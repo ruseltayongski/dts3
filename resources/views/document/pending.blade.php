@@ -263,7 +263,12 @@ use App\Http\Controllers\ReleaseController as Rel;
                         <tr>
                             <?php
                                 $temp = explode(';',$row->code);
-                                $section = \App\Section::find($temp[1])->description;
+                                
+                                if($section = \App\Section::find($temp[1])){
+                                    $section = $section->description;
+                                } else {
+                                    $section = "NO SECTION";
+                                }
                             ?>
                             <td>Delivered To:</td>
                             <td>{{ $section }}</td>
