@@ -67,7 +67,6 @@ class PrintLogsController extends Controller
 
     public function sectionLogs()
     {
-        return "wew";
         $keyword = Session::get('sectionLogs');
         $doc_type = $keyword['doc_type'];
         $section = Auth::user()->section;
