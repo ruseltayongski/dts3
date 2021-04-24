@@ -112,8 +112,28 @@
                                 <em>({{ $received_section }})</em>
                             @else
                                 <?php
-                                    
+                                    if($x = App\Tracking_Details::where('received_by',0)
+                                            ->where('id',$out->id)
+                                            ->where('route_no',$out->route_no)
+                                            ->first()){
 
+                                        $string = $x->code;
+                                        $temp1   = explode(';',$string);
+                                        $temp2   = array_slice($temp1, 1, 1);
+                                        $section_id = implode(',', $temp2);
+                                        $x_section=null;
+                                        if($section_id)
+                                        {
+                                            if($x_section = App\Section::find($section_id)){
+                                                $x_section->description;
+                                            }
+                                            else{
+                                                $x_section = "No section";
+                                            }
+                                        }
+                                    } else {
+                                        $x_section = "No section";
+                                    }
 
                                 ?>
                                 <font class="text-bold text-danger">
