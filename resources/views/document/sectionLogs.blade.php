@@ -153,17 +153,38 @@ $code = Session::get('doc_type_code');
                             @endif
                         </td>
                         <?php
-                        $out = Doc::deliveredDocument($doc->route_no,$doc->received_by,$doc->doc_type);
+                            $out = Doc::deliveredDocument($doc->route_no,$doc->received_by,$doc->doc_type);
                         ?>
                         @if($out)
                             <td>{{ date('M d, Y',strtotime($out->date_in)) }}<br>{{ date('h:i:s A',strtotime($out->date_in)) }}</td>
                             <td>
-                                <?php $user = Users::find($out->received_by);?>
+                                <?php
+                                    if($user = Users::find($out->received_by)){
+                                        $user_fname = $user->fname;
+                                        $user_lname = $user->lname;
+                                    }
+                                    else{
+                                        $user_fname = "NO FNAME";
+                                        $user_lname = "NO LNAME";
+                                    }
+                                ?>
                                 @if($user)
-                                    {{ $user->fname }}
-                                    {{ $user->lname }}
+                                    {{ $user_fname }}
+                                    {{ $user_lname }}
                                     <br>
-                                    <em>({{ Section::find($user->section)->description }})</em>
+                                    <em>
+                                        (
+                                            <?php
+                                                if($user_section = Section::find($user->section)->description){
+                                                    $user_section = $user_section->description;
+                                                }
+                                                else{
+                                                    $user_section = 'NO SECTION';
+                                                }
+                                                echo $user_section;
+                                            ?>
+                                        )
+                                    </em>
                                 @else
                                     <?php
                                         if($x = App\Tracking_Details::where('received_by',0)
