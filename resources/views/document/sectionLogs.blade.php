@@ -125,14 +125,16 @@ $code = Session::get('doc_type_code');
                         <td>{{ date('M d, Y',strtotime($doc->date_in)) }}<br>{{ date('h:i:s A',strtotime($doc->date_in)) }}</td>
                         <td>
                             <?php
-                                if($user_delivered_by = Users::find($doc->delivered_by)){
+                                /*if($user_delivered_by = Users::find($doc->delivered_by)){
                                     $user_delivered_by_fname = $user_delivered_by->fname;
                                     $user_delivered_by_lname = $user_delivered_by->lname;
                                 }
                                 else{
                                     $user_delivered_by_fname = "NO FNAME";
                                     $user_delivered_by_lname = "NO LNAME";
-                                }
+                                }*/
+                            $user_delivered_by_fname = "NO FNAME";
+                            $user_delivered_by_lname = "NO LNAME";
                             ?>
                             @if($user_delivered_by)
                                 {{ $user_delivered_by_fname }}
