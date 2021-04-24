@@ -187,10 +187,12 @@ $code = Session::get('doc_type_code');
                                     </em>
                                 @else
                                     <?php
-                                        if($x = App\Tracking_Details::where('received_by',0)
+                                        if(
+                                            $x = App\Tracking_Details::where('received_by',0)
                                                 ->where('id',$out->id)
                                                 ->where('route_no',$out->route_no)
-                                                ->first()){
+                                                ->first()
+                                        ){
 
                                             $string = $x->code;
                                             $temp1   = explode(';',$string);
@@ -199,7 +201,11 @@ $code = Session::get('doc_type_code');
                                             $x_section=null;
                                             if($section_id)
                                             {
-                                                $x_section = Section::find($section_id)->description;
+                                                if($x_section = Section::find($section_id)->description){
+                                                    $x_section = Section::find($section_id)->description;
+                                                } else {
+                                                    $x_section = "No section";
+                                                }
                                             }
                                         } else {
                                             $x_section = "No section";
