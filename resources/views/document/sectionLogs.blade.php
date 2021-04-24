@@ -113,7 +113,120 @@ $code = Session::get('doc_type_code');
                 </thead>
                 <tbody>
                 @foreach($documents as $doc)
+                    <tr>
+                        <td>
+                            <a href="#track" data-link="{{ asset('document/track/'.$doc->route_no) }}" data-route="{{ $doc->route_no }}" data-toggle="modal" class="btn btn-sm btn-success col-sm-12"><i class="fa fa-line-chart"></i> Track</a>
+                        </td>
+                        <td>
+                            <a class="title-info" data-route="{{ $doc->route_no }}" data-link="{{ asset('/document/info/'.$doc->route_no) }}" href="#document_info" data-toggle="modal">{{ $doc->route_no }}</a>
+                            <br>
+                            {!! nl2br($doc->description) !!}
+                        </td>
+                        <td>{{ date('M d, Y',strtotime($doc->date_in)) }}<br>{{ date('h:i:s A',strtotime($doc->date_in)) }}</td>
+                        <td>
+                            <?php
+                                if($user_delivered_by = Users::find($doc->delivered_by)){
+                                    $user_delivered_by_fname = $user_delivered_by->fname;
+                                    $user_delivered_by_lname = $user_delivered_by->lname;
+                                }
+                                else{
+                                    $user_delivered_by_fname = "NO FNAME";
+                                    $user_delivered_by_lname = "NO LNAME";
+                                }
+                            ?>
+                            @if($user_delivered_by)
+                                {{ $user_delivered_by_fname }}
+                                {{ $user_delivered_by_lname }}
+                                <br>
+                                <em>
+                                    (
+                                        <?php
+                                            if($user_section = Section::find($user_delivered_by->section))
+                                                $user_section = $user_delivered_by->description;
+                                            else
+                                                $user_section = "NO SECTION";
 
+                                            $user_section = "NO SECTION";
+
+                                            echo $user_section;
+                                        ?>
+                                    )
+                                </em>
+                            @endif
+                        </td>
+                        <?php
+                            $out = Doc::deliveredDocument($doc->route_no,$doc->received_by,$doc->doc_type);
+                        ?>
+                        @if($out)
+                            <td>{{ date('M d, Y',strtotime($out->date_in)) }}<br>{{ date('h:i:s A',strtotime($out->date_in)) }}</td>
+                            <td>
+                                <?php
+                                    if($user = Users::find($out->received_by)){
+                                        $user_fname = $user->fname;
+                                        $user_lname = $user->lname;
+                                    }
+                                    else{
+                                        $user_fname = "NO FNAME";
+                                        $user_lname = "NO LNAME";
+                                    }
+                                ?>
+                                @if($user)
+                                    {{ $user_fname }}
+                                    {{ $user_lname }}
+                                    <br>
+                                    <em>
+                                        (
+                                            <?php
+                                                if($user_section = Section::find($user->section)){
+                                                    $user_section = $user_section->description;
+                                                }
+                                                else{
+                                                    $user_section = 'NO SECTION';
+                                                }
+                                                echo $user_section;
+                                            ?>
+                                        )
+                                    </em>
+                                @else
+                                    <?php
+                                        if(
+                                            $x = App\Tracking_Details::where('received_by',0)
+                                                ->where('id',$out->id)
+                                                ->where('route_no',$out->route_no)
+                                                ->first()
+                                        ){
+
+                                            $string = $x->code;
+                                            $temp1   = explode(';',$string);
+                                            $temp2   = array_slice($temp1, 1, 1);
+                                            $section_id = implode(',', $temp2);
+                                            $x_section=null;
+                                            if($section_id)
+                                            {
+                                                if($x_section = Section::find($section_id)){
+                                                    $x_section = Section::find($section_id)->description;
+                                                } else {
+                                                    $x_section = "No section";
+                                                }
+                                            }
+                                        } else {
+                                            $x_section = "No section";
+                                        }
+
+
+                                        ?>
+                                        <font class="text-bold text-danger">
+                                            {{ $x_section }}<br />
+                                            <em>(Unconfirmed)</em>
+                                        </font>
+                                @endif
+                            </td>
+                        @else
+                            <td></td>
+                            <td></td>
+                        @endif
+                        <td>{{ \App\Http\Controllers\DocumentController::docTypeName($doc->doc_type) }}</td>
+                    </tr>
                 @endforeach
                 </tbody>
             </table>
