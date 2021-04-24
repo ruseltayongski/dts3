@@ -124,38 +124,7 @@ $code = Session::get('doc_type_code');
                         </td>
                         <td>{{ date('M d, Y',strtotime($doc->date_in)) }}<br>{{ date('h:i:s A',strtotime($doc->date_in)) }}</td>
                         <td>
-                            <?php
-                                /*if($user_delivered_by = Users::find($doc->delivered_by)){
-                                    $user_delivered_by_fname = $user_delivered_by->fname;
-                                    $user_delivered_by_lname = $user_delivered_by->lname;
-                                }
-                                else{
-                                    $user_delivered_by_fname = "NO FNAME";
-                                    $user_delivered_by_lname = "NO LNAME";
-                                }*/
-                            $user_delivered_by = true;
-                            $user_delivered_by_fname = "NO FNAME";
-                            $user_delivered_by_lname = "NO LNAME";
-                            ?>
-                            @if($user_delivered_by)
-                                {{ $user_delivered_by_fname }}
-                                {{ $user_delivered_by_lname }}
-                                <br>
-                                <em>
-                                    (
-                                        <?php
-                                            /*if($user_section = Section::find($user_delivered_by->section))
-                                                $user_section = $user_delivered_by->description;
-                                            else
-                                                $user_section = "NO SECTION";*/
 
-                                            $user_section = "NO SECTION";
-
-                                            echo $user_section;
-                                        ?>
-                                    )
-                                </em>
-                            @endif
                         </td>
                         <?php
                             $out = Doc::deliveredDocument($doc->route_no,$doc->received_by,$doc->doc_type);
