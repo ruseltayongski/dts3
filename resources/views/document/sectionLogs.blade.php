@@ -129,7 +129,18 @@ $code = Session::get('doc_type_code');
                                 {{ $user->fname }}
                                 {{ $user->lname }}
                                 <br>
-                                <em>({{ Section::find($user->section)->description }})</em>
+                                <em>
+                                    (
+                                        <?php
+                                            if($user_section = Section::find($user->section))
+                                                $user_section = $user->description;
+                                            else
+                                                $user_section = "NO SECTION";
+
+                                            echo $user_section;
+                                        ?>
+                                    )
+                                </em>
                             @endif
                         </td>
                         <?php
