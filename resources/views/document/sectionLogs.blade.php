@@ -175,7 +175,7 @@ $code = Session::get('doc_type_code');
                                     <em>
                                         (
                                             <?php
-                                                if($user_section = Section::find($user->section)->description){
+                                                if($user_section = Section::find($user->section)){
                                                     $user_section = $user_section->description;
                                                 }
                                                 else{
