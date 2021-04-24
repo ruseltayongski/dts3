@@ -125,7 +125,7 @@
                                         if($section_id)
                                         {
                                             if($x_section = App\Section::find($section_id)){
-                                                $x_section->description;
+                                                $x_section = $x_section->description;
                                             }
                                             else{
                                                 $x_section = "No section";
