@@ -133,6 +133,7 @@ $code = Session::get('doc_type_code');
                                     $user_delivered_by_fname = "NO FNAME";
                                     $user_delivered_by_lname = "NO LNAME";
                                 }*/
+                            $user_delivered_by = true;
                             $user_delivered_by_fname = "NO FNAME";
                             $user_delivered_by_lname = "NO LNAME";
                             ?>
