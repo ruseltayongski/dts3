@@ -201,7 +201,7 @@ $code = Session::get('doc_type_code');
                                             $x_section=null;
                                             if($section_id)
                                             {
-                                                if($x_section = Section::find($section_id)->description){
+                                                if($x_section = Section::find($section_id)){
                                                     $x_section = Section::find($section_id)->description;
                                                 } else {
                                                     $x_section = "No section";
