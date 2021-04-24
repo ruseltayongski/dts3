@@ -130,8 +130,8 @@ $code = Session::get('doc_type_code');
                                     $user_delivered_by_lname = $user_delivered_by->lname;
                                 }
                                 else{
-                                    $user_delivered_by_fname = $user_delivered_by->fname;
-                                    $user_delivered_by_lname = $user_delivered_by->lname;
+                                    $user_delivered_by_fname = "NO FNAME";
+                                    $user_delivered_by_lname = "NO LNAME";
                                 }
                             ?>
                             @if($user_delivered_by)
