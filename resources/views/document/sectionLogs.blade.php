@@ -141,8 +141,8 @@ $code = Session::get('doc_type_code');
                                 <em>
                                     (
                                         <?php
-                                            if($user_section = Section::find($user->section))
-                                                $user_section = $user->description;
+                                            if($user_section = Section::find($user_delivered_by->section))
+                                                $user_section = $user_delivered_by->description;
                                             else
                                                 $user_section = "NO SECTION";
 
