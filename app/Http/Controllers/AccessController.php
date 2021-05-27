@@ -15,13 +15,13 @@ class AccessController extends Controller
     
     static function access()
     {
-        $budget = Section::where('description','Budget Section')->first();
+        /*$budget = Section::where('description','Budget Section')->first();
         $accounting = Section::where('description','Accounting Section')->first();
         if(Auth::user()->section == $accounting->id) {
             return 'accounting';
         }else if(Auth::user()->section == $budget->id) {
             return 'budget';
-        }
+        }*/
         return 'general';
     }
 }

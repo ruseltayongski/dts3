@@ -175,39 +175,37 @@ $filter = Doc::isIncluded($doc_type);
                 </tr>
             @endif
             @if($filter[13]!='hide')
-                <tr class="
-                @if($filter[13]!='hide')
-                        <td class="text-right">Applicant :</td>
-                <td>
-                    <input type="text" name="cdo_applicant" class="form-control"/>
-                </td>
-                @endif
-                @endif
+                <tr>
+                    <td class="text-right">Applicant :</td>
+                    <td>
+                        <input type="text" name="cdo_applicant" class="form-control"/>
+                    </td>
                 </tr>
-                @if($filter[14]!='hide')
-                    <tr>
-                        <td class="text-right">Number of Days :</td>
-                        <td>
-                            <input type="text" name="cdo_day" class="form-control"/>
-                        </td>
-                    </tr>
-                @endif
-                @if($filter[16]!='hide')
-                    <tr>
-                        <td class="text-right">Payee :</td>
-                        <td>
-                            <input type="text" name="payee" class="form-control" />
-                        </td>
-                    </tr>
-                @endif
-                @if($filter[17]!='hide')
-                    <tr>
-                        <td class="text-right">Item/s :</td>
-                        <td>
-                            <input type="text" name="item" class="form-control"  />
-                        </td>
-                    </tr>
-                @endif
+            @endif
+            @if($filter[14]!='hide')
+                <tr>
+                    <td class="text-right">Number of Days :</td>
+                    <td>
+                        <input type="text" name="cdo_day" class="form-control"/>
+                    </td>
+                </tr>
+            @endif
+            @if($filter[16]!='hide')
+                <tr>
+                    <td class="text-right">Payee :</td>
+                    <td>
+                        <input type="text" name="payee" class="form-control" />
+                    </td>
+                </tr>
+            @endif
+            @if($filter[17]!='hide')
+                <tr>
+                    <td class="text-right">Item/s :</td>
+                    <td>
+                        <input type="text" name="item" class="form-control"  />
+                    </td>
+                </tr>
+            @endif
         </table>
     </div>
     <div class="modal-footer">

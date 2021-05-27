@@ -450,7 +450,8 @@ class DocumentController extends Controller
             'item',
             'dv_no',
             'ors_no',
-            'fund_source_budget');
+            'fund_source_budget'
+        );
         for($i=0;$i<count($filter);$i++){
             if(!Tracking_Filter::where($filter[$i],1)
                 ->where('doc_type',$doc_type)
