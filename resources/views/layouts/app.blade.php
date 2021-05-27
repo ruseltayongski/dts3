@@ -247,8 +247,6 @@ $pending = \App\Tracking_Details::select(
 <script src="{{ asset('resources/plugin_old/daterangepicker/moment.min.js') }}"></script>
 <!-- DATE RANGE SELECT -->
 <script src="{{ asset('resources/plugin_old/daterangepicker/daterangepicker.js') }}"></script>
-<!-- NUMERAL JS -->
-<script src="{{ asset('resources/assets/js/Numeral-js/src/numeral.js') }}"></script>
 <!-- SELECT CHOOSEN -->
 <script src="{{ asset('resources/plugin_old/chosen/chosen.jquery.js') }}"></script>
 <!-- CKEDITOR -->

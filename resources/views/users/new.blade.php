@@ -66,6 +66,9 @@
                     </select>
                 </td>
             </tr>
+            <tbody class="section_append">
+
+            </tbody>
         </table>
     </div>
     <div class="modal-footer">

@@ -268,10 +268,7 @@ function loadDivision(el){
     };
     var next = $(el).parent().parent().parent();
     $.get(url,id,function(response){
-        if(response){
-            $(el).parent().parent().next('tr').remove();
-           next.append(response);
-        }
+        $(".section_append").html(response);
     });
 }
 function del_user(el) {
