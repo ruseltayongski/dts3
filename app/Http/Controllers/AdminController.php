@@ -60,7 +60,7 @@ class AdminController extends Controller
     }
     public function user_edit(Request $request){
 
-        $user = User::find($request->input('id'))->first();
+        $user = User::find($request->input('id'));
         //GET
         if($request->isMethod('get')){
             if(isset($user)) {
