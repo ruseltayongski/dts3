@@ -61,21 +61,22 @@
 <script>
     //$('#notificationModal').modal('show');
     <?php echo 'var url = "'.asset('home/chart').'";';?>
-    var jim = [];
+    //var jim = [];
     $.ajax({
         url: url,
         type: 'GET',
         success: function(data) {
-            jim = jQuery.parseJSON(data);
+            console.log(data);
+            //jim = jQuery.parseJSON(data);
             //chart created docs
             var ctx = document.getElementById("createdDoc");
             var myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: jim.data1.months,
+                    labels: data.data1.months,
                     datasets: [{
                         label: '# of Created Documents',
-                        data: jim.data1.count,
+                        data: data.data1.count,
                         backgroundColor: [
                             'rgba(255, 206, 86, 0.2)',
                             'rgba(75, 192, 192, 0.2)',
@@ -111,10 +112,10 @@
             var myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: jim.data2.months,
+                    labels: data.data2.months,
                     datasets: [{
                         label: '# of Accepted Documents',
-                        data: jim.data2.count,
+                        data: data.data2.count,
                         backgroundColor: [
                             'rgba(75, 192, 192, 0.2)',
                             'rgba(153, 102, 255, 0.2)',

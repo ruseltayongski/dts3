@@ -14,8 +14,7 @@ if($type=='section'){
 }
 
 ?>
-<html>
-<title>Print Logs</title>
+<html><title>Print Logs</title>
 <head>
     <link href="{{ asset('resources/assets/css/print.css') }}" rel="stylesheet">
     <style>
@@ -24,8 +23,7 @@ if($type=='section'){
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
     </style>
-</head>
-<body>
+</head><body>
 <table class="letter-head" cellpadding="0" cellspacing="0">
     <tr>
         <td width="20%"><center><img src="{{ asset('public/img/doh.png') }}" width="100"></center></td>
@@ -38,9 +36,7 @@ if($type=='section'){
             </center>
         </td>
         <td width="20%"><center><img src="{{ asset('public/img/ro7.png') }}" width="100"></center></td>
-    </tr>
-
-</table>
+    </tr></table>
 <br>
 <center><h3>{{ strtoupper(Session::get('doc_type')) }}</h3></center>
 <table class="table table-bordered table-hover table-striped">
@@ -121,6 +117,4 @@ if($type=='section'){
         </tr>
     @endforeach
     </tbody>
-</table>
-</body>
-</html>
+</table></body></html>
