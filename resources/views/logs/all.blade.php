@@ -22,21 +22,27 @@ if($type=='section'){
             font-size:0.8em;
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
+
+        .table-bordered th,
+        .table-bordered td {
+            border: 1px solid #ddd !important;
+        }
+
     </style>
 </head><body>
-<table class="letter-head" cellpadding="0" cellspacing="0">
-    <tr>
-        <td width="20%"><center><img src="{{ asset('public/img/doh.png') }}" width="100"></center></td>
-        <td width="60%">
-            <center>
-                <h4 style="margin:0;">DOCUMENT TRACKING SYSTEM LOGS</h4>
-                ({{ Section::find(Auth::user()->section)->description }})<br>
-                {{ Auth::user()->fname }} {{ Auth::user()->lname }}<br>
-                {{ date('M d, Y',strtotime(Session::get('startdate'))) }} - {{ date('M d, Y',strtotime(Session::get('enddate'))) }}
-            </center>
-        </td>
-        <td width="20%"><center><img src="{{ asset('public/img/ro7.png') }}" width="100"></center></td>
-    </tr></table>
+{{--<table class="letter-head" cellpadding="0" cellspacing="0">--}}
+    {{--<tr>--}}
+        {{--<td width="20%"><center><img src="{{ asset('public/img/doh.png') }}" width="100"></center></td>--}}
+        {{--<td width="60%">--}}
+            {{--<center>--}}
+                {{--<h4 style="margin:0;">DOCUMENT TRACKING SYSTEM LOGS</h4>--}}
+                {{--({{ Section::find(Auth::user()->section)->description }})<br>--}}
+                {{--{{ Auth::user()->fname }} {{ Auth::user()->lname }}<br>--}}
+                {{--{{ date('M d, Y',strtotime(Session::get('startdate'))) }} - {{ date('M d, Y',strtotime(Session::get('enddate'))) }}--}}
+            {{--</center>--}}
+        {{--</td>--}}
+        {{--<td width="20%"><center><img src="{{ asset('public/img/ro7.png') }}" width="100"></center></td>--}}
+    {{--</tr></table>--}}
 <br>
 <center><h3>{{ strtoupper(Session::get('doc_type')) }}</h3></center>
 <table class="table table-bordered table-hover table-striped">
@@ -57,16 +63,16 @@ if($type=='section'){
             </td>
             <td>{{ date('M d, Y',strtotime($doc->date_in)) }}<br>{{ date('h:i:s A',strtotime($doc->date_in)) }}</td>
             <td>
-                <?php 
-                    if($user = Users::find($doc->delivered_by)){
-                        $del_fname = $user->fname;
-                        $del_lname = $user->lname;
-                        $del_section = Section::find($user->section)->description;
-                    } else {
-                        $del_fname = "No Firstname";
-                        $del_lname = "No Lastname";
-                        $del_section = "No Section";
-                    }
+                <?php
+                if($user = Users::find($doc->delivered_by)){
+                    $del_fname = $user->fname;
+                    $del_lname = $user->lname;
+                    $del_section = Section::find($user->section)->description;
+                } else {
+                    $del_fname = "No Firstname";
+                    $del_lname = "No Lastname";
+                    $del_section = "No Section";
+                }
                 ?>
                 {{ $del_fname }}
                 {{ $del_lname }}
@@ -79,16 +85,16 @@ if($type=='section'){
             @if($out)
                 <td>{{ date('M d, Y',strtotime($out->date_in)) }}<br>{{ date('h:i:s A',strtotime($out->date_in)) }}</td>
                 <td>
-                    <?php 
-                        if($user = Users::find($out->received_by)){
-                            $rec_fname = $user->fname;
-                            $rec_lname = $user->lname;
-                            $rec_section = Section::find($user->section)->description;
-                        } else {
-                            $rec_fname = "No Firstname";
-                            $rec_lname = "No Lastname";
-                            $rec_section = "No Section";
-                        }
+                    <?php
+                    if($user = Users::find($out->received_by)){
+                        $rec_fname = $user->fname;
+                        $rec_lname = $user->lname;
+                        $rec_section = Section::find($user->section)->description;
+                    } else {
+                        $rec_fname = "No Firstname";
+                        $rec_lname = "No Lastname";
+                        $rec_section = "No Section";
+                    }
                     ?>
                     {{ $rec_fname }}
                     {{ $rec_lname }}

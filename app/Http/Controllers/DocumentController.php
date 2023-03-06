@@ -31,23 +31,41 @@ class DocumentController extends Controller
     {
         $user = Auth::user();
         $id = $user->id;
-        $keyword = Session::get('keyword');
+        $keyword = Session::get('search');
+//      $keyword = Session::get('keyword');
+        $keywordLogs = isset($keyword['keyword']) ? $keyword['keyword']: null;
+        $str = isset($keyword['str']) ? $keyword['str']: null;
+
+        $temp1 = explode('-',$str);
+        $temp2 = array_slice($temp1, 0, 1);
+        $tmp = implode(',', $temp2);
+        $start_date = date('Y-m-d 00:00:00',strtotime($tmp));
+
+        $temp3 = array_slice($temp1, 1, 1);
+        $tmp = implode(',', $temp3);
+        $end_date = date('Y-m-d H:i:s',strtotime($tmp));
 
         $data['documents'] = Tracking::where('prepared_by',$id)
-            ->where(function($q) use ($keyword){
-                $q->where('route_no','like',"%$keyword%")
-                    ->orwhere('description','like',"%$keyword%")
-                    ->orWhere('purpose','like',"%$keyword%");
+            ->where(function($q) use ($keywordLogs){
+                $q->where('route_no','like',"%$keywordLogs")
+                    ->orwhere('description','like',"%$keywordLogs%")
+                    ->orWhere('purpose','like',"%$keywordLogs%");
             })
             ->orderBy('id','desc')
             ->paginate(15);
+
         $data['access'] = $this->middleware('access');
         return view('document.list',$data);
-
     }
 
     public function search(Request $request){
-        Session::put('keyword',$request->keyword);
+//        Session::put('keyword',$request->keyword);
+//        Session::put('daterange',$request->daterange);
+        $keyword = array(
+            'str' => $request->daterange,
+            'keywordLogs' => $request->keyword
+        );
+        Session::put('search',$keyword);
         return self::index();
     }
 
@@ -910,10 +928,24 @@ class DocumentController extends Controller
         return $hours;
     }
 
-    public function removePending($id)
+    public function removePending($id, Request $request)
     {
         Tracking_Details::where('id',$id)
             ->update(['status'=> 1]);
+
+        //joi - for cycle end remarks
+        $cycle_end_to_datein = date('Y-m-d H:i:s');
+        $table = Tracking_Details::where('id',$id)->orderBy('id', 'DESC');
+
+        $tracking_release = new Tracking_Releasev2();
+        $tracking_release->released_by = Auth::user()->username;
+        $tracking_release->released_section_to = Auth::user()->section;
+        $tracking_release->released_date = $cycle_end_to_datein;
+        $tracking_release->document_id = $id;
+        $tracking_release->route_no = $table->first()->route_no;
+        $tracking_release->status = "end";
+        $tracking_release->remarks = "cycle end:".$request->remarks;
+        $tracking_release->save();
     }
 
     public function removeOutgoing($id)

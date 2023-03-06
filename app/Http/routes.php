@@ -7,6 +7,29 @@ Route::auth();
 //jimzky
 Route::get('/','HomeController@index');
 
+//TEST EXTRACT EXCEL document logs
+Route::get('excel', function() {
+    $file_name = "logs.xls";
+    header("Content-Type: application/xls");
+    header("Content-Disposition: attachment; filename=$file_name");
+    header("Pragma: no-cache");
+    header("Expires: 0");
+
+    return view('logs.all');
+});
+
+//Section Logs
+Route::get('section-logs', function() {
+    $file_name = "section_logs.xls";
+    header("Content-Type: application/xls");
+    header("Content-Disposition: attachment; filename=$file_name");
+    header("Pragma: no-cache");
+    header("Expires: 0");
+
+    return view('logs.all');
+});
+
+
 Route::get('home', 'HomeController@index');
 Route::get('home/chart', 'HomeController@chart');
 
@@ -284,4 +307,5 @@ Route::get('temporary',function(){
 Route::get('test', 'TestController@test');
 Route::get('append/appendOutgoingDocument/{id}/{route_no}', 'AppendController@appendOutgoingDocument');
 
-Route::get('document/csmc/track/{route_no}', 'ApiController@index');
+
+//Route::get('document/csmc/track/{route_no}', 'ApiController@index');

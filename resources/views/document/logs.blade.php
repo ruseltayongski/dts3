@@ -95,9 +95,16 @@ $code = Session::get('doc_type_code');
                         <option <?php if($code=='GENERAL') echo 'selected'; ?> value="GENERAL">General Documents</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-success" onclick="checkDocTye()"><i class="fa fa-search"></i> Filter</button>
+                <button type="submit" class="btn btn-success" onclick="checkDocTye()"><i class="fa fa-search"></i> Filter </button>
                 @if(count($documents))
-                    <a target="_blank" href="{{ asset('pdf/logs/'.$doc_type) }}" class="btn btn-warning"><i class="fa fa-print"></i> Print Logs</a>
+                    {{--<a target="_blank" href="{{ asset('pdf/logs/'.$doc_type) }}" clas   s="btn btn-warning"><i class="fa fa-print"></i> Print Logs</a>--}}
+                    <div class="dropdown" style="float: right; padding-top: 5px; padding-left: 5px">
+                        <button style="font-family: Verdana;" href="#" class="dropdown-toggle btn btn-primary" data-toggle="dropdown" role="button" aria-haspopup="true">Extract Logs</button>
+                        <ul class="dropdown-menu" style="padding: 5px">
+                                <li><a target="_blank" href="{{ asset('pdf/logs/'.$doc_type) }}" class="btn btn-warning" style="padding-bottom:5px"><i class="fa fa-print"></i> as PDF </a></li>
+                                <li><a href="{{ url("/excel") }}" class="btn btn-warning" style="padding-top:5px"><i class="fa fa-print"></i> as EXCEL </a></li>
+                        </ul>
+                    </div>
                 @endif
             </div>
         </form>
@@ -171,7 +178,7 @@ $code = Session::get('doc_type_code');
                                     } else {
                                         $x_section = "No Section";
                                     }
-                                    
+
                                 ?>
                                 <font class="text-bold text-danger">
                                     {{ $x_section }}<br />
@@ -203,7 +210,7 @@ $code = Session::get('doc_type_code');
                                     } else {
                                         'NO SECTION';
                                     }
-                                    
+
                                 ?>
                                 <br />
                                     <button data-toggle="modal" data-target="#releaseTo" data-id="{{ $out->id }}" data-route_no="{{ $out->route_no }}" onclick="changeRoute($(this), '<?php echo $out->id ?>')" type="button" class="btn btn-info btn-xs"><i class="fa fa-send"></i> Change</button>
