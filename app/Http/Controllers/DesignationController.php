@@ -43,7 +43,7 @@ class DesignationController extends Controller
         }
         if($request->isMethod('post')){
             $d = Designation::find($request->input('id'));
-            if(isset($d) and count($d) > 0) {
+            if(isset($d) and count((array)$d) > 0) {
                 $d->description = $request->input('designation');
                 $d->save();
                 return redirect('designation');

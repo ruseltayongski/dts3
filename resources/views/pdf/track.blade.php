@@ -149,11 +149,11 @@
         <tr>
             <td>{{ date('M d, Y', strtotime($doc->date_in)) }}<br>{{ date('h:i A', strtotime($doc->date_in)) }}</td>
             <td>
-                {{ $received_by }}
+                {{ $received_by."JOY"}}
                 <br>
-                <em>({{ $sectionName }})</em>
+                <em>({{ $sectionName."DASDHJAKDHAJK" }})</em>
             </td>
-            <td>{{ $doc->action }}</td>
+            <td>{{ $doc->action}}</td>
             <td></td>
         </tr>
         @endif

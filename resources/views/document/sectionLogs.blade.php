@@ -89,7 +89,14 @@ $code = Session::get('doc_type_code');
                 <button type="submit" class="btn btn-success" onclick="checkDocTye()"><i class="fa fa-search"></i> Filter</button>
                 @if(count($documents))
                     {{--<a target="_blank" href="{{ asset('pdf/logs/'.$doc_type.'?type=section') }}" class="btn btn-warning"><i class="fa fa-print"></i> Print Logs</a>--}}
-                    <a target="_blank" href="{{ asset('report/logs/section') }}" class="btn btn-warning"><i class="fa fa-print"></i> Print Logs</a>
+                    {{--<a target="_blank" href="{{ asset('report/logs/section') }}" class="btn btn-warning"><i class="fa fa-print"></i> Print Logs</a>--}}
+                    <div class="dropdown" style="float: right; padding-top: 5px; padding-left: 5px">
+                        <button style="font-family: Verdana;" href="#" class="dropdown-toggle btn btn-primary" data-toggle="dropdown" role="button" aria-haspopup="true">Extract Logs</button>
+                        <ul class="dropdown-menu" style="padding: 5px">
+                            <li><a target="_blank" href="{{ asset('report/logs/section') }}" class="btn btn-warning" style="padding-bottom:5px"><i class="fa fa-print"></i> as PDF </a></li>
+                            <li><a href="{{ url("/section-logs") }}" class="btn btn-warning" style="padding-top:5px"><i class="fa fa-print"></i> as EXCEL </a></li>
+                        </ul>
+                    </div>
                 @endif
             </div>
         </form>
