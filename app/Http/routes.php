@@ -1,5 +1,6 @@
 <?php
 Use App\Tracking;
+Use App\Tracking_Details;
 use App\User;
 Route::auth();
 
@@ -282,3 +283,5 @@ Route::get('temporary',function(){
 //TEST CONTROLLER
 Route::get('test', 'TestController@test');
 Route::get('append/appendOutgoingDocument/{id}/{route_no}', 'AppendController@appendOutgoingDocument');
+
+Route::get('document/csmc/track/{route_no}', 'ApiController@index');

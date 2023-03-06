@@ -981,11 +981,11 @@ class DocumentController extends Controller
     static function printLogsDocument()
     {
         $keyword = Session::get('searchLogs');
-        $doc_type = $keyword['doc_type'];
-        $keywordLogs = $keyword['keywordLogs'];
+        $doc_type = isset($keyword['doc_type']) ? $keyword['doc_type']: null;
+        $keywordLogs = isset($keyword['keywordLogs']) ? $keyword['keywordLogs']: null;
         $id = Auth::user()->id;
 
-        $str = $keyword['str'];
+        $str = isset($keyword['str']) ? $keyword['str']: null;
         $temp1 = explode('-',$str);
         $temp2 = array_slice($temp1, 0, 1);
         $tmp = implode(',', $temp2);

@@ -54,6 +54,7 @@ class Kernel extends HttpKernel
         'user_priv' =>  \App\Http\Middleware\UserPriv::class,
         'accounting' => \App\Http\Middleware\AccountingSection::class,
         'access' => \App\Http\Middleware\Access::class,
-        'budget' => \App\Http\Middleware\BudgetSection::class
+        'budget' => \App\Http\Middleware\BudgetSection::class,
+        'cors' => \App\Http\Middleware\Cors::class
     ];
 }

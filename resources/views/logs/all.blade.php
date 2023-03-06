@@ -40,7 +40,6 @@ if($type=='section'){
 <br>
 <center><h3>{{ strtoupper(Session::get('doc_type')) }}</h3></center>
 <table class="table table-bordered table-hover table-striped">
-    <thead>
     <tr>
         <th width="29%">Route # / Remarks</th>
         <th width="12%">Received Date</th>
@@ -49,8 +48,6 @@ if($type=='section'){
         <th width="12%">Released To</th>
         <th width="20%">Document Type</th>
     </tr>
-    </thead>
-    <tbody>
     @foreach($documents as $doc)
         <tr>
             <td>
@@ -116,5 +113,4 @@ if($type=='section'){
             <td>{{ \App\Http\Controllers\DocumentController::docTypeName($doc->doc_type) }}</td>
         </tr>
     @endforeach
-    </tbody>
 </table></body></html>
