@@ -31,41 +31,22 @@ class DocumentController extends Controller
     {
         $user = Auth::user();
         $id = $user->id;
-        $keyword = Session::get('search');
-//      $keyword = Session::get('keyword');
-        $keywordLogs = isset($keyword['keyword']) ? $keyword['keyword']: null;
-        $str = isset($keyword['str']) ? $keyword['str']: null;
-
-        $temp1 = explode('-',$str);
-        $temp2 = array_slice($temp1, 0, 1);
-        $tmp = implode(',', $temp2);
-        $start_date = date('Y-m-d 00:00:00',strtotime($tmp));
-
-        $temp3 = array_slice($temp1, 1, 1);
-        $tmp = implode(',', $temp3);
-        $end_date = date('Y-m-d H:i:s',strtotime($tmp));
+        $keyword = Session::get('keyword');
 
         $data['documents'] = Tracking::where('prepared_by',$id)
-            ->where(function($q) use ($keywordLogs){
-                $q->where('route_no','like',"%$keywordLogs")
-                    ->orwhere('description','like',"%$keywordLogs%")
-                    ->orWhere('purpose','like',"%$keywordLogs%");
+            ->where(function($q) use ($keyword){
+                $q->where('route_no','like',"%$keyword%")
+                    ->orwhere('description','like',"%$keyword%")
+                    ->orWhere('purpose','like',"%$keyword%");
             })
             ->orderBy('id','desc')
             ->paginate(15);
-
         $data['access'] = $this->middleware('access');
         return view('document.list',$data);
     }
 
     public function search(Request $request){
-//        Session::put('keyword',$request->keyword);
-//        Session::put('daterange',$request->daterange);
-        $keyword = array(
-            'str' => $request->daterange,
-            'keywordLogs' => $request->keyword
-        );
-        Session::put('search',$keyword);
+        Session::put('keyword',$request->keyword);
         return self::index();
     }
 
