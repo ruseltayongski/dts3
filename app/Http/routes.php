@@ -309,3 +309,7 @@ Route::get('append/appendOutgoingDocument/{id}/{route_no}', 'AppendController@ap
 
 
 //Route::get('document/csmc/track/{route_no}', 'ApiController@index');
+
+//report release to
+Route::get('count/{year}','ReportController@countReleaseTo');
+//'reportedDocuments/{year}',
