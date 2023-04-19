@@ -163,6 +163,14 @@ $pending = \App\Tracking_Details::select(
                                 @endfor
                             </ul>
                         </li>
+                        <li class="dropdown-submenu">
+                            <a href="#" data-toggle="dropdown"><i class="fa fa-file"></i> Released Documents</a>
+                            <ul class="dropdown-menu">
+                                <?php for($year=2023;$year<=date('Y');$year++): ?>
+                                <li><a href="<?php echo e(url('count').'/'.$year); ?>"><i class="fa fa-sticky-note"></i> <?php echo e($year); ?></a></li>
+                                <?php endfor; ?>
+                            </ul>
+                        </li>
                         @endif
                     </ul>
                 </li>
