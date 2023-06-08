@@ -142,7 +142,7 @@ Route::get('logout',function(){
     }
     \Illuminate\Support\Facades\Session::flush();
     return redirect('login');
-});
+})->middleware('web');
 //endjimzky
 
 //rusel
@@ -312,4 +312,5 @@ Route::get('append/appendOutgoingDocument/{id}/{route_no}', 'AppendController@ap
 
 //report release to
 Route::get('count/{year}','ReportController@countReleaseTo');
+Route::get('/documents_count','ReportController@counter');
 //'reportedDocuments/{year}',
