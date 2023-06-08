@@ -51,6 +51,7 @@ class DivisionController extends Controller
     }
     public function searchDivision(Request $request){
         Session::put("search",$request->get("search"));
+        return $this->searchDivisionSave();
     }
     public function searchDivisionSave(){
         $division = Division::where('description','like','%'.Session::get('search').'%')->orderBy('description','asc')->paginate(10);
