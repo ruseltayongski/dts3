@@ -14,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //$this->app['request']->server->set('HTTPS', true);
-        //$this->app['request']->server->set('HTTPS', true);
+        $this->app['request']->server->set('HTTPS', true);
         //isset($keyword['keywordLogs']) ? $keyword['keywordLogs']: null;
         //$link = https://mis.cvchd7.com
     }
