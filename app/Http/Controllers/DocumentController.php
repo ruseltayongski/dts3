@@ -27,6 +27,7 @@ class DocumentController extends Controller
     {
         $this->middleware('auth');
     }
+
     public function index()
     {
         $user = Auth::user();
@@ -42,6 +43,7 @@ class DocumentController extends Controller
             ->orderBy('id','desc')
             ->paginate(15);
         $data['access'] = $this->middleware('access');
+
         return view('document.list',$data);
     }
 

@@ -10,7 +10,7 @@ class TestController extends Controller
 {
     public function test()
     {
-        return view('prr_supply.test');
+        return view('prr_supplysd.test');
         //FOR TOMORROW SET LAST HOUR IN 8
         $start_date = "2018-11-14 12:30:00";
         $end_date = "2018-11-14 13:30:00";

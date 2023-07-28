@@ -201,8 +201,8 @@ Route::get('date_in/{count}','DocumentController@get_date_in');
 //GET DESIGNATION
 Route::get('getDesignation/{id}','PurchaseRequestController@getDesignation');
 //APPOINTMENT
-Route::get('appointment','AppointmentController@appointment');
-Route::post('appointment','AppointmentController@appointmentSave');
+/*Route::get('appointment','AppointmentController@appointment');
+Route::post('appointment','AppointmentController@appointmentSave');*/
 //PR PDF
 Route::get('pdf_pr','PurchaseRequestController@prr_pdf');
 //CALENDAR

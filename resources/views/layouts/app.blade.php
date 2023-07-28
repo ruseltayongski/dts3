@@ -236,7 +236,7 @@ $pending = \App\Tracking_Details::select(
             @endif
             </a>
         </p>
-        <p>All Rights Reserved 2017 | Version 5.0</p>
+        <p>All Rights Reserved {{ date('Y') }} DOH CVCHD - ICTU | Version 5.0</p>
 
     </div>
 </footer>
