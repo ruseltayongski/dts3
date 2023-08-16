@@ -13,7 +13,7 @@
                         <label>Division</label>
                         <select name="division" class="chosen-select filter-division" required>
                             <option value="">Select division...</option>
-                            <?php $division = \App\Division::where('description','!=','Default')->orderBy('description','asc')->get(); ?>
+                            <?php $division = \App\Division::where('description','!=','Default')->whereNull('ppmp_used')->orderBy('description','asc')->get(); ?>
                             @foreach($division as $div)
                                 <option value="{{ $div->id }}">{{ $div->description }}</option>
                             @endforeach

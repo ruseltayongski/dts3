@@ -59,7 +59,10 @@
                             <input type="text" name="route_no[]" class="form-control route_no" disabled placeholder="Enter route #">
                         </td>
                         <td>
+                            <textarea class="form-control remarks" name="remarks[]" disabled></textarea>
+                            <!--
                             <input type="text" name="remarks[]" class="form-control remarks" disabled placeholder="Enter remarks">
+                            -->
                         </td>
                         @if(Auth::user()->section == 36)
                         <td>

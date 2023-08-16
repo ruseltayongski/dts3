@@ -24,12 +24,12 @@ class HomeController extends Controller
     }
 
 
-    function chart(){
+    function chart() {
         $data = array(
             'data1' => self::_createdDocument(),
             'data2' => self::_acceptedDocument()
         );
-        echo json_encode($data);
+        return $data;
     }
 
     function _createdDocument(){
