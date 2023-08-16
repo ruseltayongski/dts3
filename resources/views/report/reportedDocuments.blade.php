@@ -32,6 +32,7 @@ use App\Http\Controllers\AdminController as Admin;
                 <div class="page-divider"></div>--}}
                 <?php $count = 0; ?>
                 @foreach(\App\Division::get() as $division)
+                    @if(isset($thHeadColor[$count]))
                     <table class="table table-striped table-hover" style="border: 1px solid #d6e9c6">
                         <thead>
                         <tr>
@@ -45,19 +46,24 @@ use App\Http\Controllers\AdminController as Admin;
                         <tbody>
                         @foreach(\App\Section::where('division','=',$division->id)->get() as $section)
                         <tr>
-                            <td>{{ $section->description }}</td>
-                            <td>{!! isset($reportedDocument[$section->id.'-01']) ? nl2br("<strong style='color:#f06e20;'>".$reportedDocument[$section->id.'-01']."</strong>") : 0 !!}</td>
+                            @if(isset($reportedDocument[$section->id.'-01']))
+                                <td>{{ $section->description }}</td>
+                                <td>{{ $reportedDocument[$section->id.'-01'] }}</td>
+                               <!--  <td>{!! isset($reportedDocument[$section->id.'-01']) ? nl2br("<strong style='color:#f06e20;'>".$reportedDocument[$section->id.'-01']."</strong>") : 0 !!}</td> -->
+                            @endif
                         </tr>
                         @endforeach
                         </tbody>
                     </table>
                     <?php $count++; ?>
+                    @endif
                 @endforeach
             </div>
             @foreach($monthArray as $key => $month)
                 <div class="tab-pane fade" id="{{ $month }}" role="tabpanel" aria-labelledby="profile-tab">
                     <?php $count = 0; ?>
                     @foreach(\App\Division::get() as $division)
+                        @if(isset($thHeadColor[$count]))
                     <table class="table table-striped table-hover" style="border: 1px solid #d6e9c6">
                         <thead>
                         <tr>
@@ -71,13 +77,17 @@ use App\Http\Controllers\AdminController as Admin;
                         <tbody>
                         @foreach(\App\Section::where('division','=',$division->id)->get() as $section)
                         <tr>
-                            <td >{{ $section->description }}</td>
-                            <td >{!! isset($reportedDocument[$section->id.'-'.$key]) ? nl2br("<strong style='color:#f06e20;'>".$reportedDocument[$section->id.'-'.$key]."</strong>") : 0  !!}</td>
+                            @if(isset($reportedDocument[$section->id.'-'.$key]))
+                                <td>{{ $section->description }}</td>
+                                <td>{{ $reportedDocument[$section->id.'-'.$key] }}</td>
+                                <!-- <td >{!! isset($reportedDocument[$section->id.'-'.$key]) ? nl2br("<strong style='color:#f06e20;'>".$reportedDocument[$section->id.'-'.$key]."</strong>") : 0  !!}</td> -->
+                            @endif
                         </tr>
                         @endforeach
                         </tbody>
                     </table>
                     <?php $count++; ?>
+                        @endif
                     @endforeach
                 </div>
             @endforeach

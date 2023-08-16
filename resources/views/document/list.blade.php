@@ -27,8 +27,13 @@
         {{ csrf_field() }}
         <div class="form-group">
             <input type="text" class="form-control" placeholder="Quick Search" name="keyword" value="{{ Session::get('keyword') }}" autofocus>
+            {{--<div class="input-group">--}}
+                {{--<div class="input-group-addon">--}}
+                    {{--<i class="fa fa-calendar"></i>--}}
+                {{--</div>--}}
+                {{--<input type="text" class="form-control" id="reservation" name="daterange" value="{{ isset($daterange) ? $daterange: null }}" placeholder="Input date range here..." required>--}}
+            {{--</div>--}}
             <button type="submit" class="btn btn-default"><i class="fa fa-search"></i> Search</button>
-
             <div class="btn-group">
                 <a class="btn btn-success dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="fa fa-plus"></i>  Add New

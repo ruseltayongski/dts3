@@ -27,6 +27,7 @@ class DocumentController extends Controller
     {
         $this->middleware('auth');
     }
+
     public function index()
     {
         $user = Auth::user();
@@ -42,8 +43,8 @@ class DocumentController extends Controller
             ->orderBy('id','desc')
             ->paginate(15);
         $data['access'] = $this->middleware('access');
-        return view('document.list',$data);
 
+        return view('document.list',$data);
     }
 
     public function search(Request $request){
@@ -201,7 +202,8 @@ class DocumentController extends Controller
                 $this->releasedStatusChecker($route_no,Auth::user()->section);
 
                 $getSO = $this->getSO($route_no);
-                $so_no = $request->so_no[$i];
+                $so_no = isset($request->so_no[$i]) ? $request->so_no[$i]: null;
+                //isset($keyword['doc_type']) ? $keyword['doc_type']: null;
                 if(Auth::user()->section == 36 and $doc->doc_type == 'OFFICE_ORDER' and $getSO and $so_no)
                 {
                     $this->updateSO(1,$route_no);
@@ -909,10 +911,24 @@ class DocumentController extends Controller
         return $hours;
     }
 
-    public function removePending($id)
+    public function removePending($id, Request $request)
     {
         Tracking_Details::where('id',$id)
             ->update(['status'=> 1]);
+
+        //joi - for cycle end remarks
+        $cycle_end_to_datein = date('Y-m-d H:i:s');
+        $table = Tracking_Details::where('id',$id)->orderBy('id', 'DESC');
+
+        $tracking_release = new Tracking_Releasev2();
+        $tracking_release->released_by = Auth::user()->username;
+        $tracking_release->released_section_to = Auth::user()->section;
+        $tracking_release->released_date = $cycle_end_to_datein;
+        $tracking_release->document_id = $id;
+        $tracking_release->route_no = $table->first()->route_no;
+        $tracking_release->status = "end";
+        $tracking_release->remarks = "cycle end:".$request->remarks;
+        $tracking_release->save();
     }
 
     public function removeOutgoing($id)
@@ -980,11 +996,11 @@ class DocumentController extends Controller
     static function printLogsDocument()
     {
         $keyword = Session::get('searchLogs');
-        $doc_type = $keyword['doc_type'];
-        $keywordLogs = $keyword['keywordLogs'];
+        $doc_type = isset($keyword['doc_type']) ? $keyword['doc_type']: null;
+        $keywordLogs = isset($keyword['keywordLogs']) ? $keyword['keywordLogs']: null;
         $id = Auth::user()->id;
 
-        $str = $keyword['str'];
+        $str = isset($keyword['str']) ? $keyword['str']: null;
         $temp1 = explode('-',$str);
         $temp2 = array_slice($temp1, 0, 1);
         $tmp = implode(',', $temp2);
@@ -1033,11 +1049,11 @@ class DocumentController extends Controller
     }
     function logsDocument(){
         $keyword = Session::get('searchLogs');
-        $doc_type = $keyword['doc_type'];
-        $keywordLogs = $keyword['keywordLogs'];
+        $doc_type = isset($keyword['doc_type']) ? $keyword['doc_type']: null;
+        $keywordLogs = isset($keyword['keywordLogs']) ? $keyword['keywordLogs']: null;
         $id = Auth::user()->id;
 
-        $str = $keyword['str'];
+        $str = isset($keyword['str']) ? $keyword['str']: null;
         $temp1 = explode('-',$str);
         $temp2 = array_slice($temp1, 0, 1);
         $tmp = implode(',', $temp2);
@@ -1105,7 +1121,7 @@ class DocumentController extends Controller
             $documents = $data->paginate(15);
             $logs['data'][] = $data->get();
         }
-        return view('document.logs',['documents' => $documents, 'doc_type' => $doc_type, 'daterange' => $keyword['str'],'keywordLogs' => $keywordLogs]);
+        return view('document.logs',['documents' => $documents, 'doc_type' => isset($doc_type) ? $doc_type: null, 'daterange' => isset($keyword['str']) ? $keyword['str']: null,'keywordLogs' => isset($keywordLogs) ? $keywordLogs: null]);
     }
 
     function searchLogs(Request $req)
@@ -1121,10 +1137,10 @@ class DocumentController extends Controller
 
     function sectionLogs(){
         $keyword = Session::get('sectionLogs');
-        $doc_type = $keyword['doc_type'];
+        $doc_type = isset($keyword['doc_type']) ? $keyword['doc_type']: null;
         $section = Auth::user()->section;
-        $keywordSectionLogs = $keyword['keywordSectionLogs'];
-        $str = $keyword['str'];
+        $keywordSectionLogs = isset($keyword['keywordSectionLogs']) ? $keyword['keywordSectionLogs']: null;
+        $str = isset($keyword['str']) ? $keyword['str']:null;
         $temp1 = explode('-',$str);
         $temp2 = array_slice($temp1, 0, 1);
         $tmp = implode(',', $temp2);
@@ -1176,7 +1192,7 @@ class DocumentController extends Controller
         }
         Session::put('logsDocument',$logs);
 
-        return view('document.sectionLogs',['documents' => $documents, 'doc_type' => $doc_type, 'daterange' => $keyword['str'],'keywordSectionLogs' => $keywordSectionLogs]);
+        return view('document.sectionLogs',['documents' => $documents, 'doc_type' => isset($doc_type) ? $doc_type:null, 'daterange' => isset($keyword['str']) ? $keyword['str']:null,'keywordSectionLogs' => isset($keywordSectionLogs) ? $keywordSectionLogs:null]);
     }
 
     function searchSectionLogs(Request $req)

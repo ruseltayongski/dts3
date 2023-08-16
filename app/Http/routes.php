@@ -1,10 +1,34 @@
 <?php
 Use App\Tracking;
+Use App\Tracking_Details;
 use App\User;
 Route::auth();
 
 //jimzky
 Route::get('/','HomeController@index');
+
+//TEST EXTRACT EXCEL document logs
+Route::get('excel', function() {
+    $file_name = "logs.xls";
+    header("Content-Type: application/xls");
+    header("Content-Disposition: attachment; filename=$file_name");
+    header("Pragma: no-cache");
+    header("Expires: 0");
+
+    return view('logs.all');
+});
+
+//Section Logs
+Route::get('section-logs', function() {
+    $file_name = "section_logs.xls";
+    header("Content-Type: application/xls");
+    header("Content-Disposition: attachment; filename=$file_name");
+    header("Pragma: no-cache");
+    header("Expires: 0");
+
+    return view('logs.all');
+});
+
 
 Route::get('home', 'HomeController@index');
 Route::get('home/chart', 'HomeController@chart');
@@ -118,7 +142,7 @@ Route::get('logout',function(){
     }
     \Illuminate\Support\Facades\Session::flush();
     return redirect('login');
-});
+})->middleware('web');
 //endjimzky
 
 //rusel
@@ -177,8 +201,8 @@ Route::get('date_in/{count}','DocumentController@get_date_in');
 //GET DESIGNATION
 Route::get('getDesignation/{id}','PurchaseRequestController@getDesignation');
 //APPOINTMENT
-Route::get('appointment','AppointmentController@appointment');
-Route::post('appointment','AppointmentController@appointmentSave');
+/*Route::get('appointment','AppointmentController@appointment');
+Route::post('appointment','AppointmentController@appointmentSave');*/
 //PR PDF
 Route::get('pdf_pr','PurchaseRequestController@prr_pdf');
 //CALENDAR
@@ -282,3 +306,11 @@ Route::get('temporary',function(){
 //TEST CONTROLLER
 Route::get('test', 'TestController@test');
 Route::get('append/appendOutgoingDocument/{id}/{route_no}', 'AppendController@appendOutgoingDocument');
+
+
+//Route::get('document/csmc/track/{route_no}', 'ApiController@index');
+
+//report release to
+Route::get('count/{year}','ReportController@countReleaseTo');
+Route::get('/documents_count','ReportController@counter');
+//'reportedDocuments/{year}',

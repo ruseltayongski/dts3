@@ -249,16 +249,24 @@
             e.preventDefault();
             var id = $(this).closest('.list-group-item').data('id');
             $('#removeModal').data('id',id).modal('show');
+            $('#end_remarks').val(null);
         });
 
         $('.confirmRemove').click(function(){
             var id = $('#removeModal').data('id');
+            var remarks = $('#end_remarks').val();
+            var _token = "{{ csrf_token() }}";
             $('[data-id=' + id + ']').addClass('hide');
             $('.loading').show();
             var url = "<?php echo url('document/removepending');?>";
             $.ajax({
                 url: url+'/'+id,
                 type: 'GET',
+                data: {
+                    id:id,
+                    remarks:remarks,
+                    _token: _token
+                },
                 success: function(data){
                     countOutgoing += 1;
                     var count = outgoingFunction();

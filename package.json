@@ -1,12 +1,31 @@
 {
-  "private": true,
+  "name": "dts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "scripts": {
-    "prod": "gulp --production",
-    "dev": "gulp watch"
+    "dev": "npm run development",
+    "development": "mix",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
+    "prod": "npm run production",
+    "production": "mix --production"
   },
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "laravel-elixir": "^5.0.0",
-    "bootstrap-sass": "^3.0.0"
+    "laravel-mix": "^6.0.49",
+    "resolve-url-loader": "^5.0.0",
+    "vue": "^3.3.4"
+  },
+  "dependencies": {
+    "@types/node": "^20.5.0",
+    "sass": "^1.65.1",
+    "sass-loader": "^13.3.2",
+    "ts-loader": "^9.4.4",
+    "typescript": "^5.1.6",
+    "vue-loader": "^17.2.2"
   }
 }

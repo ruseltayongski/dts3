@@ -32,7 +32,9 @@ $pending = \App\Tracking_Details::select(
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="{{ asset('resources/img/favicon.png') }}">
-    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <title>Document Tracking System</title>
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('resources/assets/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -106,9 +108,9 @@ $pending = \App\Tracking_Details::select(
         </div>
         <div class="clearfix"></div>
     </div>
-    <div class="header" style="background-color:#00CC99;padding:10px;">
+    <div class="header" style="background-color:#054c4f;padding: 10px;">
         <div class="container">
-            <img src="{{ asset('resources/img/banner_dts2019.png') }}" class="img-responsive" />
+            <img src="{{ asset('resources/img/banner_dts2023v8.png') }}" class="img-responsive" />
         </div>
     </div>
     <div class="container">
@@ -161,6 +163,14 @@ $pending = \App\Tracking_Details::select(
                                 @for($year=2018;$year<=date('Y');$year++)
                                 <li><a href="{{ url('reportedDocuments').'/'.$year }}"><i class="fa fa-sticky-note"></i> {{ $year }}</a></li>
                                 @endfor
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a href="#" data-toggle="dropdown"><i class="fa fa-file"></i> Released Documents</a>
+                            <ul class="dropdown-menu">
+                                <?php for($year=2023;$year<=date('Y');$year++): ?>
+                                <li><a href="<?php echo e(url('count').'/'.$year); ?>"><i class="fa fa-sticky-note"></i> <?php echo e($year); ?></a></li>
+                                <?php endfor; ?>
                             </ul>
                         </li>
                         @endif
@@ -226,7 +236,7 @@ $pending = \App\Tracking_Details::select(
             @endif
             </a>
         </p>
-        <p>All Rights Reserved 2017 | Version 5.0</p>
+        <p>All Rights Reserved {{ date('Y') }} DOH CVCHD - ICTU | Version 5.0</p>
 
     </div>
 </footer>
@@ -255,6 +265,8 @@ $pending = \App\Tracking_Details::select(
 <!-- Bootstrap WYSIHTML5 -->
 <script src="{{ asset('resources/plugin_old/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
 <script src="{{ asset('resources/plugin_old/Lobibox/Lobibox.js') }}"></script>
+<!-- VUE Scripts -->
+<script src="{{ asset('public/js/app.js?version=').date('YmdHis') }}" defer></script>
 @yield('plugin_old')
 <?php
 use App\Tracking_Details;

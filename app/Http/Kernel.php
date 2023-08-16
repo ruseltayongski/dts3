@@ -16,7 +16,6 @@ class Kernel extends HttpKernel
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \App\Http\Middleware\NoCache::class
-
     ];
 
     /**
@@ -31,6 +30,7 @@ class Kernel extends HttpKernel
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
+            'revalidate' => \App\Http\Middleware\RevalidateBackHistory::class,
         ],
 
         'api' => [
@@ -54,6 +54,7 @@ class Kernel extends HttpKernel
         'user_priv' =>  \App\Http\Middleware\UserPriv::class,
         'accounting' => \App\Http\Middleware\AccountingSection::class,
         'access' => \App\Http\Middleware\Access::class,
-        'budget' => \App\Http\Middleware\BudgetSection::class
+        'budget' => \App\Http\Middleware\BudgetSection::class,
+        'cors' => \App\Http\Middleware\Cors::class
     ];
 }

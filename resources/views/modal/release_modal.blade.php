@@ -116,6 +116,7 @@
                 <div class="alert alert-warning">
                     Are you sure you want to end this cycle?
                 </div>
+                <textarea name="remarks" class="form-control" id="end_remarks" rows="7" style="resize: vertical;" placeholder="Please enter your remark(s) of end..."></textarea>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> No</button>
