@@ -332,6 +332,10 @@ Route::get('modal', function () {
     return view('users.modal');
 });
 
+Route::get('welcome', function () {
+    return view('welcome');
+});
+
 // Route::get('res', [PasswordController::class, 'change']);
 
 // Route::get('/migrate', [SystemController::class, 'migrate']);
