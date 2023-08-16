@@ -11,6 +11,119 @@
         ->get();
 ?>
 <html>
+<<<<<<< HEAD
+<title>Track Details</title>
+<style>
+    .upper, .info, .table {
+        width: 100%;
+    }
+    .upper td, .info td, .table td {
+        border:1px solid #000;
+    }
+    .upper td {
+        padding:10px;
+    }
+    .info {
+        margin-top: 90px;
+    }
+    .info td {
+        padding: 5px;
+        vertical-align: top;
+    }
+    .table th {
+        border:1px solid #000;
+    }
+    .table td {
+        padding: 5px;
+        vertical-align: top;
+    }
+    .barcode {
+        top: 130px;
+        position: absolute;
+        left: -50%;
+    }
+    .route_no {
+        font-size:1.2em;
+        margin-left:70px;
+    }
+
+</style>
+<body>
+<div style="position: absolute; left: 53%;">
+    <div class="barcode">
+        <?php echo DNS1D::getBarcodeHTML(Session::get('route_no'),"C39E",1,25) ?>
+        <font class="route_no">{{ $route_no }}</font>
+    </div>
+</div>
+<table class="upper" cellpadding="0" cellspacing="0">
+    <tr>
+        <?php $image_path = '/img/doh.png'; ?>
+        <td width="20%"><center><img src="{{ public_path() . $image_path }}" width="100"></center></td>
+        <td width="60%" style="font-size: 11pt;">
+            <center>
+                <span style="font-size: 12pt;">Republic of the Philippines</span><br>
+                <span>Department of Health</span><br>
+                <strong>CENTRAL VISAYAS CENTER for HEALTH DEVELOPMENT</strong><br><br>
+                <span style="margin-top: 100px;">DOCUMENT TRACKING SYSTEM (DTS)</span>
+            </center>
+        </td>
+        <!--
+            {{--<td width="20%"><?php echo DNS2D::getBarcodeHTML(Session::get('route_no'), "QRCODE",5,5); ?></td>--}}
+        -->
+        <?php $image_path = '/img/f1.jpg'; ?>
+        <td width="20%"><center><img src="{{ public_path() . $image_path }}" width="100"></center></td>
+    </tr>
+
+</table>
+<table class="info" width="100%" cellspacing="0" style="margin-top: 60px;">
+    <tr>
+        <td width="30%">
+            <strong>PREPARED BY:</strong><br>
+            <?php $user = User::find($document->prepared_by); ?>
+            {{ $user->fname.' '.$user->lname }}
+        </td>
+        <td>
+            <strong>SECTION:</strong><br>
+            {{ Section::find($user->section)->description }}
+        </td>
+        <td width="30%">
+            <strong>PREPARED DATE:</strong><br>
+            {{ date('d F Y',strtotime($document->prepared_date)) }}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3">
+            <strong>DOCUMENT TYPE:</strong>
+            {{ Doc::getDocType($route_no) }}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3">
+            <strong>REMARKS / SUBJECT:</strong>
+            {!! nl2br($document->description) !!}
+            <br>
+            <br>
+        </td>
+    </tr>
+</table>
+
+<table cellspacing="0" class="table">
+    <tr>
+        <th width="15%">DATE</th>
+        <th width="25%">RECEIVED BY</th>
+        <th width="45%">ACTION / REMARKS</th>
+        <th width="15%">SIGNATURE</th>
+    </tr>
+    @foreach($tracking as $doc)
+        <?php
+            $received_by = '';
+            $section = '';
+        if($doc->received_by==0){
+            $string = $doc->code;
+            $temp   = explode(';',$string);
+            $section_id = isset($temp[1]) ? $temp[1] : 0;
+            $action = isset($temp[0]) ? $temp[0]: 0;
+=======
     <title>Track Details</title>
     <style>
         .upper, .info, .table {
@@ -134,6 +247,7 @@
                     } else {
                         $received_by = 0;
                     }
+>>>>>>> d9b9b55c3a464e05669700695ee53e8acd303dec
 
                     $user = User::find($doc->delivered_by);
                     $tmp = $user->fname.' '.$user->lname;
@@ -157,6 +271,35 @@
                         $received_by = "No Name";
                     }
 
+<<<<<<< HEAD
+            
+        }
+        ?>
+        @if(($doc->received_by != $doc->delivered_by))
+        <tr>
+            <td>{{ date('M d, Y', strtotime($doc->date_in)) }}<br>{{ date('h:i A', strtotime($doc->date_in)) }}</td>
+            <td>
+                {{ $received_by }}
+                <br>
+                <em>({{ $sectionName }})</em>
+            </td>
+            <td>{{ $doc->action }}</td>
+            <td></td>
+        </tr>
+        @endif
+    @endforeach
+    <?php $i = count($tracking); ?>
+    @for($i; $i < 11; $i++)
+    <tr>
+        <td>&nbsp;<br><br></td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    @endfor
+</table>
+</body>
+=======
 
                 }
                 ?>
@@ -184,4 +327,5 @@
             @endfor
         </table>
     </body>
+>>>>>>> d9b9b55c3a464e05669700695ee53e8acd303dec
 </html>

@@ -265,6 +265,8 @@ $pending = \App\Tracking_Details::select(
 <!-- Bootstrap WYSIHTML5 -->
 <script src="{{ asset('resources/plugin_old/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
 <script src="{{ asset('resources/plugin_old/Lobibox/Lobibox.js') }}"></script>
+<!-- VUE Scripts -->
+<script src="{{ asset('public/js/app.js?version=').date('YmdHis') }}" defer></script>
 @yield('plugin_old')
 <?php
 use App\Tracking_Details;
