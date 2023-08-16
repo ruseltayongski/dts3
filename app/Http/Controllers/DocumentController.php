@@ -488,7 +488,7 @@ class DocumentController extends Controller
         $outgoingPage = 1;
         $unconfirmPage = 1;
 
-        if($request->page){
+        /*if($request->page){
             switch (explode('type=',$request->page)[1]){
                 case 'incoming':
                     $incomingPage =  explode('?',$request->page)[0];
@@ -498,6 +498,21 @@ class DocumentController extends Controller
                     break;
                 case 'unconfirm':
                     $unconfirmPage = explode('?',$request->page)[0];
+                    break;
+            }
+        }
+*/
+
+        if($request->type){
+            switch ($request->type){
+                case 'incoming':
+                    $incomingPage =  $request->page;
+                    break;
+                case 'outgoing':
+                    $outgoingPage = $request->page;
+                    break;
+                case 'unconfirm':
+                    $unconfirmPage = $request->page;
                     break;
             }
         }
@@ -560,11 +575,11 @@ class DocumentController extends Controller
             'tracking_details.alert'
         )
             ->leftJoin('users','tracking_details.delivered_by','=','users.id')
-                ->where('tracking_details.code','like',"%temp%")
-                ->where('users.section',$user->section)
-                ->where('tracking_details.status',0)
-                ->where(function($q) use ($keywordUnconfirmed){
-                    $q->where('route_no','like',"%$keywordUnconfirmed%");
+            ->where('tracking_details.code','like',"%temp%")
+            ->where('users.section',$user->section)
+            ->where('tracking_details.status',0)
+            ->where(function($q) use ($keywordUnconfirmed){
+                $q->where('route_no','like',"%$keywordUnconfirmed%");
             })
             ->orderBy('tracking_details.date_in','desc')
             ->paginate(10, ['*'], 'page', $unconfirmPage);
@@ -657,9 +672,9 @@ class DocumentController extends Controller
 
     static function checkMinutes($start_date)
     {
-       /* $start_date = "2018-11-16 11:24:33";
-        $end_date = "2018-11-16 14:43:00";*/
-       $global_end_date = date("Y-m-d H:i:s");
+        /* $start_date = "2018-11-16 11:24:33";
+         $end_date = "2018-11-16 14:43:00";*/
+        $global_end_date = date("Y-m-d H:i:s");
         $end_date = $global_end_date;
 
         $start_checker = date("Y-m-d",strtotime($start_date));
@@ -759,12 +774,12 @@ class DocumentController extends Controller
         $this->releasedStatusChecker($tracking_details->first()->route_no,Auth::user()->section);
 
         $tracking_details->update(array(
-                'code' => 'accept;' . Auth::user()->section,
-                'date_in' => $date_in,
-                'action' => $remarks,
-                'received_by' => Auth::user()->id,
-                'alert' => 0
-            ));
+            'code' => 'accept;' . Auth::user()->section,
+            'date_in' => $date_in,
+            'action' => $remarks,
+            'received_by' => Auth::user()->id,
+            'alert' => 0
+        ));
         $data = array(
             'code' => 'accept;' . Auth::user()->section,
             'date_in' => $date_in,
