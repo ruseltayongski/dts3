@@ -318,17 +318,31 @@ use App\Http\Controllers\ReleaseController as Rel;
     <script src="<?php echo asset('resources/plugin_old/dataTable/js/dataTables.bootstrap.min.js');?>"></script>
     @include('js.release_js')
     <script>
-        $(".incomingPaginate").children().children().each(function(index){
+        $(document).ready(function() {
+            $('.incomingPaginate a.page-link').each(function() {
+                var href = $(this).attr('href');
+                $(this).attr('href', href+"&type=incoming");
+            });
+            $('.outgoingPaginate a.page-link').each(function() {
+                var href = $(this).attr('href');
+                $(this).attr('href', href+"&type=outgoing");
+            });
+            $('.unconfirmPaginate a.page-link').each(function() {
+                var href = $(this).attr('href');
+                $(this).attr('href', href+"&type=unconfirm");
+            });
+        });
+        /*$(".incomingPaginate").children().children().each(function(index){
             var _href = $($(this).children().get(0)).attr('href');
-            $($(this).children().get(0)).attr('href',_href+'?type=incoming');
+            $($(this).children().get(0)).attr('href',_href+'&type=incoming');
         });
         $(".outgoingPaginate").children().children().each(function(index){
             var _href = $($(this).children().get(0)).attr('href');
-            $($(this).children().get(0)).attr('href',_href+'?type=outgoing');
+            $($(this).children().get(0)).attr('href',_href+'&type=outgoing');
         });
         $(".unconfirmPaginate").children().children().each(function(index){
             var _href = $($(this).children().get(0)).attr('href');
-            $($(this).children().get(0)).attr('href',_href+'?type=unconfirm');
-        });
+            $($(this).children().get(0)).attr('href',_href+'&type=unconfirm');
+        });*/
     </script>
 @endsection

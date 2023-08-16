@@ -488,7 +488,7 @@ class DocumentController extends Controller
         $outgoingPage = 1;
         $unconfirmPage = 1;
 
-        if($request->page){
+        /*if($request->page){
             switch (explode('type=',$request->page)[1]){
                 case 'incoming':
                     $incomingPage =  explode('?',$request->page)[0];
@@ -498,6 +498,21 @@ class DocumentController extends Controller
                     break;
                 case 'unconfirm':
                     $unconfirmPage = explode('?',$request->page)[0];
+                    break;
+            }
+        }
+*/
+
+        if($request->type){
+            switch ($request->type){
+                case 'incoming':
+                    $incomingPage =  $request->page;
+                    break;
+                case 'outgoing':
+                    $outgoingPage = $request->page;
+                    break;
+                case 'unconfirm':
+                    $unconfirmPage = $request->page;
                     break;
             }
         }
