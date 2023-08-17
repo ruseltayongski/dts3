@@ -1,10 +1,24 @@
 <script setup lang="ts">
-    import { onMounted, defineProps } from 'vue';
-    const props = defineProps({
-       "sample": String
-    });
+    import { onMounted,ref } from 'vue';
+    import Echo, {Channel} from "laravel-echo";
+
+    const users = ref<any[]>([]);
+
     onMounted(() => {
-        console.log(props.sample);
+        const echoWithJoin = window.Echo as Echo & { join: (channel: string) => Channel };
+
+        echoWithJoin.join('chat')
+            .here((receivedUsers: any[]) => {
+                console.log(receivedUsers);
+                users.value = receivedUsers;
+            })
+            .joining((user: any) => {
+                console.log(user);
+                users.value.push(user);
+            }); 
+    });
+
+    /* console.log(props.sample);
 
         // Define an interface for a basic vehicle
         interface Vehicle {
@@ -58,9 +72,8 @@
         const myBicycle = new Bicycle("Schwinn", 2021);
         myBicycle.start();
         myBicycle.ringBell();
-        myBicycle.stop();
-    })
+        myBicycle.stop();*/
 </script>
 <template>
-    <h1>Hello DTS!! {{ props.sample }} wewewe</h1>
+    <h1>Hello DTS!!</h1>
 </template>

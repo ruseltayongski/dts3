@@ -150,8 +150,8 @@ Route::get('report', [AdminController::class, 'report']);
 Route::get('reportedDocuments/{year}', [AdminController::class, 'reportedDocuments']);
 
 
-Route::get('report/logs/section', 'PrintLogsController@sectionLogs');
-Route::get('sectionTracking/{sectionId}/{year}/{month}', 'PrintLogsController@sectionTracking');
+Route::get('report/logs/section', [PrintLogsController::class,'sectionLogs']);
+Route::get('sectionTracking/{sectionId}/{year}/{month}', [PrintLogsController::class,'sectionTracking']);
 
 // ONLINE
 Route::get('online', [OnlineController::class, 'online']);
