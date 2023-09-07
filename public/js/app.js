@@ -22427,7 +22427,9 @@ var Runtime = {
     },
     createWebSocket(url) {
         var Constructor = this.getWebSocketAPI();
-        return new Constructor(url);
+        console.log(url);
+        return new Constructor("ws://192.168.110.160:6001/app/websocketkey?protocol=7&client=js&version=4.4.0&flash=false");
+        //return new Constructor(url);
     },
     createSocketRequest(method, url) {
         if (this.isXHRSupported()) {
