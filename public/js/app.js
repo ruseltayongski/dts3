@@ -16979,14 +16979,11 @@ window.Pusher = (pusher_js__WEBPACK_IMPORTED_MODULE_0___default()); // Assign th
 });*/
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_1__["default"]({
   broadcaster: 'pusher',
-  //authEndpoint: "broadcasting/auth",
   authEndpoint: "/dts/broadcasting/auth",
   key: "websocketkey",
   cluster: "",
-  wsHost: "mis.cvchd7.com",
-  //wsHost: window.location.hostname,
-  //wsPort: 6001,
-  wssPort: 6001,
+  wsHost: window.location.hostname,
+  wsPort: 6001,
   disableStats: true,
   enabledTransports: ['ws', 'wss'] // <- added this param
 });
