@@ -60,7 +60,7 @@ return [
          * in a separate file specified by local_pk.
          */
         //'local_cert' => "/var/lib/jelastic/keys/cvchd7.com.cer",
-        'local_cert' => "C:/xampp/apache/crt/site.test/cvchd7.com.crt",
+        'local_cert' => "C:/Apache24/crt/cvchd7.com/STAR_cvchd7_com.crt",
         //'local_cert' => null,
 
         /*
@@ -68,14 +68,14 @@ return [
          * certificate (local_cert) and private key.
          */
         //'local_pk' => "/var/lib/jelastic/keys/cvchd7.com.key",
-        'local_pk' => "C:/xampp/apache/crt/site.test/cvchd7.com.key",
+        'local_pk' => "C:/Apache24/crt/cvchd7.com/cvchd7.com.key",
         //'local_pk' => null,
 
         /*
          * Passphrase with which your local_cert file was encoded.
          */
         'passphrase' => null,
-        'verify_peer' => false,
+        'verify_peer' => true,
     ],
 
     'statistics' => [
