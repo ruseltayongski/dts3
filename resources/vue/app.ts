@@ -38,7 +38,7 @@ window.Pusher = Pusher; // Assign the imported Pusher to the global object
     disableStats: true,
 });*/
 
-/*window.Echo = new Echo({
+window.Echo = new Echo({
     broadcaster: 'pusher',
     authEndpoint: "/dts/broadcasting/auth",
     key: process.env.MIX_PUSHER_APP_KEY,
@@ -46,18 +46,8 @@ window.Pusher = Pusher; // Assign the imported Pusher to the global object
     encrypted: false, // Use encrypted WebSocket connection
     wsHost: window.location.hostname,
     wsPort: 6001
-});*/
-
-window.Echo = new Echo({
-    broadcaster: 'pusher',
-    authEndpoint: "/dts/broadcasting/auth",
-    key: process.env.MIX_PUSHER_APP_KEY,
-    cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-    wsHost: window.location.hostname,
-    wsPort: 6001,
-    disableStats: true,
-    enabledTransports: ['ws', 'wss'] // <- added this param
 });
+
 
 import { createApp } from 'vue';
 import App from './layout/App.vue';

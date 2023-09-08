@@ -16968,26 +16968,15 @@ window.Pusher = (pusher_js__WEBPACK_IMPORTED_MODULE_0___default()); // Assign th
     forceTLS: true, // Use HTTPS for WebSocket
     disableStats: true,
 });*/
-/*window.Echo = new Echo({
-    broadcaster: 'pusher',
-    authEndpoint: "/dts/broadcasting/auth",
-    key: process.env.MIX_PUSHER_APP_KEY,
-    cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-    encrypted: false, // Use encrypted WebSocket connection
-    wsHost: window.location.hostname,
-    wsPort: 6001
-});*/
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_1__["default"]({
   broadcaster: 'pusher',
   authEndpoint: "/dts/broadcasting/auth",
   key: "websocketkey",
   cluster: "",
+  encrypted: false,
   wsHost: window.location.hostname,
-  wsPort: 6001,
-  disableStats: true,
-  enabledTransports: ['ws', 'wss'] // <- added this param
+  wsPort: 6001
 });
-
 
 
 var app = (0,vue__WEBPACK_IMPORTED_MODULE_2__.createApp)(_layout_App_vue__WEBPACK_IMPORTED_MODULE_3__["default"]);
