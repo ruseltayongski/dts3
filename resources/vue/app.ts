@@ -50,14 +50,11 @@ window.Pusher = Pusher; // Assign the imported Pusher to the global object
 
 window.Echo = new Echo({
     broadcaster: 'pusher',
-    //authEndpoint: "broadcasting/auth",
     authEndpoint: "/dts/broadcasting/auth",
     key: process.env.MIX_PUSHER_APP_KEY,
     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-    wsHost: "mis.cvchd7.com",
-    //wsHost: window.location.hostname,
-    //wsPort: 6001,
-    wssPort: 6001,
+    wsHost: window.location.hostname,
+    wsPort: 6001,
     disableStats: true,
     enabledTransports: ['ws', 'wss'] // <- added this param
 });

@@ -1,5 +1,5 @@
 /******/ (() => { // webpackBootstrap
-/******/ 	var __webpack_modules__ = ({
+/******/  var __webpack_modules__ = ({
 
 /***/ "./node_modules/@vue/compiler-core/dist/compiler-core.esm-bundler.js":
 /*!***************************************************************************!*\
@@ -16985,7 +16985,7 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_1__["default"]({
   wsHost: "mis.cvchd7.com",
   wssPort: 6001,
   disableStats: true,
-  enabledTransports: ['ws', 'wss'],
+  enabledTransports: ['ws', 'wss'] // <- added this param
 });
 
 
@@ -18711,94 +18711,94 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 (function webpackUniversalModuleDefinition(root, factory) {
-	if(true)
-		module.exports = factory();
-	else {}
+  if(true)
+    module.exports = factory();
+  else {}
 })(window, function() {
 return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
+/******/  // The module cache
+/******/  var installedModules = {};
 /******/
-/******/ 	// The require function
-/******/ 	function __nested_webpack_require_669__(moduleId) {
+/******/  // The require function
+/******/  function __nested_webpack_require_669__(moduleId) {
 /******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
+/******/    // Check if module is in cache
+/******/    if(installedModules[moduleId]) {
+/******/      return installedModules[moduleId].exports;
+/******/    }
+/******/    // Create a new module (and put it into the cache)
+/******/    var module = installedModules[moduleId] = {
+/******/      i: moduleId,
+/******/      l: false,
+/******/      exports: {}
+/******/    };
 /******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_669__);
+/******/    // Execute the module function
+/******/    modules[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_669__);
 /******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
+/******/    // Flag the module as loaded
+/******/    module.l = true;
 /******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__nested_webpack_require_669__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__nested_webpack_require_669__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__nested_webpack_require_669__.d = function(exports, name, getter) {
-/******/ 		if(!__nested_webpack_require_669__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// define __esModule on exports
-/******/ 	__nested_webpack_require_669__.r = function(exports) {
-/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 		}
-/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 	};
-/******/
-/******/ 	// create a fake namespace object
-/******/ 	// mode & 1: value is a module id, require it
-/******/ 	// mode & 2: merge all properties of value into the ns
-/******/ 	// mode & 4: return value when already ns object
-/******/ 	// mode & 8|1: behave like require
-/******/ 	__nested_webpack_require_669__.t = function(value, mode) {
-/******/ 		if(mode & 1) value = __nested_webpack_require_669__(value);
-/******/ 		if(mode & 8) return value;
-/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
-/******/ 		var ns = Object.create(null);
-/******/ 		__nested_webpack_require_669__.r(ns);
-/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
-/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __nested_webpack_require_669__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
-/******/ 		return ns;
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__nested_webpack_require_669__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__nested_webpack_require_669__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__nested_webpack_require_669__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__nested_webpack_require_669__.p = "";
+/******/    // Return the exports of the module
+/******/    return module.exports;
+/******/  }
 /******/
 /******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __nested_webpack_require_669__(__nested_webpack_require_669__.s = 2);
+/******/  // expose the modules object (__webpack_modules__)
+/******/  __nested_webpack_require_669__.m = modules;
+/******/
+/******/  // expose the module cache
+/******/  __nested_webpack_require_669__.c = installedModules;
+/******/
+/******/  // define getter function for harmony exports
+/******/  __nested_webpack_require_669__.d = function(exports, name, getter) {
+/******/    if(!__nested_webpack_require_669__.o(exports, name)) {
+/******/      Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/    }
+/******/  };
+/******/
+/******/  // define __esModule on exports
+/******/  __nested_webpack_require_669__.r = function(exports) {
+/******/    if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/      Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/    }
+/******/    Object.defineProperty(exports, '__esModule', { value: true });
+/******/  };
+/******/
+/******/  // create a fake namespace object
+/******/  // mode & 1: value is a module id, require it
+/******/  // mode & 2: merge all properties of value into the ns
+/******/  // mode & 4: return value when already ns object
+/******/  // mode & 8|1: behave like require
+/******/  __nested_webpack_require_669__.t = function(value, mode) {
+/******/    if(mode & 1) value = __nested_webpack_require_669__(value);
+/******/    if(mode & 8) return value;
+/******/    if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/    var ns = Object.create(null);
+/******/    __nested_webpack_require_669__.r(ns);
+/******/    Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/    if(mode & 2 && typeof value != 'string') for(var key in value) __nested_webpack_require_669__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/    return ns;
+/******/  };
+/******/
+/******/  // getDefaultExport function for compatibility with non-harmony modules
+/******/  __nested_webpack_require_669__.n = function(module) {
+/******/    var getter = module && module.__esModule ?
+/******/      function getDefault() { return module['default']; } :
+/******/      function getModuleExports() { return module; };
+/******/    __nested_webpack_require_669__.d(getter, 'a', getter);
+/******/    return getter;
+/******/  };
+/******/
+/******/  // Object.prototype.hasOwnProperty.call
+/******/  __nested_webpack_require_669__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/  // __webpack_public_path__
+/******/  __nested_webpack_require_669__.p = "";
+/******/
+/******/
+/******/  // Load entry module and return exports
+/******/  return __nested_webpack_require_669__(__nested_webpack_require_669__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -20358,6 +20358,7 @@ var WSTransport = new transport_Transport({
         return Boolean(runtime.getWebSocketAPI());
     },
     getSocket: function (url) {
+      console.log(url);
         return runtime.createWebSocket(url);
     }
 });
@@ -22438,9 +22439,7 @@ var Runtime = {
     },
     createWebSocket(url) {
         var Constructor = this.getWebSocketAPI();
-        console.log(url);
-        return new Constructor(url);
-        //return new Constructor(url);
+        return new Constructor("ws://localhost:6001/app/websocketkey?protocol=7&client=js&version=8.3.0&flash=false");
     },
     createSocketRequest(method, url) {
         if (this.isXHRSupported()) {
@@ -23651,182 +23650,182 @@ ${codeFrame}` : message);
 
 /***/ })
 
-/******/ 	});
+/******/  });
 /************************************************************************/
-/******/ 	// The module cache
-/******/ 	var __webpack_module_cache__ = {};
-/******/ 	
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/ 		// Check if module is in cache
-/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
-/******/ 		if (cachedModule !== undefined) {
-/******/ 			return cachedModule.exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = __webpack_module_cache__[moduleId] = {
-/******/ 			// no module.id needed
-/******/ 			// no module.loaded needed
-/******/ 			exports: {}
-/******/ 		};
-/******/ 	
-/******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/ 	
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/ 	
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = __webpack_modules__;
-/******/ 	
+/******/  // The module cache
+/******/  var __webpack_module_cache__ = {};
+/******/  
+/******/  // The require function
+/******/  function __webpack_require__(moduleId) {
+/******/    // Check if module is in cache
+/******/    var cachedModule = __webpack_module_cache__[moduleId];
+/******/    if (cachedModule !== undefined) {
+/******/      return cachedModule.exports;
+/******/    }
+/******/    // Create a new module (and put it into the cache)
+/******/    var module = __webpack_module_cache__[moduleId] = {
+/******/      // no module.id needed
+/******/      // no module.loaded needed
+/******/      exports: {}
+/******/    };
+/******/  
+/******/    // Execute the module function
+/******/    __webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/  
+/******/    // Return the exports of the module
+/******/    return module.exports;
+/******/  }
+/******/  
+/******/  // expose the modules object (__webpack_modules__)
+/******/  __webpack_require__.m = __webpack_modules__;
+/******/  
 /************************************************************************/
-/******/ 	/* webpack/runtime/chunk loaded */
-/******/ 	(() => {
-/******/ 		var deferred = [];
-/******/ 		__webpack_require__.O = (result, chunkIds, fn, priority) => {
-/******/ 			if(chunkIds) {
-/******/ 				priority = priority || 0;
-/******/ 				for(var i = deferred.length; i > 0 && deferred[i - 1][2] > priority; i--) deferred[i] = deferred[i - 1];
-/******/ 				deferred[i] = [chunkIds, fn, priority];
-/******/ 				return;
-/******/ 			}
-/******/ 			var notFulfilled = Infinity;
-/******/ 			for (var i = 0; i < deferred.length; i++) {
-/******/ 				var [chunkIds, fn, priority] = deferred[i];
-/******/ 				var fulfilled = true;
-/******/ 				for (var j = 0; j < chunkIds.length; j++) {
-/******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every((key) => (__webpack_require__.O[key](chunkIds[j])))) {
-/******/ 						chunkIds.splice(j--, 1);
-/******/ 					} else {
-/******/ 						fulfilled = false;
-/******/ 						if(priority < notFulfilled) notFulfilled = priority;
-/******/ 					}
-/******/ 				}
-/******/ 				if(fulfilled) {
-/******/ 					deferred.splice(i--, 1)
-/******/ 					var r = fn();
-/******/ 					if (r !== undefined) result = r;
-/******/ 				}
-/******/ 			}
-/******/ 			return result;
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/compat get default export */
-/******/ 	(() => {
-/******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__webpack_require__.n = (module) => {
-/******/ 			var getter = module && module.__esModule ?
-/******/ 				() => (module['default']) :
-/******/ 				() => (module);
-/******/ 			__webpack_require__.d(getter, { a: getter });
-/******/ 			return getter;
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
-/******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = (exports, definition) => {
-/******/ 			for(var key in definition) {
-/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
-/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 				}
-/******/ 			}
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/global */
-/******/ 	(() => {
-/******/ 		__webpack_require__.g = (function() {
-/******/ 			if (typeof globalThis === 'object') return globalThis;
-/******/ 			try {
-/******/ 				return this || new Function('return this')();
-/******/ 			} catch (e) {
-/******/ 				if (typeof window === 'object') return window;
-/******/ 			}
-/******/ 		})();
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = (exports) => {
-/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/jsonp chunk loading */
-/******/ 	(() => {
-/******/ 		// no baseURI
-/******/ 		
-/******/ 		// object to store loaded and loading chunks
-/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
-/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
-/******/ 		var installedChunks = {
-/******/ 			"/js/app": 0,
-/******/ 			"css/app": 0
-/******/ 		};
-/******/ 		
-/******/ 		// no chunk on demand loading
-/******/ 		
-/******/ 		// no prefetching
-/******/ 		
-/******/ 		// no preloaded
-/******/ 		
-/******/ 		// no HMR
-/******/ 		
-/******/ 		// no HMR manifest
-/******/ 		
-/******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
-/******/ 		
-/******/ 		// install a JSONP callback for chunk loading
-/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
-/******/ 			var [chunkIds, moreModules, runtime] = data;
-/******/ 			// add "moreModules" to the modules object,
-/******/ 			// then flag all "chunkIds" as loaded and fire callback
-/******/ 			var moduleId, chunkId, i = 0;
-/******/ 			if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
-/******/ 				for(moduleId in moreModules) {
-/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
-/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
-/******/ 					}
-/******/ 				}
-/******/ 				if(runtime) var result = runtime(__webpack_require__);
-/******/ 			}
-/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
-/******/ 			for(;i < chunkIds.length; i++) {
-/******/ 				chunkId = chunkIds[i];
-/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
-/******/ 					installedChunks[chunkId][0]();
-/******/ 				}
-/******/ 				installedChunks[chunkId] = 0;
-/******/ 			}
-/******/ 			return __webpack_require__.O(result);
-/******/ 		}
-/******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunkdts"] = self["webpackChunkdts"] || [];
-/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
-/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
-/******/ 	})();
-/******/ 	
+/******/  /* webpack/runtime/chunk loaded */
+/******/  (() => {
+/******/    var deferred = [];
+/******/    __webpack_require__.O = (result, chunkIds, fn, priority) => {
+/******/      if(chunkIds) {
+/******/        priority = priority || 0;
+/******/        for(var i = deferred.length; i > 0 && deferred[i - 1][2] > priority; i--) deferred[i] = deferred[i - 1];
+/******/        deferred[i] = [chunkIds, fn, priority];
+/******/        return;
+/******/      }
+/******/      var notFulfilled = Infinity;
+/******/      for (var i = 0; i < deferred.length; i++) {
+/******/        var [chunkIds, fn, priority] = deferred[i];
+/******/        var fulfilled = true;
+/******/        for (var j = 0; j < chunkIds.length; j++) {
+/******/          if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every((key) => (__webpack_require__.O[key](chunkIds[j])))) {
+/******/            chunkIds.splice(j--, 1);
+/******/          } else {
+/******/            fulfilled = false;
+/******/            if(priority < notFulfilled) notFulfilled = priority;
+/******/          }
+/******/        }
+/******/        if(fulfilled) {
+/******/          deferred.splice(i--, 1)
+/******/          var r = fn();
+/******/          if (r !== undefined) result = r;
+/******/        }
+/******/      }
+/******/      return result;
+/******/    };
+/******/  })();
+/******/  
+/******/  /* webpack/runtime/compat get default export */
+/******/  (() => {
+/******/    // getDefaultExport function for compatibility with non-harmony modules
+/******/    __webpack_require__.n = (module) => {
+/******/      var getter = module && module.__esModule ?
+/******/        () => (module['default']) :
+/******/        () => (module);
+/******/      __webpack_require__.d(getter, { a: getter });
+/******/      return getter;
+/******/    };
+/******/  })();
+/******/  
+/******/  /* webpack/runtime/define property getters */
+/******/  (() => {
+/******/    // define getter functions for harmony exports
+/******/    __webpack_require__.d = (exports, definition) => {
+/******/      for(var key in definition) {
+/******/        if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/          Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/        }
+/******/      }
+/******/    };
+/******/  })();
+/******/  
+/******/  /* webpack/runtime/global */
+/******/  (() => {
+/******/    __webpack_require__.g = (function() {
+/******/      if (typeof globalThis === 'object') return globalThis;
+/******/      try {
+/******/        return this || new Function('return this')();
+/******/      } catch (e) {
+/******/        if (typeof window === 'object') return window;
+/******/      }
+/******/    })();
+/******/  })();
+/******/  
+/******/  /* webpack/runtime/hasOwnProperty shorthand */
+/******/  (() => {
+/******/    __webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/  })();
+/******/  
+/******/  /* webpack/runtime/make namespace object */
+/******/  (() => {
+/******/    // define __esModule on exports
+/******/    __webpack_require__.r = (exports) => {
+/******/      if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/        Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/      }
+/******/      Object.defineProperty(exports, '__esModule', { value: true });
+/******/    };
+/******/  })();
+/******/  
+/******/  /* webpack/runtime/jsonp chunk loading */
+/******/  (() => {
+/******/    // no baseURI
+/******/    
+/******/    // object to store loaded and loading chunks
+/******/    // undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/    // [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
+/******/    var installedChunks = {
+/******/      "/js/app": 0,
+/******/      "css/app": 0
+/******/    };
+/******/    
+/******/    // no chunk on demand loading
+/******/    
+/******/    // no prefetching
+/******/    
+/******/    // no preloaded
+/******/    
+/******/    // no HMR
+/******/    
+/******/    // no HMR manifest
+/******/    
+/******/    __webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
+/******/    
+/******/    // install a JSONP callback for chunk loading
+/******/    var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
+/******/      var [chunkIds, moreModules, runtime] = data;
+/******/      // add "moreModules" to the modules object,
+/******/      // then flag all "chunkIds" as loaded and fire callback
+/******/      var moduleId, chunkId, i = 0;
+/******/      if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
+/******/        for(moduleId in moreModules) {
+/******/          if(__webpack_require__.o(moreModules, moduleId)) {
+/******/            __webpack_require__.m[moduleId] = moreModules[moduleId];
+/******/          }
+/******/        }
+/******/        if(runtime) var result = runtime(__webpack_require__);
+/******/      }
+/******/      if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
+/******/      for(;i < chunkIds.length; i++) {
+/******/        chunkId = chunkIds[i];
+/******/        if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/          installedChunks[chunkId][0]();
+/******/        }
+/******/        installedChunks[chunkId] = 0;
+/******/      }
+/******/      return __webpack_require__.O(result);
+/******/    }
+/******/    
+/******/    var chunkLoadingGlobal = self["webpackChunkdts"] = self["webpackChunkdts"] || [];
+/******/    chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
+/******/    chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/  })();
+/******/  
 /************************************************************************/
-/******/ 	
-/******/ 	// startup
-/******/ 	// Load entry module and return exports
-/******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/vue/app.ts")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/sass/app.scss")))
-/******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
-/******/ 	
+/******/  
+/******/  // startup
+/******/  // Load entry module and return exports
+/******/  // This entry module depends on other loaded chunks and execution need to be delayed
+/******/  __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/vue/app.ts")))
+/******/  var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/sass/app.scss")))
+/******/  __webpack_exports__ = __webpack_require__.O(__webpack_exports__);
+/******/  
 /******/ })()
 ;
