@@ -16968,22 +16968,13 @@ window.Pusher = (pusher_js__WEBPACK_IMPORTED_MODULE_0___default()); // Assign th
     forceTLS: true, // Use HTTPS for WebSocket
     disableStats: true,
 });*/
-/*window.Echo = new Echo({
-    broadcaster: 'pusher',
-    authEndpoint: "/dts/broadcasting/auth",
-    key: process.env.MIX_PUSHER_APP_KEY,
-    cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-    encrypted: false, // Use encrypted WebSocket connection
-    wsHost: window.location.hostname,
-    wsPort: 6001
-});*/
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_1__["default"]({
   broadcaster: 'pusher',
   authEndpoint: "/dts/broadcasting/auth",
   key: "websocketkey",
   cluster: "",
-  wsHost: "mis.cvchd7.com",
-  wssPort: 6001,
+  wsHost: window.location.hostname,
+  wsPort: 6001,
   disableStats: true,
   enabledTransports: ['ws', 'wss'] // <- added this param
 });
@@ -20358,8 +20349,8 @@ var WSTransport = new transport_Transport({
         return Boolean(runtime.getWebSocketAPI());
     },
     getSocket: function (url) {
-      console.log(url);
-        return runtime.createWebSocket(url);
+      console.log(url)
+        return runtime.createWebSocket("ws://localhost:6001/app/websocketkey?protocol=7&client=js&version=8.3.0&flash=false");
     }
 });
 var httpConfiguration = {
@@ -22439,7 +22430,7 @@ var Runtime = {
     },
     createWebSocket(url) {
         var Constructor = this.getWebSocketAPI();
-        return new Constructor("ws://localhost:6001/app/websocketkey?protocol=7&client=js&version=8.3.0&flash=false");
+        return new Constructor(url);
     },
     createSocketRequest(method, url) {
         if (this.isXHRSupported()) {

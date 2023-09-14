@@ -17,6 +17,7 @@ return [
             'secret' => env('PUSHER_APP_SECRET'),
             'enable_client_messages' => true,
             'enable_statistics' => true,
+            'encrypted' => true,
         ],
     ],
 
@@ -58,18 +59,22 @@ return [
          * certificate chain of issuers. The private key also may be contained
          * in a separate file specified by local_pk.
          */
-        'local_cert' => null,
+        'local_cert' => "C:/Apache24/crt/cvchd7.com/STAR_cvchd7_com.crt",
+        //'local_cert' => "C:/xampp/apache/crt/site.test/server.crt",
+        //'local_cert' => null,
 
         /*
          * Path to local private key file on filesystem in case of separate files for
          * certificate (local_cert) and private key.
          */
-        'local_pk' => null,
+        'local_pk' => "C:/Apache24/crt/cvchd7.com/cvchd7.com.key",
+        //'local_pk' => null,
 
         /*
          * Passphrase with which your local_cert file was encoded.
          */
-        'passphrase' => null
+        'passphrase' => null,
+        'verify_peer' => false,
     ],
 
     'statistics' => [
