@@ -1,34 +1,53 @@
-# Use the official PHP image as the base image
-FROM php:7.4-cli
+FROM php:7.4-fpm
 
-# Set the working directory in the container
-WORKDIR /var/www/html
+# Copy composer.lock and composer.json
+COPY composer.lock composer.json /var/www/
 
-# Install system dependencies
+# Set working directory
+WORKDIR /var/www
+
+# Install dependencies
 RUN apt-get update && apt-get install -y \
+    build-essential \
+    libpng-dev \
+    libjpeg62-turbo-dev \
+    libfreetype6-dev \
+    locales \
+    zip \
+    jpegoptim optipng pngquant gifsicle \
+    vim \
+    unzip \
     git \
-    unzip
+    curl \
+    libzip-dev
 
-# Install PHP extensions required by Laravel
-RUN docker-php-ext-install \
-    pdo \
-    pdo_mysql
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install Composer globally
+# Install extensions
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
+# Install pdo_mysql extension manually
+RUN docker-php-source extract && \
+    docker-php-ext-configure pdo_mysql && \
+    docker-php-ext-install pdo_mysql && \
+    docker-php-source delete
+
+# Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Copy the Laravel project files into the container
-COPY . /var/www/html
+# Add user for laravel application
+RUN groupadd -g 1000 www
+RUN useradd -u 1000 -ms /bin/bash -g www www
 
-# Install Laravel WebSockets dependencies
-RUN composer install
+# Copy existing application directory contents
+COPY . /var/www
 
-# Expose the port on which the Laravel WebSockets server will run
-EXPOSE 6001
+# Copy existing application directory permissions
+COPY --chown=www:www . /var/www
 
-# Define the command to run the Laravel WebSockets server
-CMD ["php", "artisan", "websockets:serve"]
+# Change current user to www
+USER www
 
-#docker build -t laravel-websockets-image .
-#docker run -d -p 6001:6001 --name laravel-websockets-container laravel-websockets-image
-
+# Expose port 9000 and start php-fpm server
+EXPOSE 9000
+CMD ["php-fpm"]
