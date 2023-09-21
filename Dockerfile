@@ -48,6 +48,11 @@ COPY --chown=www:www . /var/www
 # Change current user to www
 USER www
 
-# Expose port 9000 and start php-fpm server
+# Expose port 9000
 EXPOSE 9000
+
+# Run php artisan config:cache during the build process
+RUN php artisan config:cache
+
+# Start php-fpm server
 CMD ["php-fpm"]
