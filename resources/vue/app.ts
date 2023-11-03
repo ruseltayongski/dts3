@@ -43,9 +43,10 @@ window.Echo = new Echo({
     authEndpoint: "/dts/broadcasting/auth",
     key: process.env.MIX_PUSHER_APP_KEY,
     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-    encrypted: false, // Use encrypted WebSocket connection
-    wsHost: window.location.hostname,
-    wsPort: 6001
+    wsHost: "mis.cvchd7.com",
+    wssPort: 6001,
+    disableStats: true,
+    enabledTransports: ['ws', 'wss'] // <- added this param
 });
 
 

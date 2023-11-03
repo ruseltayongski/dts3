@@ -16973,8 +16973,8 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_1__["default"]({
   authEndpoint: "/dts/broadcasting/auth",
   key: "websocketkey",
   cluster: "",
-  wsHost: window.location.hostname,
-  wsPort: 6001,
+  wsHost: "mis.cvchd7.com",
+  wssPort: 6001,
   disableStats: true,
   enabledTransports: ['ws', 'wss'] // <- added this param
 });
@@ -20349,8 +20349,7 @@ var WSTransport = new transport_Transport({
         return Boolean(runtime.getWebSocketAPI());
     },
     getSocket: function (url) {
-      console.log(url)
-        return runtime.createWebSocket("ws://localhost:6001/app/websocketkey?protocol=7&client=js&version=8.3.0&flash=false");
+        return runtime.createWebSocket(url);
     }
 });
 var httpConfiguration = {
@@ -22429,8 +22428,9 @@ var Runtime = {
         return net_info_Network;
     },
     createWebSocket(url) {
+        console.log(url);
         var Constructor = this.getWebSocketAPI();
-        return new Constructor(url);
+        return new Constructor("wss://mis.cvchd7.com:6001/app/websocketkey?protocol=7&client=js&version=8.3.0&flash=false");
     },
     createSocketRequest(method, url) {
         if (this.isXHRSupported()) {

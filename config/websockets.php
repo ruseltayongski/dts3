@@ -15,9 +15,14 @@ return [
             'name' => env('APP_NAME'),
             'key' => env('PUSHER_APP_KEY'),
             'secret' => env('PUSHER_APP_SECRET'),
+            'path' => env('PUSHER_APP_PATH'),
+            'capacity' => null,
             'enable_client_messages' => true,
             'enable_statistics' => true,
-            'encrypted' => true,
+            'ssl' => true,
+            'host' => 'mis.cvchd7.com', // Add your subdomain here
+            'port' => 6001, // You can use the default port or change it if needed
+            'scheme' => 'https', // Use 'https' since you have an SSL certificate
         ],
     ],
 
@@ -30,13 +35,6 @@ return [
      */
     'app_provider' => BeyondCode\LaravelWebSockets\Apps\ConfigAppProvider::class,
 
-    /*
-     * This array contains the hosts of which you want to allow incoming requests.
-     * Leave this empty if you want to accepts requests from all hosts.
-     */
-    'allowed_origins' => [
-        //
-    ],
 
     /*
      * The maximum request size in kilobytes that is allowed for an incoming WebSocket request.
@@ -59,7 +57,7 @@ return [
          * certificate chain of issuers. The private key also may be contained
          * in a separate file specified by local_pk.
          */
-        'local_cert' => "C:/Apache24/crt/cvchd7.com/STAR_cvchd7_com.crt",
+        'local_cert' => "C:/nginx-1.24.0/nginx-1.24.0/crt/cvchd7.com/STAR_cvchd7_com.pem",
         //'local_cert' => "C:/xampp/apache/crt/site.test/server.crt",
         //'local_cert' => null,
 
@@ -67,7 +65,8 @@ return [
          * Path to local private key file on filesystem in case of separate files for
          * certificate (local_cert) and private key.
          */
-        'local_pk' => "C:/Apache24/crt/cvchd7.com/cvchd7.com.key",
+        'local_pk' => "C:/nginx-1.24.0/nginx-1.24.0/crt/cvchd7.com/cvchd7.com.key",
+        //'local_pk' => "C:/xampp/apache/crt/site.test/server.key",
         //'local_pk' => null,
 
         /*
@@ -75,7 +74,12 @@ return [
          */
         'passphrase' => null,
         'verify_peer' => false,
+        /*
+         * Path to your CA bundle file.
+         */
+        'cafile' => 'C:/nginx-1.24.0/nginx-1.24.0/crt/cvchd7.com/My_CA_Bundle.ca-bundle',
     ],
+    'debug' => true,
 
     'statistics' => [
         /*

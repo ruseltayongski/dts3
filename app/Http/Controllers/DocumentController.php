@@ -291,9 +291,9 @@ class DocumentController extends Controller
     public function createDocument(Request $req)
     {
         $data = $_POST;
-        $route_no = date('Y-').Auth::user()->id.date('mdHis');
+        //$route_no = date('Y-').Auth::user()->id.date('mdHis');
         $q = new Tracking();
-        $q->route_no = $route_no;
+        //$q->route_no = $route_no;
         $q->prepared_date = date('Y-m-d H:i:s');
         $q->prepared_by = Auth::user()->id;
 
@@ -316,7 +316,14 @@ class DocumentController extends Controller
             $q->description = $tmp;
         }
 
+        //ge pa mubo route no
         $q->save();
+        $tracking_route = Tracking::find($q->id);
+        $route_no = date('Y').'-'.$q->id;
+
+        $tracking_route->route_no = $route_no;
+        $tracking_route->save(); //ge pa mubo ang route no, instead mo himo og route, ang id na lang sa tracking master
+
         Session::put('added',true);
 
         $r = new Tracking_Details();
