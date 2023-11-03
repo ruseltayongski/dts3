@@ -16895,6 +16895,7 @@ __webpack_require__.r(__webpack_exports__);
         myBicycle.start();
         myBicycle.ringBell();
         myBicycle.stop();*/
+    console.log("hahaha");
     var __returned__ = {
       users: users
     };
@@ -16919,10 +16920,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   render: () => (/* binding */ render)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h1", null, "Hello DTS!!");
+  return null;
 }
 
 /***/ }),
@@ -16956,29 +16955,26 @@ window.Pusher = (pusher_js__WEBPACK_IMPORTED_MODULE_0___default()); // Assign th
      forceTLS: true,
      disableStats: true,
  });*/
-/*window.Echo = new Echo({
-    broadcaster: 'pusher',
-    authEndpoint: "/dts/broadcasting/auth",
-    key: process.env.MIX_PUSHER_APP_KEY,
-    cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-    encrypted: true, // Use encrypted WebSocket connection
-    wsHost: window.location.hostname,
-    wsPort: 6001,
-    wssPort: 6001, // Specify the wss port for secure WebSocket
-    forceTLS: true, // Use HTTPS for WebSocket
-    disableStats: true,
-});*/
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_1__["default"]({
   broadcaster: 'pusher',
   authEndpoint: "/dts/broadcasting/auth",
   key: "websocketkey",
   cluster: "",
-  wsHost: "mis.cvchd7.com",
+  wsHost: window.location.hostname,
   wssPort: 6001,
   disableStats: true,
   enabledTransports: ['ws', 'wss'] // <- added this param
 });
-
+// window.Echo = new Echo({
+//     broadcaster: 'pusher',
+//     authEndpoint: "/dts/broadcasting/auth",
+//     key: process.env.MIX_PUSHER_APP_KEY,
+//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+//     wsHost: window.location.hostname,
+//     wsPort: 6001,
+//     disableStats: true,
+//     enabledTransports: ['ws', 'wss'] // <- added this param
+// });
 
 
 var app = (0,vue__WEBPACK_IMPORTED_MODULE_2__.createApp)(_layout_App_vue__WEBPACK_IMPORTED_MODULE_3__["default"]);

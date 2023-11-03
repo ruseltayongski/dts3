@@ -218,6 +218,9 @@ $pending = \App\Tracking_Details::select(
 
 <div class="container">
     <div class="loading"></div>
+    <div id="layout_app">
+        <layout-app></layout-app>
+    </div>
     @yield('content')
     <div class="clearfix"></div>
 </div> <!-- /container -->

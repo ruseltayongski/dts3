@@ -10,9 +10,6 @@
                 <div class="panel-body">
                     Your Application's Landing Page.
                 </div>
-                <div id="layout_app">
-                    <layout-app :sample="'Your Sample Text Here'"></layout-app>
-                </div>
             </div>
         </div>
     </div>
