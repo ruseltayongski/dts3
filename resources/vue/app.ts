@@ -25,16 +25,16 @@ window.Pusher = Pusher; // Assign the imported Pusher to the global object
      disableStats: true,
  });*/
 
- window.Echo = new Echo({
-    broadcaster: 'pusher',
-    authEndpoint: "/dts/broadcasting/auth",
-    key: process.env.MIX_PUSHER_APP_KEY,
-    cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-    wsHost: window.location.hostname,
-    wssPort: 6001,
-    disableStats: true,
-    enabledTransports: ['ws', 'wss'] // <- added this param
-});
+//  window.Echo = new Echo({
+//     broadcaster: 'pusher',
+//     authEndpoint: "/dts/broadcasting/auth",
+//     key: process.env.MIX_PUSHER_APP_KEY,
+//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+//     wsHost: window.location.hostname,
+//     wssPort: 6001,
+//     disableStats: true,
+//     enabledTransports: ['ws', 'wss'] // <- added this param
+// });
 
 
 // window.Echo = new Echo({
