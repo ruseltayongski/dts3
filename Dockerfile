@@ -31,4 +31,4 @@ CMD ["php", "artisan", "websockets:serve"]
 
 #docker build -t laravel-websockets-image .
 #docker run -d -p 6001:6001 --name laravel-websockets-container laravel-websockets-image
-
+#docker logs laravel-websockets-container

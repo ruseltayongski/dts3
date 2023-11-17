@@ -73,7 +73,7 @@
         myBicycle.start();
         myBicycle.ringBell();
         myBicycle.stop();*/
+    
+    console.log("hahaha")
 </script>
-<template>
-    <h1>Hello DTS!!</h1>
-</template>
+<template></template>
