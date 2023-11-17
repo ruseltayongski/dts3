@@ -15,7 +15,7 @@
             email: "john.doe@example.com",
         };
         
-        insertFirebase(newPerson)
+        //insertFirebase(newPerson)
     })
 </script>
 <template></template>
