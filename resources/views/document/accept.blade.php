@@ -60,14 +60,11 @@
                         </td>
                         <td>
                             <textarea class="form-control remarks" name="remarks[]" disabled></textarea>
-                            <!--
-                            <input type="text" name="remarks[]" class="form-control remarks" disabled placeholder="Enter remarks">
-                            -->
                         </td>
                         @if(Auth::user()->section == 36)
                         <td>
                             <a href="#{{ $i.'collapseSono' }}" type="button" class="click_me" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
-                                <small>Click me to add SO#</small>
+                                <small>ADD SO#</small>
                             </a>
                             <div class="collapse" id="{{ $i.'collapseSono' }}">
                                 <input type="hidden" id="{{ 'input'.$i.'collapseSono' }}" class="form-control" name="so_no[]" placeholder="Enter SO#" required>
@@ -97,7 +94,6 @@
 
 @section('js')
     <script>
-        //RUSEL
         $(".click_me").each(function(index){
             var href = $(this).attr('href');
             $("a[href='"+href+"']").on("click",function(){
@@ -111,7 +107,6 @@
 
             });
         });
-        //END RUSEL
 
         <?php echo 'var url="'. asset('document/accept').'";'; ?>
         var route_nos = [];

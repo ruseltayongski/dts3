@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 //import { getAnalytics } from "firebase/analytics";
-import { getDatabase, ref, set, push, onValue, get, child, limitToLast, query } from "firebase/database";
+import { getDatabase, ref, set, push, onValue, get, child, limitToLast, query, remove } from "firebase/database";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -31,18 +31,36 @@ const initFirebase = () => {
 
 const insertFirebase = (inserted_data:any) => {
     const db = initFirebase();
-    push(ref(db, 'dts'), inserted_data)
-    .then((success) => {
-        console.log("success")
-    // Data saved successfully!
+
+    // push(ref(db, 'dts'), inserted_data)
+    // .then((success) => {
+    //     console.log(success)
+    // })
+    // .catch((error) => {
+    //     console.log(error)
+    // });
+
+    const dbRef = ref(db, 'dts');
+    push(dbRef, inserted_data)
+    .then((pushedDataRef) => {
+        if (pushedDataRef.key !== null) {
+            console.log('Data pushed successfully:', pushedDataRef.key);
+            const dataToRemoveRef = child(dbRef, pushedDataRef.key);
+            remove(dataToRemoveRef);
+        } else {
+            console.error('Error: Unable to get key after push.');
+            Promise.reject('Unable to get key after push.');
+        }
+    })
+    .then(() => {
+        console.log('Data removed successfully after push.');
     })
     .catch((error) => {
-        console.log(error)
-    // The write failed...
+        console.error('Error:', error);
     });
 }
 
-const readFirebase = () => {
+const readFirebase = (current_user_section:Number) => {
     // const db = initFirebase();
     // const starCountRef = ref(db, 'ridts');
     // onValue(starCountRef, (snapshot) => {
@@ -54,7 +72,19 @@ const readFirebase = () => {
     const starCountRef = query(ref(db, 'dts'), limitToLast(1));
     onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
-        console.log(data)
+        if(data) {
+            const itemValue : any = Object.values(data)[0];
+            if(itemValue.section_owner == current_user_section && itemValue.status == "accepted") {
+                Lobibox.notify('success', {
+                    title: itemValue.route_no+" was accepted by "+itemValue.user_accepted,
+                    size: 'normal',
+                    delay: false,
+                    closeOnClick: false,
+                    img: $("#public_url").val()+"public/img/doh-logo.png",
+                    msg: itemValue.remarks
+                });
+            }
+        }
     });
 }
 

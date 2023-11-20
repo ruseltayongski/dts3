@@ -132,10 +132,11 @@ class DocumentController extends Controller
         return $row;
     }
     //END RUSEL
-    public function saveDocument(Request $request){
+    public function saveDocument(Request $request) {
         $user = Auth::user();
         $id = $user->id;
         $status = array();
+        $fb_accepted = [];
         echo '<pre>';
         for($i=0;$i<10;$i++):
             if(!$request->route_no[$i])
@@ -180,6 +181,15 @@ class DocumentController extends Controller
                     $q->action = $request->remarks[$i];
                     $q->save();
                 }
+
+                $fb_accepted[] = [
+                    "route_no" => $route_no,
+                    "section_owner" => User::find($doc->prepared_by)->section,
+                    "user_accepted" => $user->fname.' '.$user->lname,
+                    "section_accepted" => $user->section,
+                    "remarks" => $request->remarks[$i],
+                    "status" => "accepted"
+                ];
 
                 $time = 0;
                 $rel = Release::where('route_no', $route_no)->orderBy('id','desc')->first();
@@ -271,6 +281,8 @@ class DocumentController extends Controller
                 $status['errors'][] = 'Route No. "'. $route_no . '" not found in the database. ';
             }
         endfor;
+
+        Session::put('fb_accepted',$fb_accepted);
         return redirect('document/accept')->with('status',$status);
     }
 

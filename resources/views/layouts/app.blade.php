@@ -88,7 +88,7 @@ $pending = \App\Tracking_Details::select(
 </head>
 
 <body>
-
+<input type="hidden" value="{{ asset('/') }}" id="public_url">
 <!-- Fixed navbar -->
 
 <nav class="navbar navbar-default navbar-static-top">
@@ -219,7 +219,8 @@ $pending = \App\Tracking_Details::select(
 <div class="container">
     <div class="loading"></div>
     <div id="layout_app">
-        <layout-app></layout-app>
+        <layout-app :fb_accepted="JSON.parse('{{ json_encode(Session::get('fb_accepted')) ?? '{}' }}')" :current_user_section="{{ $user->section }}"></layout-app>
+        <?php Session::forget('fb_accepted'); ?>
     </div>
     @yield('content')
     <div class="clearfix"></div>
@@ -255,7 +256,7 @@ $pending = \App\Tracking_Details::select(
 <script>var loadingState = '<center><img src="{{ asset('resources/img/spin.gif') }}" width="150" style="padding:20px;"></center>'; </script>
 <!-- bootstrap datepicker -->
 <script src="{{ asset('resources/plugin_old/datepicker/bootstrap-datepicker.js') }}"></script>
-<script src="{{ asset('resources/assets/js/script.js') }}?v=1"></script>
+<script src="{{ asset('resources/assets/js/script.js') }}?v=2"></script>
 <script src="{{ asset('resources/assets/js/form-justification.js') }}"></script>
 <script src="{{ asset('resources/plugin_old/daterangepicker/moment.min.js') }}"></script>
 <!-- DATE RANGE SELECT -->
@@ -267,7 +268,7 @@ $pending = \App\Tracking_Details::select(
 <script src="{{ asset('resources/plugin_old/ckeditor/adapters/jquery.js') }}"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="{{ asset('resources/plugin_old/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
-<script src="{{ asset('resources/plugin_old/Lobibox/Lobibox.js') }}"></script>
+<script src="{{ asset('resources/plugin_old/Lobibox/Lobibox.js?v=1') }}"></script>
 <!-- VUE Scripts -->
 <script src="{{ asset('public/js/app.js?version=').date('YmdHis') }}" defer></script>
 @yield('plugin_old')
