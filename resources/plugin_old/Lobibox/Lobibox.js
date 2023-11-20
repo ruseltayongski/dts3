@@ -1285,7 +1285,7 @@ var Lobibox = Lobibox || {};
         }
     };
     //User can set default options to this variable
-    var url = 'http://'+window.location.hostname + '/dts/resources/plugin_old/Lobibox/sounds/';
+    var url = 'https://'+window.location.hostname + '/dts/resources/plugin_old/Lobibox/sounds/';
     Lobibox.notify.DEFAULTS = {
         title: true,                // Title of notification. If you do not include the title in options it will automatically takes its value 
         //from Lobibox.notify.OPTIONS object depending of the type of the notifications or set custom string. Set this false to disable title
