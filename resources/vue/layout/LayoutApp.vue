@@ -1,21 +1,32 @@
 <script setup lang="ts">
     import { onMounted,ref } from 'vue';
-    import { insertFirebase } from "../utils/firebase"
+    import { insertFirebase, readFirebase } from "../utils/firebase"
     
-    onMounted(() => {
-        console.log("good morning!")
-        interface Person {
-            name: string;
-            age: number;
-            email: string;
+    interface AcceptedItem {
+        route_no: String;
+        section_owner: Number,
+        section_accepted: Number,
+        remarks: String
+    }
+
+    const props = defineProps({
+        fb_accepted: {
+            type: Object as () => AcceptedItem[] | null,
+            default: null,
+        },
+        current_user_section: {
+            type: Number,
+            default: null,
         }
-        const newPerson: Person = {
-            name: "John Doe",
-            age: 25,
-            email: "john.doe@example.com",
-        };
-        
-        //insertFirebase(newPerson)
+    });
+
+    onMounted(() => {
+        if (props.fb_accepted) {
+            props.fb_accepted.forEach((item: AcceptedItem, index: number) => {
+                insertFirebase(item)
+            });
+        }
+        readFirebase(props.current_user_section);
     })
 </script>
 <template></template>

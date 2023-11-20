@@ -401,7 +401,6 @@ function isEmpty(val){
 }
 
 //logs
-    console.log("ruseltayongskie");
     $('.filter-division').show();
     $('.filter-division').on('change',function(){
         checkDestinationForm();
