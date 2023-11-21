@@ -219,7 +219,7 @@ $pending = \App\Tracking_Details::select(
 <div class="container">
     <div class="loading"></div>
     <div id="layout_app">
-        <layout-app :fb_accepted="JSON.parse('{{ json_encode(Session::get('fb_accepted')) ?? '{}' }}')" :current_user_section="{{ $user->section }}"></layout-app>
+        <layout-app :fb_accepted="JSON.parse('{{ json_encode(Session::get('fb_accepted')) ?? '{}' }}')" :current_user_section_id="{{ $user->section }}"></layout-app>
         <?php Session::forget('fb_accepted'); ?>
     </div>
     @yield('content')
@@ -271,6 +271,11 @@ $pending = \App\Tracking_Details::select(
 <script src="{{ asset('resources/plugin_old/Lobibox/Lobibox.js?v=2') }}"></script>
 <!-- VUE Scripts -->
 <script src="{{ asset('public/js/app.js?version=').date('YmdHis') }}" defer></script>
+<script>
+    $(document).ready(function () {
+        //insertFirebase(123);
+    });
+</script>
 @yield('plugin_old')
 <?php
 use App\Tracking_Details;
