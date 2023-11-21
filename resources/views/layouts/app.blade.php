@@ -256,7 +256,7 @@ $pending = \App\Tracking_Details::select(
 <script>var loadingState = '<center><img src="{{ asset('resources/img/spin.gif') }}" width="150" style="padding:20px;"></center>'; </script>
 <!-- bootstrap datepicker -->
 <script src="{{ asset('resources/plugin_old/datepicker/bootstrap-datepicker.js') }}"></script>
-<script src="{{ asset('resources/assets/js/script.js') }}?v=2"></script>
+<script src="{{ asset('resources/assets/js/script.js') }}?v=3"></script>
 <script src="{{ asset('resources/assets/js/form-justification.js') }}"></script>
 <script src="{{ asset('resources/plugin_old/daterangepicker/moment.min.js') }}"></script>
 <!-- DATE RANGE SELECT -->
@@ -271,11 +271,6 @@ $pending = \App\Tracking_Details::select(
 <script src="{{ asset('resources/plugin_old/Lobibox/Lobibox.js?v=2') }}"></script>
 <!-- VUE Scripts -->
 <script src="{{ asset('public/js/app.js?version=').date('YmdHis') }}" defer></script>
-<script>
-    $(document).ready(function () {
-        //insertFirebase(123);
-    });
-</script>
 @yield('plugin_old')
 <?php
 use App\Tracking_Details;

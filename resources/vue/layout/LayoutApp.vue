@@ -1,7 +1,6 @@
 <script setup lang="ts">
     import { onMounted,ref } from 'vue';
     import { insertFirebase, readFirebase, testData } from "../utils/firebase"
-import { Console } from 'console';
     
     interface AcceptedItem {
         route_no: String;
