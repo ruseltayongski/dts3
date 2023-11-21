@@ -318,6 +318,17 @@ use App\Http\Controllers\ReleaseController as Rel;
     <script src="<?php echo asset('resources/plugin_old/dataTable/js/dataTables.bootstrap.min.js');?>"></script>
     @include('js.release_js')
     <script>
+        @if(Session::get('releaseAdded'))
+            Lobibox.notify('success', {
+                msg: 'Successfully Released Document!'
+            });
+            const released_data = <?php echo json_encode(Session::get('releaseAdded')); ?>;
+            $(document).ready(function () {
+                insertFirebase(released_data);
+            });
+            <?php Session::forget('releaseAdded'); ?>
+        @endif
+        
         $(document).ready(function() {
             $('.incomingPaginate a.page-link').each(function() {
                 var href = $(this).attr('href');

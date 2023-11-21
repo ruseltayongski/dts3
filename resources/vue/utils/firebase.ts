@@ -58,11 +58,21 @@ const readFirebase = (current_user_section_id:Number) => {
         const data = snapshot.val();
         if(data) {
             const itemValue : any = Object.values(data)[0];
-            // console.log(itemValue);
+            console.log(itemValue);
             // console.log(current_user_section_id);
             if(itemValue.section_owner_id == current_user_section_id && itemValue.section_accepted_id != current_user_section_id  && itemValue.status == "accepted") {
                 Lobibox.notify('success', {
                     title: itemValue.route_no+" was accepted by "+itemValue.user_accepted_name+" / "+itemValue.section_accepted_name,
+                    size: 'normal',
+                    delay: false,
+                    closeOnClick: false,
+                    img: $("#public_url").val()+"public/img/doh-logo.png",
+                    msg: itemValue.remarks
+                });
+            } 
+            else if(itemValue.section_released_to_id == current_user_section_id && itemValue.status == "released") {
+                Lobibox.notify('info', {
+                    title: itemValue.route_no+" was released by "+itemValue.user_released_name+" / "+itemValue.section_released_by_name,
                     size: 'normal',
                     delay: false,
                     closeOnClick: false,

@@ -13,6 +13,7 @@ use DateTime;
 use App\Tracking_Report;
 use App\Tracking_Releasev2;
 use App\Http\Controllers\SystemController as System;
+use Illuminate\Support\Facades\Session;
 
 class ReleaseController extends Controller
 {
@@ -21,9 +22,10 @@ class ReleaseController extends Controller
         $this->middleware('auth');
     }
 
-    public function addRelease(Request $req){
+    public function addRelease(Request $req) {
+        $user = Auth::user();
         $release_to_datein = date('Y-m-d H:i:s');
-        if($req->op != 0){
+        if($req->op != 0) {
             $id = $req->op;
             Tracking_Details::where('id',$id)->update(array(
                 'code' => 'temp;' . $req->section,
@@ -32,15 +34,14 @@ class ReleaseController extends Controller
                 'status' => 0
             ));
             $status='releaseUpdated';
-        }else{
-
+        } else {
             if($req->currentID!=0)
             {
                 $table = Tracking_Details::where('id',$req->currentID)->orderBy('id', 'DESC');
                 $code = isset($table->first()->code) ? $table->first()->code:null;
 
                 $tracking_release = new Tracking_Releasev2();
-                $tracking_release->released_by = Auth::user()->id;
+                $tracking_release->released_by = $user->id;
                 $tracking_release->released_section_to = $req->section;
                 $tracking_release->released_date = $release_to_datein;
                 $tracking_release->remarks = $req->remarks;
@@ -76,13 +77,22 @@ class ReleaseController extends Controller
             $q->route_no = $req->route_no;
             $q->date_in = $release_to_datein;
             $q->action = $req->remarks;
-            $q->delivered_by = Auth::user()->id;
+            $q->delivered_by = $user->id;
             $q->code= 'temp;' . $req->section;
             $q->save();
 
-            $status='releaseAdded';
+            Session::put("releaseAdded",[
+                "route_no" => $req->route_no,
+                "section_released_to_id" => $req->section,
+                "user_released_name" => $user->fname.' '.$user->lname,
+                "section_released_by_id" => $user->section,
+                "section_released_by_name" => Section::find($user->section)->description,
+                "remarks" => $req->remarks,
+                "status" => "released"
+            ]);
         }
-       return redirect()->back()->with('status',$status);
+
+       return redirect()->back();
     }
 
     public function addReport($id,$cancel=null,$status=null)
