@@ -184,9 +184,10 @@ class DocumentController extends Controller
 
                 $fb_accepted[] = [
                     "route_no" => $route_no,
-                    "section_owner" => User::find($doc->prepared_by)->section,
-                    "user_accepted" => $user->fname.' '.$user->lname,
-                    "section_accepted" => $user->section,
+                    "section_owner_id" => User::find($doc->prepared_by)->section,
+                    "user_accepted_name" => $user->fname.' '.$user->lname,
+                    "section_accepted_id" => $user->section,
+                    "section_accepted_name" => Section::find($user->section)->description,
                     "remarks" => $request->remarks[$i],
                     "status" => "accepted"
                 ];
@@ -783,6 +784,7 @@ class DocumentController extends Controller
 
     public function acceptDocument(Request $req)
     {
+        $user = Auth::user();
         $id = $req->id;
         $remarks = $req->remarks;
         $date_in = date('Y-m-d H:i:s');
@@ -793,19 +795,30 @@ class DocumentController extends Controller
         $this->releasedStatusChecker($tracking_details->first()->route_no,Auth::user()->section);
 
         $tracking_details->update(array(
-            'code' => 'accept;' . Auth::user()->section,
+            'code' => 'accept;' . $user->section,
             'date_in' => $date_in,
             'action' => $remarks,
-            'received_by' => Auth::user()->id,
+            'received_by' => $user->id,
             'alert' => 0
         ));
+        
         $data = array(
-            'code' => 'accept;' . Auth::user()->section,
+            'code' => 'accept;' . $user->section,
             'date_in' => $date_in,
             'action' => $remarks,
-            'received_by' => Auth::user()->id
+            'received_by' => $user->id,
+            //extend for firebase
+            'route_no' => $tracking_details->first()->route_no,
+            'section_owner_id' => User::find(Tracking::where("route_no",$tracking_details->first()->route_no)->first()->prepared_by)->section,
+            'user_accepted_name' => $user->fname.' '.$user->lname,
+            'section_accepted_id' => $user->section,
+            'section_accepted_name' => Section::find($user->section)->description,
+            "remarks" => $remarks,
+            "status" => "accepted"
         );
-        echo json_encode($data);
+        
+        return $data;
+        //echo json_encode($data);
     }
 
     public static function countPendingDocuments()

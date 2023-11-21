@@ -68,19 +68,28 @@
                     _token: _token
                 },
                 success: function(data){
-                    console.log(data);
-                    countIncoming += 1;
-                    var count = incomingFunction();
-                    $('.badgeIncoming').html(count-countIncoming);
-                    Lobibox.notify('success', {
-                        msg: 'Accepted successfully!'
+                    $(document).ready(function () {
+                        insertFirebase({
+                            "route_no" : data.route_no,
+                            "section_owner_id" : data.section_owner_id,
+                            "user_accepted_name" : data.user_accepted_name,
+                            "section_accepted_id" : data.section_accepted_id,
+                            "section_accepted_name" : data.section_accepted_name,
+                            "remarks" : data.remarks,
+                            "status" : data.status
+                        });
+                        countIncoming += 1;
+                        var count = incomingFunction();
+                        $('.badgeIncoming').html(count-countIncoming);
+                        Lobibox.notify('success', {
+                            msg: 'Accepted successfully!'
+                        });
+                        $('.loading').hide();
+                        if(count-countIncoming == 0){
+                            location.reload();
+                        }
+                        appendOutgoing(id,route_no);
                     });
-                    $('.loading').hide();
-                    if(count-countIncoming == 0){
-                        location.reload();
-                    }
-                    appendOutgoing(id,route_no);
-
                 }
             });
         });

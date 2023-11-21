@@ -31,15 +31,6 @@ const initFirebase = () => {
 
 const insertFirebase = (inserted_data:any) => {
     const db = initFirebase();
-
-    // push(ref(db, 'dts'), inserted_data)
-    // .then((success) => {
-    //     console.log(success)
-    // })
-    // .catch((error) => {
-    //     console.log(error)
-    // });
-
     const dbRef = ref(db, 'dts');
     push(dbRef, inserted_data)
     .then((pushedDataRef) => {
@@ -60,23 +51,18 @@ const insertFirebase = (inserted_data:any) => {
     });
 }
 
-const readFirebase = (current_user_section:Number) => {
-    // const db = initFirebase();
-    // const starCountRef = ref(db, 'ridts');
-    // onValue(starCountRef, (snapshot) => {
-    //     const data = snapshot.val();
-    //     console.log(data)
-    // });
-
+const readFirebase = (current_user_section_id:Number) => {
     const db = initFirebase();
     const starCountRef = query(ref(db, 'dts'), limitToLast(1));
     onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
         if(data) {
             const itemValue : any = Object.values(data)[0];
-            if(itemValue.section_owner == current_user_section && itemValue.status == "accepted") {
+            // console.log(itemValue);
+            // console.log(current_user_section_id);
+            if(itemValue.section_owner_id == current_user_section_id && itemValue.section_accepted_id != current_user_section_id  && itemValue.status == "accepted") {
                 Lobibox.notify('success', {
-                    title: itemValue.route_no+" was accepted by "+itemValue.user_accepted,
+                    title: itemValue.route_no+" was accepted by "+itemValue.user_accepted_name+" / "+itemValue.section_accepted_name,
                     size: 'normal',
                     delay: false,
                     closeOnClick: false,
@@ -88,4 +74,8 @@ const readFirebase = (current_user_section:Number) => {
     });
 }
 
-export { insertFirebase, readFirebase }
+const testData = (test:String) => {
+    console.log(test);
+}
+
+export { insertFirebase, readFirebase, testData }
