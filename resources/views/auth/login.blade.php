@@ -28,7 +28,7 @@
       <div class="login-logo">
           <img src="{{ asset('public/img/doh.png') }}" style="width: 30%" />
           <br />
-          <a href="#" style="font-weight:bolder;"><label style="font-size: 17pt;">DOH-CVCHD DTS 5.0</label></a>
+          <a href="#" style="font-weight:bolder;"><label style="font-size: 17pt;">DOH-CVCHD DTS 5.1.0</label></a>
       </div><!-- /.login-logo -->
       <form role="form" method="POST" action="{{ url('/login') }}">
           {{ csrf_field() }}
@@ -92,7 +92,7 @@
             </div>
         </form>
     @endif
-    {{--@include('modal.announcement')--}}
+    @include('modal.announcement')
     </div><!-- /.login-box -->
 
     <!-- jQuery 2.1.4 -->
