@@ -196,15 +196,15 @@
         });
         <?php Session::forget('deletedPR'); ?>
     @endif
-        @if (session('status'))
-            <?php
-                $status = session('status');
-            ?>
-            @if($status=='releaseAdded')
-            Lobibox.notify('success', {
-                msg: 'Successfully Released!'
-            });
-        @endif
+    @if(Session::get('releaseAdded'))
+        Lobibox.notify('success', {
+            msg: 'Successfully Released Document!'
+        });
+        const released_data = <?php echo json_encode(Session::get('releaseAdded')); ?>;
+        $(document).ready(function () {
+            insertFirebase(released_data);
+        });
+        <?php Session::forget('releaseAdded'); ?>
     @endif
 
     $("a[href='#prr_supply_modal']").on('click',function(){
