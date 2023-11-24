@@ -203,8 +203,8 @@
         const released_data = <?php echo json_encode(Session::get('releaseAdded')); ?>;
         $(document).ready(function () {
             insertFirebase(released_data);
+            <?php Session::forget('releaseAdded'); ?>
         });
-        <?php Session::forget('releaseAdded'); ?>
     @endif
 
     $("a[href='#prr_supply_modal']").on('click',function(){
