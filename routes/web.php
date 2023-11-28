@@ -119,6 +119,7 @@ Route::post('document/received', [DocumentController::class, 'receivedDocument']
 
 Route::get('document/logs', [DocumentController::class, 'logsDocument']);
 Route::post('document/logs', [DocumentController::class, 'searchLogs']);
+Route::get('get-section',[ReleaseController::class, 'getSection']);
 Route::get('document/section/logs', [DocumentController::class, 'sectionLogs']);
 Route::post('document/section/logs', [DocumentController::class, 'searchSectionLogs']);
 
@@ -354,3 +355,6 @@ Route::get('append/appendOutgoingDocument/{id}/{route_no}', [AppendController::c
 Route::get('count/{year}', [ReportController::class, 'countReleaseTo']);
 Route::get('/documents_count', [ReportController::class, 'counter']);
 //'reportedDocuments/{year}',
+
+// select-section
+

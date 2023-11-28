@@ -11,7 +11,7 @@
                     <input type="hidden" name="currentID" id="currentID" value="0">
                     <div class="form-group">
                         <label>Division</label>
-                        <select name="division" class="chosen-select filter-division" required>
+                        <select name="division" id="division" class="chosen-select filter-division" required>
                             <option value="">Select division...</option>
                             <?php $division = \App\Division::where('description','!=','Default')->whereNull('ppmp_used')->orderBy('description','asc')->get(); ?>
                             @foreach($division as $div)
@@ -21,7 +21,7 @@
                     </div>
                     <div class="form-group">
                         <label>Section</label>
-                        <select name="section" class="chosen-select filter_section" required>
+                        <select name="section" id="section" class="chosen-select filter_section" required>
                             <option value="">Select section...</option>
                         </select>
                     </div>
@@ -143,3 +143,44 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+@section('js')
+<script>
+    $(document).ready(function() {
+        $('#division').change(function() {
+            var division_id = $(this).val();
+
+            var url = "<?php echo asset('get-section');?>";
+            var json = {
+                "division_id" : division_id
+        };
+            $.get(url, json, function(result) {
+                $('#section').empty();
+
+                    result.forEach(function(val) {
+//                        console.log(val.description,val.id);
+                        $('.chosen-select.filter_section').append($('<option>', {
+                            value: val.id,
+                            text: val.description
+                        }));
+                    });
+                $('.chosen-select').trigger('chosen:updated');
+            }).fail(function(xhr, status, error) {
+                // Handle errors if the AJAX request fails
+                console.error('Error:', status, error);
+            });
+        });
+    });
+
+    @if(Session::get('releaseAdded'))
+    Lobibox.notify('success', {
+        msg: 'Successfully Released Document!'
+    });
+    const released_data = <?php echo json_encode(Session::get('releaseAdded')); ?>;
+    $(document).ready(function () {
+        insertFirebase(released_data);
+        <?php Session::forget('releaseAdded'); ?>
+    });
+    @endif
+
+</script>
+@endsection
