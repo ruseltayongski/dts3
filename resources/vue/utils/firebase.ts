@@ -64,7 +64,7 @@ const readFirebase = (current_user_section_id:Number) => {
                 Lobibox.notify('success', {
                     title: itemValue.route_no+" was accepted by "+itemValue.user_accepted_name+" / "+itemValue.section_accepted_name,
                     size: 'normal',
-                    delay: false,
+                    delay: 30000,
                     closeOnClick: false,
                     img: $("#public_url").val()+"public/img/doh-logo.png",
                     msg: itemValue.remarks
@@ -74,7 +74,7 @@ const readFirebase = (current_user_section_id:Number) => {
                 Lobibox.notify('info', {
                     title: itemValue.route_no+" was released by "+itemValue.user_released_name+" / "+itemValue.section_released_by_name,
                     size: 'normal',
-                    delay: false,
+                    delay: 30000,
                     closeOnClick: false,
                     img: $("#public_url").val()+"public/img/doh-logo.png",
                     msg: itemValue.remarks
