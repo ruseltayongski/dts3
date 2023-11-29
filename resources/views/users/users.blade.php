@@ -81,7 +81,7 @@
     <link href="{{ asset('resources/plugin/daterangepicker/daterangepicker-bs3.css') }}" rel="stylesheet">
 @endsection
 @section('js')
-    @@parent
+    @parent
     <script>
         (function($){
             $('.form-accept').submit(function(event){
