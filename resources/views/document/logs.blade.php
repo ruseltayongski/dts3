@@ -269,66 +269,10 @@ $code = Session::get('doc_type_code');
     @include('modal.release_modal')
 
 @endsection
-    @section('plugin')
-
+@section('js')
+    {{--@section('plugin')--}}
+        @include('js.release_js')
     <script>
-        console.log("rusel");
-        $('.filter-division').show();
-        $('#reservation').daterangepicker();
-        $('.filter-division').on('change',function(){
-            checkDestinationForm();
-            var id = $(this).val();
-            var url = "<?php echo asset('getsections/');?>";
-            $('.loading').show();
-            $('.filter_section').html('<option value="">Select section...</option>');
-            $.ajax({
-                url: url+'/'+id,
-                type: "GET",
-                success: function(sections){
-                    jQuery.each(sections,function(i,val){
-                        $('.filter_section').append($('<option>', {
-                            value: val.id,
-                            text: val.description
-                        }));
-                        $('.filter_section').chosen().trigger('chosen:updated');
-                        $('.filter_section').siblings('.chosen-container').css({border:'2px solid red'});
-                    });
-                    $('.loading').hide();
-                }
-            })
-        });
-        $('.filter_section').on('change',function(){
-            checkDestinationForm();
-        });
-
-        function putRoute(form)
-        {
-            var route_no = form.data('route_no');
-            $('#route_no').val(route_no);
-            $('#op').val(0);
-        }
-
-        function changeRoute(form,id)
-        {
-            var route_no = form.data('route_no');
-            $('#route_no').val(route_no);
-            $('#op').val(id);
-        }
-        function checkDestinationForm(){
-            var division = $('.filter-division').val();
-            var section = $('.filter_section').val();
-            if(division.length == 0){
-                $('.filter-division').siblings('.chosen-container').css({border:'2px solid red'});
-            }else{
-                $('.filter-division').siblings('.chosen-container').css({border:'none'});
-            }
-
-            if(section.length == 0){
-                $('.filter_section').siblings('.chosen-container').css({border:'2px solid red'});
-            }else{
-                $('.filter_section').siblings('.chosen-container').css({border:'none'});
-            }
-        }
         function checkDocTye(){
             var doc = $('select[name="doc_type"]').val();
             if(doc.length == 0){
@@ -341,8 +285,20 @@ $code = Session::get('doc_type_code');
                 return true;
             },2000);
         }
+
+        @if(Session::get('releaseAdded'))
+        Lobibox.notify('success', {
+            msg: 'Successfully Released Document!'
+        });
+        const released_data = <?php echo json_encode(Session::get('releaseAdded')); ?>;
+        $(document).ready(function () {
+            insertFirebase(released_data);
+            <?php Session::forget('releaseAdded'); ?>
+        });
+        @endif
     </script>
-@endsection
+    @endsection
+{{--@endsection--}}
 
 
 @section('css')

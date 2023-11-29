@@ -11,7 +11,7 @@
                     <input type="hidden" name="currentID" id="currentID" value="0">
                     <div class="form-group">
                         <label>Division</label>
-                        <select name="division" class="chosen-select filter-division" required>
+                        <select name="division" id="division" class="chosen-select filter-division" required>
                             <option value="">Select division...</option>
                             <?php $division = \App\Division::where('description','!=','Default')->whereNull('ppmp_used')->orderBy('description','asc')->get(); ?>
                             @foreach($division as $div)
@@ -21,7 +21,7 @@
                     </div>
                     <div class="form-group">
                         <label>Section</label>
-                        <select name="section" class="chosen-select filter_section" required>
+                        <select name="section" id="section" class="chosen-select filter_section" required>
                             <option value="">Select section...</option>
                         </select>
                     </div>
