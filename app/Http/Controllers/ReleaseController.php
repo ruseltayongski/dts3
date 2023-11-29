@@ -471,4 +471,10 @@ class ReleaseController extends Controller
             $q->save();
         }
     }
+
+    public function getSection(Request $request) {
+        $section = Section::where('division',$request->division_id)->get();
+
+        return $section;
+    }
 }

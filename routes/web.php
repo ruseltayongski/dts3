@@ -354,3 +354,6 @@ Route::get('append/appendOutgoingDocument/{id}/{route_no}', [AppendController::c
 Route::get('count/{year}', [ReportController::class, 'countReleaseTo']);
 Route::get('/documents_count', [ReportController::class, 'counter']);
 //'reportedDocuments/{year}',
+
+// select-section
+
