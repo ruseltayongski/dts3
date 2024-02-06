@@ -445,6 +445,8 @@ class DocumentController extends Controller
                 return "General Documents";
             case "ALL" :
                 return "All Documents";
+            case "DV" :
+                return "Disbursement Voucher";
             default:
                 return "N/A";
         }

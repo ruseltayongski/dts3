@@ -92,7 +92,7 @@
             </div>
         </form>
     @endif
-    @include('modal.announcement')
+    <!-- @include('modal.announcement') -->
     </div><!-- /.login-box -->
 
     <!-- jQuery 2.1.4 -->

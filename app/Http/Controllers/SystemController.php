@@ -17,8 +17,8 @@ class SystemController extends Controller
 {
     function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('user_priv');
+        $this->middleware('auth')->except('maif');
+        $this->middleware('user_priv')->except('maif');
     }
 
     static function logDocument($user_id,$id)
@@ -38,6 +38,8 @@ class SystemController extends Controller
     
     static function logDefault($act,$desc="")
     {
+        // Generate the URL for the 'exampleRoute'
+        // $url = url(route('maif'));
         $user = Users::find(Auth::user()->id);
         $q = new SystemLogs();
         $q->user_id = $user->id;

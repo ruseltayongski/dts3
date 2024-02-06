@@ -33,8 +33,10 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\RoutingController;
 use App\Http\Controllers\AppendController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\MaifController;
 use Illuminate\Support\Facades\Session;
 
+Route::get('document/trackMaif/{route_no}',[MaifController::class,'track'])->withoutMiddleware(['auth']);
 Route::auth();
 
 // Home
