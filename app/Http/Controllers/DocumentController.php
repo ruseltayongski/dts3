@@ -132,6 +132,23 @@ class DocumentController extends Controller
         return $row;
     }
     //END RUSEL
+
+    public function route_no(Request $request) {
+        $route_no = $request->route_no;
+
+        $tracking_details = Tracking_Details::where('route_no',"=", $route_no)
+            ->where('code','=','temp;5')
+            ->latest()
+            ->first();
+
+            $section = Users::find($tracking_details->delivered_by)->section;
+
+        return response()->json([
+            'route_no' => $tracking_details,
+            'section' => $section
+        ]);
+    }
+
     public function saveDocument(Request $request) {
         $user = Auth::user();
         $id = $user->id;
@@ -163,6 +180,13 @@ class DocumentController extends Controller
                 $section = 'temp;'.$user->section;
                 if($document->code === $section)
                 {
+                    if(Auth::user()->section == 5) {
+                        Tracking::where('route_no',"=", $route_no)
+                            ->where('doc_type',"=", "DV")
+                            ->update([
+                                'dv_no' => $request->dv_no[$i]
+                            ]);
+                    }
                     Tracking_Details::where('id',$document->id)
                         ->update([
                             'code' => 'accept;'.$user->section,
@@ -191,6 +215,7 @@ class DocumentController extends Controller
                     "remarks" => $request->remarks[$i],
                     "status" => "accepted"
                 ];
+
 
                 $time = 0;
                 $rel = Release::where('route_no', $route_no)->orderBy('id','desc')->first();
