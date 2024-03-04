@@ -16,4 +16,13 @@ class MaifController extends Controller
         Session::put('route_no', $route_no);
         return view('document.track_maif',['document' => $document]);
     }
+
+    static function trackPO($route_no)
+    {
+        $document = Tracking_Details::where('route_no',$route_no)
+            ->orderBy('date_in','asc')
+            ->get();
+        Session::put('route_no', $route_no);
+        return view('document.track_po',['document' => $document]);
+    }
 }

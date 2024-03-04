@@ -37,6 +37,7 @@ use App\Http\Controllers\MaifController;
 use Illuminate\Support\Facades\Session;
 
 Route::get('document/trackMaif/{route_no}',[MaifController::class,'track'])->withoutMiddleware(['auth']);
+Route::get('document/trackPO/{route_no}',[MaifController::class,'trackPO'])->withoutMiddleware(['auth']);
 Route::auth();
 
 // Home
