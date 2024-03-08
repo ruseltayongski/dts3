@@ -38,6 +38,9 @@ use Illuminate\Support\Facades\Session;
 
 Route::get('document/trackMaif/{route_no}',[MaifController::class,'track'])->withoutMiddleware(['auth']);
 Route::get('document/trackPO/{route_no}',[MaifController::class,'trackPO'])->withoutMiddleware(['auth']);
+Route::get('document/dv_no/{dv_no}/{route_no}/{user}',[MaifController::class,'dv_no'])->withoutMiddleware(['auth']);
+Route::get('document/ors_no/{ors_no}/{route_no}/{user}',[MaifController::class,'ors_no'])->withoutMiddleware(['auth']);
+Route::get('document/paid/{route_no}/{user}',[MaifController::class,'paid'])->withoutMiddleware(['auth']);
 Route::auth();
 
 // Home
