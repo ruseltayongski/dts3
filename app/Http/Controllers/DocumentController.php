@@ -89,6 +89,8 @@ class DocumentController extends Controller
     public function connect()
     {
         return new PDO("mysql:host=192.168.110.31;dbname=dohdtr",'rtayong_31','rtayong_31');
+//        return new PDO("mysql:host=localhost;dbname=dohdtr",'root','');
+
     }
     public function getSO($route_no)
     {

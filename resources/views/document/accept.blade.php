@@ -205,7 +205,7 @@
         @if(Auth::check() && Auth::user()->section == "5")
 
             var ajaxRequestMade = false;
-            $(document).click(function(){
+            $(document).on('input',function(){
 
                 if (!ajaxRequestMade) {
                 // Retrieve the value of the input element by its class
@@ -219,10 +219,10 @@
                         url: url,
                         data: { route_no: value },
                         dataType: 'json',
-                        timeout: 2000, // Timeout set to 5 seconds (you can adjust this value as needed)
+                        timeout: 1000, // Timeout set to 5 seconds (you can adjust this value as needed)
                         success: function(data) {
                             console.log("Success:", data.section);
-                            if(data.section == 42) {
+                            if(data.section == 105) {
                                 ajaxRequestMade = true;
                                 $(".click_me").each(function(index){
                                     var href = $(this).attr('href');
