@@ -2,7 +2,7 @@
 
 //$host = "localhost";
 //$username = "root";
-//$password = "adm1n";
+//$password = "";
 
 $host = "192.168.110.31";
 $username = "rtayong_31";

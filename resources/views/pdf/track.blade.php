@@ -33,7 +33,7 @@ $tracking = Tracking_Details::where('route_no',$route_no)
         border:1px solid #000;
     }
     .table td {
-        padding: 5px;
+        padding: 2px;
         vertical-align: top;
     }
 
@@ -77,7 +77,7 @@ $tracking = Tracking_Details::where('route_no',$route_no)
     <!--
                     {{--<td width="20%"><?php echo DNS2D::getBarcodeHTML(Session::get('route_no'), "QRCODE",5,5); ?></td>--}}
             -->
-        <?php $image_path = '/img/f1.jpg'; ?>
+        <?php $image_path = '/img/bagong_pilipinas2.png'; ?>
         <td width="20%"><center><img src="{{ public_path() . $image_path }}" width="100"></center></td>
     </tr>
 </table>
@@ -94,7 +94,7 @@ $tracking = Tracking_Details::where('route_no',$route_no)
         </td>
         <td width="30%">
             <strong>PREPARED DATE:</strong><br>
-            {{ date('d F Y',strtotime($document->prepared_date)) }}
+            {{ date('F d, Y',strtotime($document->prepared_date)) }}
         </td>
     </tr>
     <tr>
@@ -164,9 +164,9 @@ $tracking = Tracking_Details::where('route_no',$route_no)
             <tr>
                 <td>{{ date('M d, Y', strtotime($doc->date_in)) }}<br>{{ date('h:i A', strtotime($doc->date_in)) }}</td>
                 <td>
-                    {{ $received_by."JOY"}}
+                    {{ $received_by }}
                     <br>
-                    <em>({{ $sectionName."DASDHJAKDHAJK" }})</em>
+                    <em>({{ $sectionName }})</em>
                 </td>
                 <td>{{ $doc->action}}</td>
                 <td></td>
@@ -174,7 +174,7 @@ $tracking = Tracking_Details::where('route_no',$route_no)
         @endif
     @endforeach
     <?php $i = count($tracking); ?>
-    @for($i; $i < 11; $i++)
+    @for($i; $i < 17; $i++)
         <tr>
             <td>&nbsp;<br><br></td>
             <td>&nbsp;</td>

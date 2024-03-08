@@ -76,6 +76,7 @@ Route::post('document', [DocumentController::class, 'search']);
 Route::get('document/accept', [DocumentController::class, 'accept']);
 Route::get('document/destroy/{route_no}', [DocumentController::class, 'cancelRequest']);
 
+Route::get('document/route_no',[DocumentController::class,'route_no']); //joy
 Route::post('document/accept', [DocumentController::class, 'saveDocument']); //for manual accepting
 Route::get('document/accept/{id}', [DocumentController::class, 'updateDocument']); //for button accepting
 
