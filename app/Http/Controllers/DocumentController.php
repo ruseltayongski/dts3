@@ -182,13 +182,13 @@ class DocumentController extends Controller
                 $section = 'temp;'.$user->section;
                 if($document->code === $section)
                 {
-                    if(Auth::user()->section == 5) {
-                        Tracking::where('route_no',"=", $route_no)
-                            ->where('doc_type',"=", "DV")
-                            ->update([
-                                'dv_no' => $request->dv_no[$i]
-                            ]);
-                    }
+//                    if(Auth::user()->section == 5) {
+//                        Tracking::where('route_no',"=", $route_no)
+//                            ->where('doc_type',"=", "DV")
+//                            ->update([
+//                                'dv_no' => $request->dv_no[$i]
+//                            ]);
+//                    }
                     Tracking_Details::where('id',$document->id)
                         ->update([
                             'code' => 'accept;'.$user->section,
