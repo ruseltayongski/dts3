@@ -63,8 +63,8 @@ class ReleaseController extends Controller
                 }
             }else{
                 $tracking_details_info = Tracking_Details::where('route_no',$req->route_no)
-                        ->orderBy('id','desc')
-                        ->first();
+                    ->orderBy('id','desc')
+                    ->first();
                 $tracking_details_id = $tracking_details_info->id;
                 $update = array(
                     'code' => null
@@ -91,8 +91,16 @@ class ReleaseController extends Controller
                 "status" => "released"
             ]);
         }
-
-       return redirect()->back();
+        if(Auth::user()->section == 5 && $req->section == 6) {
+            $tracking = Tracking::where('route_no', $req->route_no)->first();
+            if($tracking->doc_type == "DV") {
+                if($tracking->dv_no == null || empty($tracking->dv_no)){
+                    $tracking->dv_no = $req->remarks;
+                    $tracking->save();
+                }
+            }
+        }
+        return redirect()->back();
     }
 
     public function addReport($id,$cancel=null,$status=null)
