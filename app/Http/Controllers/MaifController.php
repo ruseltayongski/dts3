@@ -50,15 +50,6 @@ class MaifController extends Controller
     //             $tracking_release1 = Tracking_Releasev2::where('route_no', $route_no)
     //             	->first();
     //             if($tracking_release1 != null){
-  		// 			$tracking_release1->status ="accept";
-  	 //               	$tracking_release1->save();
-    //             }
-    //         }
-
-    //         $doc_id = Tracking_Details::where('route_no', $route_no)
-    //             ->orderBy('id', 'desc')
-    //             ->first()
-    //             ->id;    
 
     //          $release_to_datein = date('Y-m-d H:i:s');
 
@@ -96,7 +87,6 @@ class MaifController extends Controller
     //             );
     //             $table = Tracking_Details::where('id', $tracking_details_id);
     //             $table->update($update);
-    //         }		
 
     //         $q = new Tracking_Details();
     //         $q->route_no = $route_no;
@@ -142,8 +132,7 @@ class MaifController extends Controller
     //             	->first();
 
     //             if($tracking_release1 != null){
-  		// 			$tracking_release1->status ="accept";
-  	 //               	$tracking_release1->save();
+
     //             }
     //         }
     //         $doc_id = Tracking_Details::where('route_no', $route_no)
@@ -229,8 +218,6 @@ class MaifController extends Controller
     //             	->first();
 
     //             if($tracking_release1 != null){
-  		// 			$tracking_release1->status ="accept";
-  	 //               	$tracking_release1->save();
     //             }
     //         }
 

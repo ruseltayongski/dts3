@@ -44,6 +44,7 @@
                         @if(Auth::user()->section == 36)
                         <th>Click if office order is approve</th>
                         @endif
+
                        <!--  @if(Auth::user()->section == 5)
                         <th>DV No.</th>
                         @endif -->
@@ -74,16 +75,17 @@
                             </div>
                         </td>
                         @endif
-                       <!--  @if(Auth::user()->section == 5)
-                            <td>
-                                <a href="#{{ $i.'collapseDvno' }}" type="button" class="click_me" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
-                                    <small>ADD DV#</small>
-                                </a>
-                                <div class="collapse" id="{{ $i.'collapseDvno' }}">
-                                    <input type="hidden" id="{{ 'input'.$i.'collapseDvno' }}" class="form-control" name="dv_no[]" placeholder="Enter DV#" required>
-                                </div>
-                            </td>
-                        @endif -->
+
+                        {{--@if(Auth::user()->section == 5)--}}
+                            {{--<td>--}}
+                                {{--<a href="#{{ $i.'collapseDvno' }}" type="button" class="click_me" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">--}}
+                                    {{--<small>ADD DV#</small>--}}
+                                {{--</a>--}}
+                                {{--<div class="collapse" id="{{ $i.'collapseDvno' }}">--}}
+                                    {{--<input type="hidden" id="{{ 'input'.$i.'collapseDvno' }}" class="form-control" name="dv_no[]" placeholder="Enter DV#" required>--}}
+                                {{--</div>--}}
+                            {{--</td>--}}
+                        {{--@endif--}}
                     </tr>
                 @endfor
                 <tr>
@@ -202,51 +204,52 @@
         });
 
 
-        // @if(Auth::check() && Auth::user()->section == "5")
 
-        //     var ajaxRequestMade = false;
-        //     $(document).on('input',function(){
+        {{--@if(Auth::check() && Auth::user()->section == "5")--}}
 
-        //         if (!ajaxRequestMade) {
-        //         // Retrieve the value of the input element by its class
-        //         var value = $(".route_no").val();
+            {{--var ajaxRequestMade = false;--}}
+            {{--$(document).on('input',function(){--}}
 
-        //         <?php echo 'var url ="'.asset('document/route_no').'";';?>
+                {{--if (!ajaxRequestMade) {--}}
+                {{--// Retrieve the value of the input element by its class--}}
+                {{--var value = $(".route_no").val();--}}
 
-        //         // Adding a timeout of 500 milliseconds before making the AJAX request
-        //         setTimeout(function() {
-        //             $.ajax({
-        //                 url: url,
-        //                 data: { route_no: value },
-        //                 dataType: 'json',
-        //                 timeout: 1000, // Timeout set to 5 seconds (you can adjust this value as needed)
-        //                 success: function(data) {
-        //                     console.log("Success:", data.section);
-        //                     if(data.section == 105) {
-        //                         ajaxRequestMade = true;
-        //                         $(".click_me").each(function(index){
-        //                             var href = $(this).attr('href');
-        //                             $("a[href='"+href+"']").on("click",function(){
-        //                                 console.log("input"+$(this).attr('href').split("#")[1]);
-        //                                 if( $($(this).attr('href')).is(":hidden") ){
-        //                                     $("#input"+$(this).attr('href').split("#")[1]).attr('type', 'text');
-        //                                 }
-        //                                 else {
-        //                                     $("#input"+$(this).attr('href').split("#")[1]).attr('type', 'hidden');
-        //                                 }
+                {{--<?php echo 'var url ="'.asset('document/route_no').'";';?>--}}
 
-        //                             });
-        //                         });
-        //                     }
-        //                 },
-        //                 error: function(xhr, status, error) {
-        //                     console.error("Error:", error);
-        //                 }
-        //             });
-        //         }, 500); // Adjust the delay as needed (500 milliseconds in this case)
-        //     }
-        // });
-        // @endif
+                {{--// Adding a timeout of 500 milliseconds before making the AJAX request--}}
+                {{--setTimeout(function() {--}}
+                    {{--$.ajax({--}}
+                        {{--url: url,--}}
+                        {{--data: { route_no: value },--}}
+                        {{--dataType: 'json',--}}
+                        {{--timeout: 1000, // Timeout set to 5 seconds (you can adjust this value as needed)--}}
+                        {{--success: function(data) {--}}
+                            {{--console.log("Success:", data.section);--}}
+                            {{--if(data.section == 105) {--}}
+                                {{--ajaxRequestMade = true;--}}
+                                {{--$(".click_me").each(function(index){--}}
+                                    {{--var href = $(this).attr('href');--}}
+                                    {{--$("a[href='"+href+"']").on("click",function(){--}}
+                                        {{--console.log("input"+$(this).attr('href').split("#")[1]);--}}
+                                        {{--if( $($(this).attr('href')).is(":hidden") ){--}}
+                                            {{--$("#input"+$(this).attr('href').split("#")[1]).attr('type', 'number');--}}
+                                        {{--}--}}
+                                        {{--else {--}}
+                                            {{--$("#input"+$(this).attr('href').split("#")[1]).attr('type', 'hidden');--}}
+                                        {{--}--}}
+
+                                    {{--});--}}
+                                {{--});--}}
+                            {{--}--}}
+                        {{--},--}}
+                        {{--error: function(xhr, status, error) {--}}
+                            {{--console.error("Error:", error);--}}
+                        {{--}--}}
+                    {{--});--}}
+                {{--}, 500); // Adjust the delay as needed (500 milliseconds in this case)--}}
+            {{--}--}}
+        {{--});--}}
+        {{--@endif--}}
 
 
     </script>
