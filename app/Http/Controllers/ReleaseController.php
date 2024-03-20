@@ -12,6 +12,7 @@ use App\Section;
 use DateTime;
 use App\Tracking_Report;
 use App\Tracking_Releasev2;
+use App\Tracking;
 use App\Http\Controllers\SystemController as System;
 use Illuminate\Support\Facades\Session;
 
