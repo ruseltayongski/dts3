@@ -109,7 +109,7 @@ Route::get('getsections/{id}', [ReleaseController::class, 'getSections']);
 Route::get('document/doctype/{doctype}', function ($doctype) {
     return DocumentController::docTypeName($doctype);
 });
-
+Route::get('document/doctype1/{route_no}',[MaifController::class, 'docType']);
 // FOR ACCOUNTING SECTION
 Route::get('accounting/accept', [AccountingController::class, 'accept']);
 Route::post('accounting/accept', [AccountingController::class, 'save']);

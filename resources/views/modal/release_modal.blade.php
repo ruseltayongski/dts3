@@ -27,7 +27,7 @@
                     </div>
                     <div class="form-group">
                         <label>Remarks</label>
-                        <textarea name="remarks" class="form-control" rows="5" style="resize: vertical;" placeholder="Please enter your remark(s) of return..."></textarea>
+                        <textarea name="remarks" class="form-control" id="remarks" rows="5" style="resize: vertical;" placeholder="Please enter your remark(s) of return..."></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
