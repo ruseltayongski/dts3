@@ -30,6 +30,12 @@ class MaifController extends Controller
         return view('document.track_po',['document' => $document]);
     }
 
+    public function docType($route_no) {
+        $doc_type = Tracking::where('route_no',"=",$route_no)
+            ->value('doc_type');
+       return $doc_type;
+    }
+
     // static function dv_no($dv_no, $route_no, $user)
     // {
     //     $user = Users::where('username', $user)->first();

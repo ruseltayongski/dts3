@@ -346,6 +346,24 @@
         }else{
             $('.filter_section').siblings('.chosen-container').css({border:'none'});
         }
+
+        var route_no = $('#route_no').val();
+        var url = "<?php echo url('document/doctype1');?>";
+
+        var user_section = {{ Auth::user()->section }}
+        if(user_section == 5 && section == 6) {
+            $.ajax({
+                url: url+'/'+route_no,
+                type: 'GET',
+                success: function(data){
+                    console.log('its my sections',user_section+section);
+                    if(data == 'DV') {
+                        console.log(data);
+                        $('#remarks').attr('required', true);
+                    }
+                }
+            });
+        }
     }
     function checkDocTye(){
         var doc = $('select[name="doc_type"]').val();
