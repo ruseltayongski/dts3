@@ -108,9 +108,9 @@ $pending = \App\Tracking_Details::select(
         </div>
         <div class="clearfix"></div>
     </div>
-    <div class="header" style="background-color:#054c4f;padding: 10px;">
+    <div class="header" style="background-color:#59ab91;padding: 10px;">
         <div class="container">
-            <img src="{{ asset('resources/img/banner_dts2023v8.png') }}" class="img-responsive" />
+            <img src="{{ asset('resources/img/banner_dts_2024.png') }}" class="img-responsive" />
         </div>
     </div>
     <div class="container">

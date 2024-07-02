@@ -69,9 +69,9 @@ $tracking = Tracking_Details::where('route_no',$route_no)
         <td width="20%"><center><img src="{{ public_path() . $image_path }}" width="100"></center></td>
         <td width="60%" style="font-size: 11pt;">
             <center>
-                <span style="font-size: 12pt;">Republic of the Philippines</span><br>
-                <span>Department of Health</span><br>
-                <strong style="font-size: 10.6pt;">CENTRAL VISAYAS CENTER for HEALTH DEVELOPMENT</strong><br><br>
+                <span style="font-size: 12pt; font-family: Helvetica Neue">Republic of the Philippines</span><br>
+                <span style="font-weight: bold; font-family: Helvetica Neue; font-size: 12pt">DEPARTMENT OF HEALTH</span><br>
+                <span style="font-size: 12pt; font-family: Helvetica Neue; font-style: italic;">Central Visayas Center for Health Development</span><br><br>
                 <span style="margin-top: 100px;">DOCUMENT TRACKING SYSTEM (DTS)</span>
             </center></td>
     <!--

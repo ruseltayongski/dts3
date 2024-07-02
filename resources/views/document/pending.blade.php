@@ -86,12 +86,12 @@ use App\Http\Controllers\ReleaseController as Rel;
                                 </tr>
                                 <tr>
                                     <?php
-
+                                    $section ='';    
                                     if( User::find($row->delivered_by) ){
                                         $user = User::find($row->delivered_by);
                                         $name = $user->fname.' '.$user->lname;
-                                        if($section = \App\Section::find($user->section)) {
-                                            $section = $section->description;
+                                        if($section1 = \App\Section::find($user->section)) {
+                                            $section = $section1->description;
                                         }else{
                                             $section = 'No Section';
                                         }
