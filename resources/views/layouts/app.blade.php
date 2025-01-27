@@ -208,6 +208,16 @@ $pending = \App\Tracking_Details::select(
                         <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out"></i> Logout</a></li>
                     </ul>
                 </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>
+                        Systems
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" class="system-link" data-system="pis"><i class="fa fa-file-text"></i>&nbsp;&nbsp; Personnel Information System</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" class="system-link" data-system="payroll"><i class="fa fa-building"></i>&nbsp;&nbsp; Payroll</a></li>
+                    </ul>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="active"><a href="#trackDoc" data-toggle="modal"><i class="fa fa-search"></i> Track Document</a></li>
@@ -411,6 +421,17 @@ $incoming = Tracking_Details::select(
             }
         });
     }
+
+    $(document).ready(function() {
+        $('.system-link').click(function(e) {
+            e.preventDefault(); // Prevent default link behavior
+
+            var systemValue = $(this).data('system'); // Get the system value from data attribute
+
+            // Redirect to the controller route with the system value as a query parameter
+            window.location.href = "{{ url('/flush-session-pis') }}" + "?system=" + systemValue;
+        });
+    });
 </script>
 
 @section('js')

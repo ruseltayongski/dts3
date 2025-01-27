@@ -401,8 +401,14 @@ class DocumentController extends Controller
 
     public static function getDocType($route_no)
     {
-        $doc = Tracking::where('route_no',$route_no)->first();;
-        return self::docTypeName($doc->doc_type);
+        $doc = Tracking::where('route_no',$route_no)->first();
+        if($doc){
+            $doc_type = $doc->doc_type;
+        }else{
+            $doc_type = '';
+        }
+
+        return self::docTypeName($doc_type);
     }
     public static function docTypeName($type)
     {

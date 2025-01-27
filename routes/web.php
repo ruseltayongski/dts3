@@ -41,6 +41,9 @@ Route::get('document/trackPO/{route_no}',[MaifController::class,'trackPO'])->wit
 Route::get('document/dv_no/{dv_no}/{route_no}/{user}',[MaifController::class,'dv_no'])->withoutMiddleware(['auth']);
 Route::get('document/ors_no/{ors_no}/{route_no}/{user}',[MaifController::class,'ors_no'])->withoutMiddleware(['auth']);
 Route::get('document/paid/{route_no}/{user}',[MaifController::class,'paid'])->withoutMiddleware(['auth']);
+Route::get('/login_jwt',[HomeController::class, 'jwt'])->withoutMiddleware(['auth']);
+Route::get('/flush-session-pis',[HomeController::class, 'flushSessionPis'])->withoutMiddleware(['auth']);
+
 Route::auth();
 
 // Home
@@ -174,7 +177,8 @@ Route::get('logout', function () {
     }
     Session::flush();
     return redirect('login');
-})->middleware('web');
+});
+// ->middleware('web')
 
 // rusel
 // PURCHASE REQUEST/REGULAR SUPPLY
