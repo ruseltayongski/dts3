@@ -164,21 +164,21 @@ $code = Session::get('doc_type_code');
                             <br>
                             <em>({{ Section::find($user->section)->description }})</em>
                             @else
-
                                 <?php
-                                    if($x = \App\Tracking_Details::where('received_by',0)
-                                            ->where('id','<',$doc->tracking_id)
-                                            ->where('route_no',$doc->route_no)
-                                            ->first()){
+                                    $x = \App\Tracking_Details::where('received_by', 0)
+                                    ->where('id', '<', $doc->tracking_id)
+                                    ->where('route_no', $doc->route_no)
+                                    ->first();
+                
+                                    if ($x) {
                                         $string = $x->code;
-                                        $temp1   = explode(';',$string);
-                                        $temp2   = array_slice($temp1, 1, 1);
-                                        $section_id = implode(',', $temp2);
-                                        $x_section = Section::find($section_id)->description;
+                                        $temp1 = explode(';', $string);
+                                        $temp2 = array_slice($temp1, 1, 1);
+                                        $section_id = !empty($temp2) ? implode(',', $temp2) : null;
+                                        $x_section = optional(Section::find($section_id))->description ?? "No Section";
                                     } else {
                                         $x_section = "No Section";
                                     }
-
                                 ?>
                                 <font class="text-bold text-danger">
                                     {{ $x_section }}<br />
