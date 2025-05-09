@@ -174,7 +174,7 @@ $tracking = Tracking_Details::where('route_no',$route_no)
         @endif
     @endforeach
     <?php $i = count($tracking); ?>
-    @for($i; $i < 17; $i++)
+    @for($i; $i < 16; $i++)
         <tr>
             <td>&nbsp;<br><br></td>
             <td>&nbsp;</td>
