@@ -153,7 +153,7 @@ $code = Session::get('doc_type_code');
                         <td>
                             <a class="title-info" data-route="{{ $doc->route_no }}" data-link="{{ asset('/document/info/'.$doc->route_no) }}" href="#document_info" data-toggle="modal">{{ $doc->route_no }}</a>
                             <br>
-                            {!! nl2br($doc->description) !!}
+                            {!! isset($doc->description) ? nl2br($doc->description) : 'NO DESCRIPTION' !!}
                         </td>
                         <td>{{ date('M d, Y',strtotime($doc->date_in)) }}<br>{{ date('h:i:s A',strtotime($doc->date_in)) }}</td>
                         <td>
@@ -187,19 +187,19 @@ $code = Session::get('doc_type_code');
                             @endif
                         </td>
                         <?php
-                            $out = Doc::deliveredDocument($doc->route_no,$doc->received_by,$doc->doc_type);
+                            $out = isset($doc->doc_type) ? Doc::deliveredDocument($doc->route_no,$doc->received_by,$doc->doc_type) : 'NO DOCTYPE';
                             $class ='';
                         ?>
                         @if($out)
                         <?php
-                            if($out->received_by==0){
+                            if(isset($out->received_by) && $out->received_by==0){
                                 $class = 'danger';
                             }
                         ?>
-                        <td class="text-<?php echo $class?>">{{ date('M d, Y',strtotime($out->date_in)) }}<br>{{ date('h:i:s A',strtotime($out->date_in)) }}</td>
+                        <td class="text-<?php echo $class?>">{{ isset($out->date_in) ? date('M d, Y',strtotime($out->date_in)) : 'NO DATE-IN' }}<br>{{ isset($out->date_in) ? date('h:i:s A',strtotime($out->date_in)) : 'NO DATE IN' }}</td>
                         <td class="text-<?php echo $class?>">
 
-                            @if($out->received_by==0)
+                            @if( isset($out->received_by) && $out->received_by==0)
                             <?php
                                     $string = $out->code;
                                     if(!empty($string)){
@@ -216,11 +216,13 @@ $code = Session::get('doc_type_code');
                                     <button data-toggle="modal" data-target="#releaseTo" data-id="{{ $out->id }}" data-route_no="{{ $out->route_no }}" onclick="changeRoute($(this), '<?php echo $out->id ?>')" type="button" class="btn btn-info btn-xs"><i class="fa fa-send"></i> Change</button>
                                 <a href="{{ asset('document/report/'.$out->id .'/cancel') }}" class="btn btn-xs btn-danger"><i class="fa fa-times"></i> Cancel</a>
                             @else
-                                <?php $user = Users::find($out->received_by);?>
-                                {{ $user->fname }}
-                                {{ $user->lname }}
-                                <br>
-                                <em>({{ Section::find($user->section)->description }})</em>
+                                @if(isset($out->received_by))
+                                    <?php $user = Users::find($out->received_by);?>
+                                    {{ $user->fname }}
+                                    {{ $user->lname }}
+                                    <br>
+                                    <em>({{ Section::find($user->section)->description }})</em>
+                                @endif
                             @endif
                         </td>
                         @else
@@ -253,7 +255,7 @@ $code = Session::get('doc_type_code');
                                 </td>
                             @endif
                         @endif
-                        <td>{{ \App\Http\Controllers\DocumentController::docTypeName($doc->doc_type) }}</td>
+                        <td>{{ isset($doc->doc_type) ? \App\Http\Controllers\DocumentController::docTypeName($doc->doc_type) : 'NO DOC TYPE' }}</td>
                     </tr>
                 @endforeach
                 </tbody>

@@ -1187,6 +1187,8 @@ class DocumentController extends Controller
             $data = DB::table('tracking_details')
                 ->select(
                     'tracking_master.id as master_id',
+                    'tracking_master.description',
+                    'tracking_master.doc_type',
                     'tracking_details.id as tracking_id',
                     'tracking_details.route_no',
                     'tracking_details.date_in',
@@ -1201,7 +1203,7 @@ class DocumentController extends Controller
                         ->orwhere('description','like',"%$keywordLogs%")
                         ->orWhere('purpose','like',"%$keywordLogs%");
                 })
-                ->where('doc_type',$doc_type)
+                ->where('tracking_master.doc_type',$doc_type)
                 ->where('received_by',$id)
                 ->where('date_in','>=',$startdate)
                 ->where('date_in','<=',$enddate)
