@@ -34,10 +34,14 @@ const insertFirebase = (inserted_data:any) => {
     const dbRef = ref(db, 'dts');
     push(dbRef, inserted_data)
     .then((pushedDataRef) => {
-        if (pushedDataRef.key !== null) {
-            console.log('Data pushed successfully:', pushedDataRef.key);
-            const dataToRemoveRef = child(dbRef, pushedDataRef.key);
-            remove(dataToRemoveRef);
+        if (pushedDataRef.key) {
+            // const dataToRemoveRef = child(dbRef, pushedDataRef.key);
+            // remove(dataToRemoveRef);
+            setTimeout(() => {
+                console.log('7152025');
+                const dataToRemoveRef = child(dbRef, pushedDataRef.key!);
+                remove(dataToRemoveRef);
+            }, 100);
         } else {
             console.error('Error: Unable to get key after push.');
             Promise.reject('Unable to get key after push.');
