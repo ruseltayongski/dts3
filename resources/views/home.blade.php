@@ -3,8 +3,8 @@
 @section('content')
 <div class="col-md-9 wrapper">
     <div class="alert alert-jim">
-        <button id="autoLoginBtn">Auto Login</button>
-        {{ Session::get('jwt_token') }}
+        {{-- <button id="autoLoginBtn">Auto Login</button>
+        {{ Session::get('jwt_token') }} --}}
         <h3 class="page-header">Created
             <small>Documents</small>
         </h3>

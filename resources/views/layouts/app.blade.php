@@ -198,31 +198,66 @@ $pending = \App\Tracking_Details::select(
                     </a>
                 </li>
                 @endif
-                <li class="dropdown">
+                {{-- <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>
-                        Account
-                        <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="{{ asset('/change/password') }}">
-                                    <i class="fa fa-unlock"></i> Change Password
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <form action="{{ url('/logout') }}" method="POST" style="display: inline;">
-                                    @csrf
-                                    <button type="submit" style="background: none; border: none; padding: 0; margin: 0; color: #337ab7; cursor: pointer;">
-                                        <i class="fa fa-sign-out"></i> Logout
-                                    </button>
-                                </form>
-                            </li>
-                        </ul>
-                    {{-- <ul class="dropdown-menu">
-                        <li><a href="{{ asset('/change/password')  }}"><i class="fa fa-unlock"></i> Change Password</a></li>
+                    Account
+                    <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="{{ asset('/change/password') }}">
+                                <i class="fa fa-unlock"></i> Change Password
+                            </a>
+                        </li>
                         <li class="divider"></li>
-                        <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out"></i> Logout</a></li>
-                    </ul> --}}
+                        <li>
+                            <form action="{{ url('/logout') }}" method="POST" style="display: inline;">
+                                @csrf
+                                <button type="submit" style="background: none; border: none; padding: 0; margin: 0; color: #337ab7; cursor: pointer;">
+                                    <i class="fa fa-sign-out"></i> Logout
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </li> --}}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user"></i>
+                        Account
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="{{ asset('/change/password') }}">
+                                <i class="fa fa-unlock"></i> Change Password
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <form action="{{ url('/logout') }}" method="POST" style="margin: 0;">
+                                @csrf
+                                <button type="submit" style="
+                                    display: block;
+                                    width: 100%;
+                                    padding: 3px 20px;
+                                    clear: both;
+                                    font-weight: normal;
+                                    line-height: 1.42857143;
+                                    color: #333;
+                                    white-space: nowrap;
+                                    text-decoration: none;
+                                    background: transparent;
+                                    border: 0;
+                                    cursor: pointer;
+                                    text-align: left;
+                                    font-size: 14px;
+                                " 
+                                onmouseover="this.style.backgroundColor='#f5f5f5'; this.style.color='#262626';"
+                                onmouseout="this.style.backgroundColor='transparent'; this.style.color='#333';">
+                                    <i class="fa fa-sign-out"></i> Logout
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>
