@@ -29,31 +29,60 @@ const initFirebase = () => {
     return database;
 }
 
-const insertFirebase = (inserted_data:any) => {
-    const db = initFirebase();
-    const dbRef = ref(db, 'dts');
-    push(dbRef, inserted_data)
-    .then((pushedDataRef) => {
-        if (pushedDataRef.key) {
-            // const dataToRemoveRef = child(dbRef, pushedDataRef.key);
-            // remove(dataToRemoveRef);
-            setTimeout(() => {
-                console.log('7152025');
-                const dataToRemoveRef = child(dbRef, pushedDataRef.key!);
-                remove(dataToRemoveRef);
-            }, 100);
-        } else {
-            console.error('Error: Unable to get key after push.');
-            Promise.reject('Unable to get key after push.');
+// const insertFirebase = (inserted_data:any) => {
+//     const db = initFirebase();
+//     const dbRef = ref(db, 'dts');
+//     push(dbRef, inserted_data)
+//     .then((pushedDataRef) => {
+//         if (pushedDataRef.key) {
+//             // const dataToRemoveRef = child(dbRef, pushedDataRef.key);
+//             // remove(dataToRemoveRef);
+//             setTimeout(() => {
+//                 console.log('7152025');
+//                 const dataToRemoveRef = child(dbRef, pushedDataRef.key!);
+//                 remove(dataToRemoveRef);
+//             }, 100);
+//         } else {
+//             console.error('Error: Unable to get key after push.');
+//             Promise.reject('Unable to get key after push.');
+//         }
+//     })
+//     .then(() => {
+//         console.log('Data removed successfully after push.');
+//     })
+//     .catch((error) => {
+//         console.error('Error:', error);
+//     });
+// }
+
+const insertFirebase = async (inserted_data: any) => {
+    try {
+        const db = initFirebase();
+        const dbRef = ref(db, 'dts');
+        
+        // Push data
+        const pushedDataRef = await push(dbRef, inserted_data);
+        
+        if (!pushedDataRef.key) {
+            throw new Error('Unable to get key after push.');
         }
-    })
-    .then(() => {
-        console.log('Data removed successfully after push.');
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
-}
+        
+        console.log('Data pushed successfullyz, key:', pushedDataRef.key);
+        
+        // Wait a bit longer to ensure Firebase has processed the push
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        // Remove data
+        const dataToRemoveRef = child(dbRef, pushedDataRef.key);
+        await remove(dataToRemoveRef);
+        
+        console.log('Dataz removed successfully after push.');
+        
+    } catch (error) {
+        console.error('Error in insertFirebase:', error);
+        throw error; // Re-throw if you want calling code to handle it
+    }
+};
 
 const readFirebase = (current_user_section_id:Number) => {
     const db = initFirebase();

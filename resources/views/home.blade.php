@@ -3,6 +3,8 @@
 @section('content')
 <div class="col-md-9 wrapper">
     <div class="alert alert-jim">
+        <button id="autoLoginBtn">Auto Login</button>
+        {{ Session::get('jwt_token') }}
         <h3 class="page-header">Created
             <small>Documents</small>
         </h3>
@@ -59,6 +61,46 @@
 @section('js')
 <script src="{{ asset('resources/plugin/Chart.js/Chart.min.js') }}"></script>
 <script>
+    $(document).ready(function () {
+        $('#autoLoginBtn').on('click', function () {
+            $.ajax({
+                url: "{{ asset('generate/jwt/token') }}",
+                method: 'GET',
+                success: function (response) {
+                    console.log(response);
+                    const authToken = response.redirect_token;
+                    const endpoint = 'http://192.168.111.71:8000/api/auto-login';
+                    const targetUrl = endpoint + '?auth_token=' + encodeURIComponent(authToken);
+                    window.open(targetUrl, '_blank');
+                    // if (authToken) {
+                    //     console.log('Token received:', authToken);
+
+                    //     // Step 2: Send the token to /auto-login
+                    //     $.ajax({
+                    //         url: 'http://192.168.111.43:8000/api/auto-login',
+                    //         method: 'GET',
+                    //         data: { auth_token: encodeURIComponent(authToken) },
+                    //         success: function (loginResponse) {
+                    //             console.log('Login success:', loginResponse);
+                    //             alert('Auto-login success!');
+                    //         },
+                    //         error: function (xhr, status, error) {
+                    //             console.error('Login failed:', error);
+                    //             alert('Auto-login failed.');
+                    //         }
+                    //     });
+
+                    // } else {
+                    //     alert('Token not found in response.');
+                    // }
+                },
+                error: function (xhr, status, error) {
+                    console.error('Token request failed:', error);
+                    alert('Failed to get JWT token.');
+                }
+            });
+        });
+    });
     //$('#notificationModal').modal('show');
     <?php echo 'var url = "'.asset('home/chart').'";';?>
     //var jim = [];

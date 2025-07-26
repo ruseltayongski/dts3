@@ -1,0 +1,9 @@
+{
+    "name": "rusel/jwt-lib",
+    "description": "A separate JWT library for use in my PHP project",
+    "type": "skip",
+    "require": {
+        "firebase/php-jwt": "^6.0"
+    },
+    "license": "MIT"
+}

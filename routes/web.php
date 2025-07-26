@@ -34,6 +34,7 @@ use App\Http\Controllers\RoutingController;
 use App\Http\Controllers\AppendController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\MaifController;
+use App\Http\Controllers\JWTController;
 use Illuminate\Support\Facades\Session;
 
 Route::get('document/trackMaif/{route_no}',[MaifController::class,'track'])->withoutMiddleware(['auth']);
@@ -167,17 +168,17 @@ Route::get('sectionTracking/{sectionId}/{year}/{month}', [PrintLogsController::c
 Route::get('online', [OnlineController::class, 'online']);
 
 // LOGOUT
-Route::get('logout', function () {
-    $user = Auth::user();
-    if (isset($user)) {
-        $id = $user->id;
-        SystemController::logDefault('Logged Out');
-        Auth::logout();
-        User::where('id', $id)->update(['status' => 0]);
-    }
-    Session::flush();
-    return redirect('login');
-});
+// Route::get('logout', function () {
+//     $user = Auth::user();
+//     if (isset($user)) {
+//         $id = $user->id;
+//         SystemController::logDefault('Logged Out');
+//         Auth::logout();
+//         User::where('id', $id)->update(['status' => 0]);
+//     }
+//     Session::flush();
+//     return redirect('login');
+// });
 // ->middleware('web')
 
 // rusel
@@ -367,4 +368,6 @@ Route::get('/documents_count', [ReportController::class, 'counter']);
 //'reportedDocuments/{year}',
 
 // select-section
+
+Route::get('/generate/jwt/token', [JWTController::class, 'getJWTToken']);
 

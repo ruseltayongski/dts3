@@ -202,11 +202,27 @@ $pending = \App\Tracking_Details::select(
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>
                         Account
                         <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="{{ asset('/change/password') }}">
+                                    <i class="fa fa-unlock"></i> Change Password
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <form action="{{ url('/logout') }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    <button type="submit" style="background: none; border: none; padding: 0; margin: 0; color: #337ab7; cursor: pointer;">
+                                        <i class="fa fa-sign-out"></i> Logout
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    {{-- <ul class="dropdown-menu">
                         <li><a href="{{ asset('/change/password')  }}"><i class="fa fa-unlock"></i> Change Password</a></li>
                         <li class="divider"></li>
                         <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out"></i> Logout</a></li>
-                    </ul>
+                    </ul> --}}
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>
