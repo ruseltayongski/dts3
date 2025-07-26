@@ -290,9 +290,7 @@ class LoginController extends Controller
         if (!session('jwt_token')) {
             $this->handlePostLoginJWT($user);
         }
-
-        +
-        ('hahahehehe');
+        Log::info('hahahehehe');
         //Log::info(session('jwt_token'));
         return redirect()->intended($this->redirectPath());
     }
