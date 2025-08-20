@@ -28,7 +28,7 @@ $filter = Doc::isIncluded($document->doc_type);
 <table class="table table-hover table-striped table-info">
 
     <tr>
-        <td class="text-right col-lg-4">Document Typess : </td>
+        <td class="text-right col-lg-4">Document Types : </td>
         <td class="col-lg-8">{{ Doc::docTypeName($document->doc_type) }}</td>
     </tr>
     <tr>

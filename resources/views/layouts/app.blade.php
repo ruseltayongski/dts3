@@ -269,9 +269,22 @@ $pending = \App\Tracking_Details::select(
                         <li><a href="#" class="system-link" data-system="payroll"><i class="fa fa-building"></i>&nbsp;&nbsp; Payroll</a></li>
                     </ul>
                 </li>
+                @if(Auth::user()->user_priv == 0)
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle notification-bell" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-check-circle"></i>
+                            Cycle End from Record
+                            <span class="badge badge-danger version2-count" style="position: relative; top: -10px; right: -5px; background-color: deepskyblue">0</span>
+                            <span class="caret"></span>
+                        </a>
+                        <div class="dropdown-menu cycle_menu" style="position:absolute; top:100%; left:0; right:0; background:white; border-radius:12px; box-shadow:0 8px 32px rgba(0,0,0,0.12);
+                            margin-top:8px; width:400px; overflow-y:auto; z-index:1000; display:none; border:1px solid #e4e6ea;">
+                        </div>
+                    </li>
+                @endif
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="#trackDoc" data-toggle="modal"><i class="fa fa-search"></i> Track Document</a></li>
+                <li class="track_doc active"><a href="#track_search" data-toggle="modal"><i class="fa fa-search"></i> Track Document</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -334,7 +347,21 @@ $pending = \App\Tracking_Details::select(
 <script src="{{ asset('public/js/app.js?version=').date('YmdHis') }}" defer></script>
 @yield('plugin_old')
 <?php
+use App\Tracking;
+use App\Tracking_Releasev2;
 use App\Tracking_Details;
+use Illuminate\Support\Facades\Auth;
+
+$cyc_user = Auth::user();
+$master_route = Tracking::where('prepared_by', $cyc_user->id)->pluck('route_no')->toArray();
+$v2 = Tracking_Releasev2::where('remarks', 'cycle end:posted on the Intranet')
+    ->leftJoin('tracking_master', 'tracking_releasev2.route_no', '=', 'tracking_master.route_no')
+    ->whereIn('tracking_releasev2.route_no', $master_route)
+    ->orderBy('tracking_releasev2.id', 'desc')
+    ->select('tracking_master.route_no', 'tracking_master.description', 'tracking_releasev2.updated_at')
+    ->get();
+$total = $v2->count();
+$v2 = $v2->take(5);
 $incoming = Tracking_Details::select(
         'date_in',
         'id',
@@ -370,6 +397,67 @@ $incoming = Tracking_Details::select(
     }
 </script>
 <script>
+
+    //for cycle end
+    var version2 = @json($v2) || [];
+    var total = @json($total) || 0;
+
+    $('.version2-count').text(total);
+    $('.notification-bell').on('click', function(e) {
+        e.stopPropagation();
+        $('.cycle_menu').toggle();
+        $('.cycle_menu').empty();
+        version2.forEach(function(item) {
+            var date = new Date(item.updated_at);
+            var options = { year: 'numeric', month: 'long', day: 'numeric' };
+            var formatted = date.toLocaleDateString('en-US', options);
+            var notificationItem =
+                '<div class="notification-item" ' +
+                'style="padding:12px 20px; border-bottom:1px solid #f0f2f5; cursor: pointer; transition: background-color 0.2s ease;' +
+                'display: flex; align-items: flex-start; gap: 12px;" ' +
+                'onmouseover="this.style.backgroundColor=\'#f2f3f5\'" ' +
+                'onmouseout="this.style.backgroundColor=\'white\'">' +
+                '<div style="width: 40px; height: 40px; border-radius: 50%; ' +
+                'display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow:hidden; background:#fff;">' +
+                '<img src="{{ asset('resources/img/doh.png') }}" ' +
+                'style="width:100%; height:100%; object-fit:cover;" />' +
+                '</div>' +
+                '<div class="cycle_data" style="flex: 1; min-width: 0;">' +
+                '<div style="color: #1c1e21; font-size: 14px; margin-bottom: 2px; ' +
+                'overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width:400px;" ' +
+                'title="' + item.description + '">' +
+                '<a href="{{ asset('/cycle/end') }}/' + item.route_no + '" style="color:black; text-decoration: none;">' +
+                item.route_no + ' - ' + item.description +
+                '</a>' +
+                '</div>' +
+                '<div style="color: #8a8d91; font-size: 11px; margin-top: 2px; ' +
+                '<a href="{{ asset('/cycle/end') }}/' + item.route_no + '" style="color:black">' +
+                'cycled on ' + formatted +
+                '</a>' +
+                '</div>' +
+                '</div>' +
+                '</div>';
+
+            $('.cycle_menu').append(notificationItem);
+        });
+        var viewAllCycle =
+            '<div class="view_all_cycle" style="padding: 12px 20px; text-align: center; border-top: 1px solid #e4e6ea; background: #f8f9fa;border-radius: 0 0 12px 12px;">' +
+            '<a href="{{ asset('/cycle/end/all') }}" style="color: #1877f2; text-decoration: none; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 6px;" ' +
+            'onmouseover="this.style.color=\'#166fe5\'" onmouseout="this.style.color=\'#1877f2\'">' +
+            '<i class="fa fa-arrow-right"></i>' +
+            ' View all cycle end records' +
+            '</a>' +
+            '</div>';
+
+        $('.cycle_menu').append(viewAllCycle);
+    });
+    $(document).on('click', function() {
+        $('.cycle_menu').hide();
+    });
+    $('.cycle_menu').on('click', function(e) {
+        e.stopPropagation();
+    });
+
     $('.form-submit').on('submit',function(){
         $('.btn-submit').attr('disabled',true);
     });
@@ -482,6 +570,11 @@ $incoming = Tracking_Details::select(
             // Redirect to the controller route with the system value as a query parameter
             window.location.href = "{{ url('/flush-session-pis') }}" + "?system=" + systemValue;
         });
+    });
+
+    $('.track_doc').on('click', function(){
+        $('#search_keyword').val('');
+        $('.track_search_history').empty();
     });
 </script>
 

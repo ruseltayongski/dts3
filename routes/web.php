@@ -90,6 +90,12 @@ Route::get('document/removepending/{id}', [DocumentController::class, 'removePen
 Route::get('document/removeOutgoing/{id}', [DocumentController::class, 'removeOutgoing']);
 Route::get('document/removeIncoming/{id}', [DocumentController::class, 'removeIncoming']);
 Route::get('document/track/{route_no}', [DocumentController::class, 'track']);
+Route::get('cycle/end/{route_no}', [DocumentController::class, 'cycle_end']);
+Route::post('cycle/end', [DocumentController::class, 'cycle_search']);
+
+//mine
+Route::get('document/track-search/{keyword}', [DocumentController::class, 'trackSearch']);
+
 Route::get('document/list', [AdminController::class, 'allDocuments']);
 Route::post('document/list', [AdminController::class, 'searchDocuments']);
 Route::post('document/update', [DocumentController::class, 'update']);

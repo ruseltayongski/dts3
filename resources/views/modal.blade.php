@@ -24,6 +24,34 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+<div class="modal fade" tabindex="-1" role="dialog" id="track_search" style="z-index:1050">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class=""><i class="fa fa-line-chart"></i> Track Document</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-form">
+                    <tr>
+                        <form action="{{ asset('document/track-search') }}" id="trackFormSearch" onsubmit="return trackDocSearch(event);">
+                            {{ csrf_field() }}
+                            <td class="col-sm-2"><label>Keyword</label></td>
+                            <td class="col-sm-9"><input type="text" placeholder="Enter search keyboard..." id="search_keyword" class="form-control"></td>
+                            <td class="col-sm-1"><button type="submit" class="btn btn-default"><i class="fa fa-search"></i> Search</button> </td>
+                        </form>
+                    </tr>
+                </table>
+                <hr />
+                <div class="track_search_history"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                {{--<button type="button" class="btn btn-success btn-print hide" onclick="window.open('{{ asset('pdf/track') }}')"><i class="fa fa-print"></i> Print</button>--}}
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 <div class="modal fade" tabindex="-1" role="dialog" id="trackDoc">
     <div class="modal-dialog modal-lg" role="document">

@@ -70,6 +70,12 @@ class DocumentController extends Controller
                     $update[$key] = $value;
                 }
             endforeach;
+            $details = Tracking_Details::where('route_no', Tracking::where('id', $id)->value('route_no'))->first();
+            if($details){
+                $details->action = $update['description'] ? $update['description'] : $details->action;
+                $details->save();
+            }
+
             Tracking::where('id',$id)
                 ->update($update);
             System::logDocument($user_id,$id);
@@ -569,6 +575,46 @@ class DocumentController extends Controller
         Session::put('route_no', $route_no);
         return view('document.track',['document' => $document]);
     }
+
+    public function trackSearch($keyword)
+    {
+        $words = preg_split('/\s+/', trim($keyword));
+
+        $paginator = Tracking::where(function ($query) use ($words) {
+            foreach ($words as $word) {
+                $query->where('description', 'LIKE', "%{$word}%");
+            }
+        })
+            ->orWhere(function ($query) use ($words) {
+                foreach ($words as $word) {
+                    $query->where('route_no', 'LIKE', "%{$word}%");
+                }
+            })
+            ->with('user_prepared:id,fname,lname')
+            ->orderBy('id', 'desc')
+            ->paginate(5);
+
+        $documents = $paginator->getCollection();
+
+        foreach ($documents as $doc) {
+            $desc = $doc->description;
+            $route = $doc->route_no;
+
+            foreach ($words as $word) {
+                $highlight = '<span style="background-color: yellow;">$1</span>';
+                $desc = preg_replace('/(' . preg_quote($word, '/') . ')/i', $highlight, $desc);
+                $route = preg_replace('/(' . preg_quote($word, '/') . ')/i', $highlight, $route);
+            }
+
+            $doc->highlighted_description = $desc;
+            $doc->highlighted_route_no = $route;
+        }
+
+        $paginator->setCollection($documents);
+
+        return view('document.track_search', ['document' => $paginator, 'keyword' => $keyword]);
+    }
+
 
     public function allPendingDocuments(Request $request)
     {
@@ -1333,6 +1379,36 @@ class DocumentController extends Controller
             ->count();
 
         return $count;
+    }
+
+    public function cycle_end($route_no)
+    {
+        $user = Auth::user();
+
+        if($route_no == "all"){
+            $master_route = Tracking::where('prepared_by', $user->id)->pluck('route_no')->toArray();
+            $routes = Tracking_Releasev2::where('remarks', 'cycle end:posted on the Intranet')
+                ->leftJoin('tracking_master', 'tracking_releasev2.route_no', '=', 'tracking_master.route_no')
+                ->whereIn('tracking_releasev2.route_no', $master_route)
+                ->orderBy('tracking_master.id', 'desc')
+                ->pluck('tracking_master.route_no')->toArray();
+            $data['documents'] = Tracking::whereIn('route_no',$routes)
+                ->orderBy('id','desc')
+                ->paginate(15);
+        }else{
+            $data['documents'] = Tracking::where('route_no',$route_no)
+                ->orderBy('id','desc')
+                ->paginate(15);
+        }
+
+        $data['access'] = $this->middleware('access');
+
+        return view('document.cycle_end',$data);
+    }
+
+    public function cycle_search(Request $request){
+        Session::put('keyword',$request->keyword);
+        return self::cycle_end($request->keyword);
     }
 
 }
