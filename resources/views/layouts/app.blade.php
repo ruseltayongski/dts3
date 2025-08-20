@@ -576,6 +576,29 @@ $incoming = Tracking_Details::select(
         $('#search_keyword').val('');
         $('.track_search_history').empty();
     });
+
+    function trackDocSearch(){
+        var keyword = $('#search_keyword').val();
+        var url = $('#trackFormSearch').attr('action')+'/'+keyword;
+        $('.track_search_history').html(loadingState);
+        console.log('url', url);
+        if(keyword.length > 0){
+            setTimeout(function(){
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    success: function(data) {
+                        $('.track_search_history').html(data);
+                    }
+                });
+            },1000);
+        }else{
+            setTimeout(function(){
+                $('.track_search_history').html('<div class="alert alert-danger"><i class="fa fa-times"></i> Please enter your search keyword!</div>');
+            },1000);
+        }
+        return false;
+    }
 </script>
 
 @section('js')

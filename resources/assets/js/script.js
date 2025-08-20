@@ -134,29 +134,6 @@ function PO_reload(){
         setTimeout(function () { window.location.reload(); }, 10);
     }
 }
-
-function trackDocSearch(){
-    var keyword = $('#search_keyword').val();
-    var url = $('#trackFormSearch').attr('action')+'/'+keyword;
-    $('.track_search_history').html(loadingState);
-    if(keyword.length > 0){
-        setTimeout(function(){
-            $.ajax({
-                url: url,
-                type: 'GET',
-                success: function(data) {
-                    $('.track_search_history').html(data);
-                }
-            });
-        },1000);
-    }else{
-        setTimeout(function(){
-            $('.track_search_history').html('<div class="alert alert-danger"><i class="fa fa-times"></i> Please enter your search keyword!</div>');
-        },1000);
-    }
-    return false;
-}
-
 function trackDocument(){
     var route_no = $('#track_route_no2').val();
     var url = $('#trackForm').attr('action')+'/'+route_no;

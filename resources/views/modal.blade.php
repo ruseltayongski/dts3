@@ -34,10 +34,10 @@
             <div class="modal-body">
                 <table class="table table-form">
                     <tr>
-                        <form action="{{ asset('document/track-search') }}" id="trackFormSearch" onsubmit="return trackDocSearch(event);">
+                        <form action="{{ url('document/track-search') }}" id="trackFormSearch" onsubmit="return trackDocSearch(event);">
                             {{ csrf_field() }}
                             <td class="col-sm-2"><label>Keyword</label></td>
-                            <td class="col-sm-9"><input type="text" placeholder="Enter search keyboard..." id="search_keyword" class="form-control"></td>
+                            <td class="col-sm-9"><input type="text" placeholder="Enter search keyword..." id="search_keyword" class="form-control"></td>
                             <td class="col-sm-1"><button type="submit" class="btn btn-default"><i class="fa fa-search"></i> Search</button> </td>
                         </form>
                     </tr>
