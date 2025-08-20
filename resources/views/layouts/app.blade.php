@@ -269,20 +269,19 @@ $pending = \App\Tracking_Details::select(
                         <li><a href="#" class="system-link" data-system="payroll"><i class="fa fa-building"></i>&nbsp;&nbsp; Payroll</a></li>
                     </ul>
                 </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle notification-bell" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-check-circle"></i>
-                        Cycle End from Record
-                        <span class="badge badge-danger version2-count" style="position: relative; top: -10px; right: -5px; background-color: deepskyblue">0</span>
-                        <span class="caret"></span>
-                    </a>
-                {{--<ul class="dropdown-menu">--}}
-                    {{--</ul>--}}
-                        <!-- Dropdown Menu -->
-                    <div class="dropdown-menu cycle_menu" style="position:absolute; top:100%; left:0; right:0; background:white; border-radius:12px; box-shadow:0 8px 32px rgba(0,0,0,0.12);
-                        margin-top:8px; width:400px; overflow-y:auto; z-index:1000; display:none; border:1px solid #e4e6ea;">
-                    </div>
-                </li>
+                @if(Auth::user()->user_priv == 0)
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle notification-bell" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-check-circle"></i>
+                            Cycle End from Record
+                            <span class="badge badge-danger version2-count" style="position: relative; top: -10px; right: -5px; background-color: deepskyblue">0</span>
+                            <span class="caret"></span>
+                        </a>
+                        <div class="dropdown-menu cycle_menu" style="position:absolute; top:100%; left:0; right:0; background:white; border-radius:12px; box-shadow:0 8px 32px rgba(0,0,0,0.12);
+                            margin-top:8px; width:400px; overflow-y:auto; z-index:1000; display:none; border:1px solid #e4e6ea;">
+                        </div>
+                    </li>
+                @endif
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="track_doc active"><a href="#track_search" data-toggle="modal"><i class="fa fa-search"></i> Track Document</a></li>
