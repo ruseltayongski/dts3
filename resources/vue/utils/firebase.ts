@@ -55,7 +55,7 @@ const initFirebase = () => {
 //     });
 // }
 
-const insertFirebase = async (inserted_data: any) => {
+const insertFirebase = async (inserted_data: any, ttlMs: number = 1000) => {
     try {
         const db = initFirebase();
         const dbRef = ref(db, 'dts');
@@ -76,9 +76,14 @@ const insertFirebase = async (inserted_data: any) => {
         // const dataToRemoveRef = child(dbRef, pushedDataRef.key);
         // await remove(dataToRemoveRef);
         
-        await set(pushedDataRef, null);
-
-        console.log('Data removed successfully after push.');
+         setTimeout(async () => {
+            try {
+                await remove(pushedDataRef);
+                console.log(`Data removed successfully after ${ttlMs}ms.`);
+            } catch (removeErr) {
+                console.error('Error removing data:', removeErr);
+            }
+        }, ttlMs);
         
     } catch (error) {
         console.error('Error in insertFirebase:', error);
