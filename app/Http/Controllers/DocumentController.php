@@ -21,6 +21,7 @@ use PDO;
 use DateTime;
 use App\SoLogs;
 use PHPUnit\Framework\Constraint\IsFalse;
+use Illuminate\Support\Facades\Log;
 
 class DocumentController extends Controller
 {
@@ -163,7 +164,7 @@ class DocumentController extends Controller
         $id = $user->id;
         $status = array();
         $fb_accepted = [];
-        $has_error = false;
+        $is_budget = false;
         echo '<pre>';
         for($i=0;$i<10;$i++):
             if(!$request->route_no[$i])
@@ -198,6 +199,7 @@ class DocumentController extends Controller
 //                                'dv_no' => $request->dv_no[$i]
 //                            ]);
 //                    }
+
                     Tracking_Details::where('id',$document->id)
                         ->update([
                             'code' => 'accept;'.$user->section,
@@ -207,8 +209,9 @@ class DocumentController extends Controller
                             'action' => $request->remarks[$i]
                         ]);
                 }else{
+
                     if ($user->section == '6') {
-                        $has_error = false;  // Initialize for each route number
+                        $is_budget = false;  // Initialize for each route number
 
                         // First check if it's a DV document
                         $doc_check = Tracking::where('route_no', '=', $route_no)
@@ -223,15 +226,15 @@ class DocumentController extends Controller
                                 ->first();
                                 
                             if (!empty($check_dv)) {
-                                $has_error = true;
+                                $is_budget = true;
                                 $status['errors'][] = 'Route No. "'. $route_no . '" has no DV. Please inform Accounting Section to Release the Document and Add DV No';
                             }
                         }
                     }else {
-                        $has_error = false;  // For non-section 6 users
+                        $is_budget = false;  // For non-section 6 users
                     } 
                     
-                    if(!$has_error) {
+                    if(!$is_budget) {
                         $q = new Tracking_Details();
                         $q->route_no = $route_no;
                         $q->code = 'accept;'.$user->section;
@@ -240,22 +243,10 @@ class DocumentController extends Controller
                         $q->delivered_by = $received_by;
                         $q->action = $request->remarks[$i];
                         $q->save();
-                    }       
-                
-                    if(!$has_error) {
-                        $fb_accepted[] = [
-                            "route_no" => $route_no,
-                            "section_owner_id" => User::find($doc->prepared_by)->section,
-                            "user_accepted_name" => $user->fname.' '.$user->lname,
-                            "section_accepted_id" => $user->section,
-                            "section_accepted_name" => Section::find($user->section)->description,
-                            "remarks" => $request->remarks[$i],
-                            "status" => "accepted"
-                        ];
-                    }
+                    } 
                 }
                 
-                if(!$has_error) {
+                if(!$is_budget) {
                     $time = 0;
                     $rel = Release::where('route_no', $route_no)->orderBy('id','desc')->first();
                     if($rel){
@@ -272,6 +263,16 @@ class DocumentController extends Controller
                         Release::where('route_no',$route_no)->update(['status'=>2]);
                     }
                     $status['success'][] = 'Route No. "'. $route_no . '" <strong>ACCEPTED!</strong> ';
+
+                     $fb_accepted[] = [
+                            "route_no" => $route_no,
+                            "section_owner_id" => User::find($doc->prepared_by)->section,
+                            "user_accepted_name" => $user->fname.' '.$user->lname,
+                            "section_accepted_id" => $user->section,
+                            "section_accepted_name" => Section::find($user->section)->description,
+                            "remarks" => $request->remarks[$i],
+                            "status" => "accepted"
+                        ];
                 }
                 //RUSEL
                 //RELEASED TO
