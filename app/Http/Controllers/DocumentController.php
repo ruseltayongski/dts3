@@ -164,7 +164,7 @@ class DocumentController extends Controller
         $id = $user->id;
         $status = array();
         $fb_accepted = [];
-        $is_budget = false;
+        $has_dv_budget = false;
         echo '<pre>';
         for($i=0;$i<10;$i++):
             if(!$request->route_no[$i])
@@ -209,16 +209,12 @@ class DocumentController extends Controller
                             'action' => $request->remarks[$i]
                         ]);
                 }else{
-
                     if ($user->section == '6') {
-                        $is_budget = false;  // Initialize for each route number
-
-                        // First check if it's a DV document
+                        
                         $doc_check = Tracking::where('route_no', '=', $route_no)
                             ->where('doc_type', '=', 'DV')
                             ->first();
                         
-                        // Only proceed with DV validation if it's actually a DV document
                         if ($doc_check) {
                             $check_dv = Tracking::select('dv_no')
                                 ->where('route_no', '=', $route_no)
@@ -226,15 +222,13 @@ class DocumentController extends Controller
                                 ->first();
                                 
                             if (!empty($check_dv)) {
-                                $is_budget = true;
+                                $has_dv_budget = true;
                                 $status['errors'][] = 'Route No. "'. $route_no . '" has no DV. Please inform Accounting Section to Release the Document and Add DV No';
                             }
                         }
-                    }else {
-                        $is_budget = false;  // For non-section 6 users
-                    } 
+                    }
                     
-                    if(!$is_budget) {
+                    if(!$has_dv_budget) {
                         $q = new Tracking_Details();
                         $q->route_no = $route_no;
                         $q->code = 'accept;'.$user->section;
@@ -246,7 +240,7 @@ class DocumentController extends Controller
                     } 
                 }
                 
-                if(!$is_budget) {
+                if(!$has_dv_budget) {
                     $time = 0;
                     $rel = Release::where('route_no', $route_no)->orderBy('id','desc')->first();
                     if($rel){
@@ -264,17 +258,16 @@ class DocumentController extends Controller
                     }
                     $status['success'][] = 'Route No. "'. $route_no . '" <strong>ACCEPTED!</strong> ';
 
-                     $fb_accepted[] = [
-                            "route_no" => $route_no,
-                            "section_owner_id" => User::find($doc->prepared_by)->section,
-                            "user_accepted_name" => $user->fname.' '.$user->lname,
-                            "section_accepted_id" => $user->section,
-                            "section_accepted_name" => Section::find($user->section)->description,
-                            "remarks" => $request->remarks[$i],
-                            "status" => "accepted"
-                        ];
+                    $fb_accepted[] = [
+                        "route_no" => $route_no,
+                        "section_owner_id" => User::find($doc->prepared_by)->section,
+                        "user_accepted_name" => $user->fname.' '.$user->lname,
+                        "section_accepted_id" => $user->section,
+                        "section_accepted_name" => Section::find($user->section)->description,
+                        "remarks" => $request->remarks[$i],
+                        "status" => "accepted"
+                    ];
                 }
-                //RUSEL
                 //RELEASED TO
                 $this->releasedStatusChecker($route_no,Auth::user()->section);
 
