@@ -164,9 +164,11 @@ class DocumentController extends Controller
         $id = $user->id;
         $status = array();
         $fb_accepted = [];
-        $has_dv_budget = false;
         echo '<pre>';
         for($i=0;$i<10;$i++):
+
+            $has_dv_budget = false;
+
             if(!$request->route_no[$i])
             {
                 continue;
@@ -189,16 +191,7 @@ class DocumentController extends Controller
                 endif;
 
                 $section = 'temp;'.$user->section;
-                if($document->code === $section)
-                {
-
-//                    if(Auth::user()->section == 5) {
-//                        Tracking::where('route_no',"=", $route_no)
-//                            ->where('doc_type',"=", "DV")
-//                            ->update([
-//                                'dv_no' => $request->dv_no[$i]
-//                            ]);
-//                    }
+                if($document->code === $section){
 
                     Tracking_Details::where('id',$document->id)
                         ->update([
@@ -208,9 +201,9 @@ class DocumentController extends Controller
                             'status' => 0,
                             'action' => $request->remarks[$i]
                         ]);
+
                 }else{
                     if ($user->section == '6') {
-                        
                         $doc_check = Tracking::where('route_no', '=', $route_no)
                             ->where('doc_type', '=', 'DV')
                             ->first();
@@ -223,7 +216,7 @@ class DocumentController extends Controller
                                 
                             if (!empty($check_dv)) {
                                 $has_dv_budget = true;
-                                $status['errors'][] = 'Route No. "'. $route_no . '" has no DV. Please inform Accounting Section to Release the Document and Add DV No';
+                                $status['errors'][] = 'Route No. "'. $route_no . '" has no DV No. Please inform Accounting Section to release the document and enter the DV No';
                             }
                         }
                     }
@@ -268,6 +261,7 @@ class DocumentController extends Controller
                         "status" => "accepted"
                     ];
                 }
+
                 //RELEASED TO
                 $this->releasedStatusChecker($route_no,Auth::user()->section);
 
