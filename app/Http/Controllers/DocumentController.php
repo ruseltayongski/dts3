@@ -580,39 +580,46 @@ class DocumentController extends Controller
     {
         $words = preg_split('/\s+/', trim($keyword));
 
-        $paginator = Tracking::where(function ($query) use ($words) {
-            foreach ($words as $word) {
-                $query->where('description', 'LIKE', "%{$word}%");
-            }
-        })
-            ->orWhere(function ($query) use ($words) {
+        $search = implode(' ', $words);
+
+        $result = Tracking::where('route_no', $search)->first();
+        if($result){
+            $document = Tracking_Details::where('route_no',$result->route_no)
+                ->orderBy('date_in','asc')
+                ->get();
+            Session::put('route_no', $result->route_no);
+            return view('document.track',['document' => $document]);
+        }else{
+            $paginator = Tracking::whereRaw(
+                "MATCH(description, route_no) AGAINST (? IN BOOLEAN MODE)",
+                [$search]
+            )
+                ->with('user_prepared:id,fname,lname')
+                ->orderBy('id', 'desc')
+                ->paginate(5);
+
+            $documents = $paginator->getCollection();
+
+            foreach ($documents as $doc) {
+                $desc = $doc->description;
+                $route = $doc->route_no;
+
                 foreach ($words as $word) {
-                    $query->where('route_no', 'LIKE', "%{$word}%");
+                    $highlight = '<span style="background-color: yellow;">$1</span>';
+                    $desc = preg_replace('/(' . preg_quote($word, '/') . ')/i', $highlight, $desc);
+                    $route = preg_replace('/(' . preg_quote($word, '/') . ')/i', $highlight, $route);
                 }
-            })
-            ->with('user_prepared:id,fname,lname')
-            ->orderBy('id', 'desc')
-            ->paginate(5);
 
-        $documents = $paginator->getCollection();
-
-        foreach ($documents as $doc) {
-            $desc = $doc->description;
-            $route = $doc->route_no;
-
-            foreach ($words as $word) {
-                $highlight = '<span style="background-color: yellow;">$1</span>';
-                $desc = preg_replace('/(' . preg_quote($word, '/') . ')/i', $highlight, $desc);
-                $route = preg_replace('/(' . preg_quote($word, '/') . ')/i', $highlight, $route);
+                $doc->highlighted_description = $desc;
+                $doc->highlighted_route_no = $route;
             }
 
-            $doc->highlighted_description = $desc;
-            $doc->highlighted_route_no = $route;
+            $paginator->setCollection($documents);
+
+            return view('document.track_search', ['document' => $paginator, 'keyword' => $keyword]);
         }
 
-        $paginator->setCollection($documents);
 
-        return view('document.track_search', ['document' => $paginator, 'keyword' => $keyword]);
     }
 
 
