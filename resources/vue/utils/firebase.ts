@@ -67,16 +67,18 @@ const insertFirebase = async (inserted_data: any) => {
             throw new Error('Unable to get key after push.');
         }
         
-        console.log('Data pushed successfullyz, key:', pushedDataRef.key);
+        console.log('Data pushed successfully, key:', pushedDataRef.key);
         
-        // Wait a bit longer to ensure Firebase has processed the push
-        await new Promise(resolve => setTimeout(resolve, 500));
+        // // Wait a bit longer to ensure Firebase has processed the push
+        // await new Promise(resolve => setTimeout(resolve, 500));
         
-        // Remove data
-        const dataToRemoveRef = child(dbRef, pushedDataRef.key);
-        await remove(dataToRemoveRef);
+        // // Remove data
+        // const dataToRemoveRef = child(dbRef, pushedDataRef.key);
+        // await remove(dataToRemoveRef);
         
-        console.log('Dataz removed successfully after push.');
+        await set(pushedDataRef, null);
+
+        console.log('Data removed successfully after push.');
         
     } catch (error) {
         console.error('Error in insertFirebase:', error);
